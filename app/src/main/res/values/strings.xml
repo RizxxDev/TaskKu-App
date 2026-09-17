@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TaskKu</string>
+    <string name="widget_name">Tugas Hari Ini &amp; Besok</string>
+    <string name="widget_description">Lihat dan selesaikan tugas hari ini dan besok langsung dari layar depan.</string>
+</resources>
