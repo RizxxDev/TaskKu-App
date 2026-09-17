@@ -63,7 +63,11 @@
 TaskKu mengimplementasikan standar arsitektur **MVVM (Model-View-ViewModel)** dengan pemisahan lapisan (**Clean Architecture**) untuk kode yang modular, mudah diuji (*testable*), dan mudah dirawat:
 
 ```
-app/
+app/src/main/java/com/example/taskku/
+├── MainActivity.kt         # Single Activity (Edge-to-Edge & Navigation Host)
+├── Navigation.kt           # Setup NavDisplay & Jetpack Navigation 3
+├── NavigationKeys.kt       # Type-safe @Serializable NavKey destinations
+├── TaskKuApplication.kt    # Inisialisasi AppContainer & Notification Channels
 ├── data/
 │   ├── local/              # Room Database, DAO, Entity SQLite
 │   ├── preferences/        # Pengaturan lokal & SharedPreferences
@@ -84,7 +88,7 @@ app/
 │   ├── taskdetail/         # Layar Rincian Tugas & Aksi
 │   ├── taskform/           # Form Tambah & Edit Tugas
 │   └── tasklist/           # Layar Daftar Tugas, Filter, & Search
-├── util/                   # Utility helpers (Penyimpanan file, DateTime formatters)
+├── util/                   # Utility helpers (Penyimpanan file lampiran, format tanggal)
 └── widget/                 # Jetpack Glance Home Screen Widget
 ```
 
@@ -97,6 +101,7 @@ app/
 | **Design System** | [Material Design 3 (M3)](https://m3.material.io/) |
 | **Navigasi** | [Jetpack Navigation 3](https://developer.android.com/guide/navigation) (Type-safe NavKey `@Serializable`) |
 | **Database** | [Room Database 2.x](https://developer.android.com/training/data-storage/room) dengan KSP |
+| **Dependency Injection** | Manual App Container (`AppContainer` di `TaskKuApplication`) |
 | **Home Screen Widget** | [Jetpack Glance AppWidget](https://developer.android.com/jetpack/compose/glance) |
 | **Pemuatan Gambar** | [Coil Compose](https://coil-kt.github.io/coil/compose/) |
 | **Asinkron & Reactive** | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/) |
@@ -128,9 +133,13 @@ app/
 3. **Jalankan Aplikasi:**
    - Pilih konfigurasi `app`.
    - Pilih perangkat target (Emulator atau USB Debugging).
-   - Klik tombol **Run** (`Shift + F10`) atau jalankan via CLI:
+   - Klik tombol **Run** (`Shift + F10`) atau jalankan build via CLI:
      ```bash
+     # Linux / macOS:
      ./gradlew assembleDebug
+
+     # Windows:
+     gradlew.bat assembleDebug
      ```
 
 ---
@@ -140,8 +149,11 @@ app/
 Proyek ini dilengkapi rangkaian unit test komprehensif untuk memastikan keandalan logika bisnis:
 
 ```bash
-# Menjalankan seluruh Unit Test
+# Linux / macOS:
 ./gradlew test
+
+# Windows:
+gradlew.bat test
 ```
 
 Cakupan pengujian meliputi:

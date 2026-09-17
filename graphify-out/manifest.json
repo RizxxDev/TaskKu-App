@@ -598,5 +598,11 @@
     "seen": 1789660158.644601,
     "ast_hash": "96a9ef79a794606dc0d68e34465bb19e",
     "semantic_hash": "96a9ef79a794606dc0d68e34465bb19e"
+  },
+  "README.md": {
+    "mtime": 1789661954.0177717,
+    "seen": 1789661965.7419457,
+    "ast_hash": "883b9e6a4318dde67cf9dfbf4f928d0e",
+    "semantic_hash": ""
   }
 }
