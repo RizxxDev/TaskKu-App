@@ -54,7 +54,7 @@ fun TaskCard(
     val pressScale by animateFloatAsState(
         targetValue = if (isPressed) 0.98f else 1.0f,
         animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
+            dampingRatio = Spring.DampingRatioLowBouncy,
             stiffness = Spring.StiffnessMedium
         ),
         label = "taskCardPressScale"

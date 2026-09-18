@@ -26,6 +26,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.taskku.domain.model.TaskTag
 
+val TaskTag.themeColor: Color
+    get() = when (this) {
+        TaskTag.PR -> Color(0xFF0984E3)
+        TaskTag.KUIS -> Color(0xFFE17055)
+        TaskTag.PRAKTIKUM -> Color(0xFF6C5CE7)
+        TaskTag.PROYEK -> Color(0xFF00B894)
+    }
+
 fun getTagIcon(tag: TaskTag): ImageVector {
     return when (tag) {
         TaskTag.PR -> Icons.AutoMirrored.Outlined.Assignment
@@ -41,13 +49,8 @@ fun TaskTagBadge(
     modifier: Modifier = Modifier,
     showIcon: Boolean = true
 ) {
-    val parsedColor = remember(tag.colorHex) {
-        try {
-            Color(android.graphics.Color.parseColor(tag.colorHex))
-        } catch (e: Exception) {
-            Color(0xFF0984E3)
-        }
-    }
+    val parsedColor = tag.themeColor
+
 
     Box(
         modifier = modifier

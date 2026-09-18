@@ -26,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -66,24 +67,24 @@ fun DashboardScreen(
     }
 
     // 1. Header & welcome greeting slide down + fade in on enter (0ms delay)
-    var isHeaderVisible by remember { mutableStateOf(false) }
+    var isHeaderVisible by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(Unit) {
         isHeaderVisible = true
     }
 
     val headerAlpha by animateFloatAsState(
         targetValue = if (isHeaderVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 0, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 250, delayMillis = 0, easing = FastOutSlowInEasing),
         label = "headerAlpha"
     )
     val headerTranslationY by animateFloatAsState(
-        targetValue = if (isHeaderVisible) 0f else -30f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 0, easing = FastOutSlowInEasing),
+        targetValue = if (isHeaderVisible) 0f else -20f,
+        animationSpec = tween(durationMillis = 250, delayMillis = 0, easing = FastOutSlowInEasing),
         label = "headerTranslationY"
     )
 
     // Staggered entrance for content activates once database loading completes
-    var isContentVisible by remember { mutableStateOf(false) }
+    var isContentVisible by rememberSaveable { mutableStateOf(false) }
     LaunchedEffect(uiState.isLoading) {
         if (!uiState.isLoading) {
             isContentVisible = true
@@ -93,69 +94,69 @@ fun DashboardScreen(
     // Hero cards (Next Class & Weekly Progress)
     val heroAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 50, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 250, delayMillis = 30, easing = FastOutSlowInEasing),
         label = "heroAlpha"
     )
     val heroTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 30f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 50, easing = FastOutSlowInEasing),
+        targetValue = if (isContentVisible) 0f else 20f,
+        animationSpec = tween(durationMillis = 250, delayMillis = 30, easing = FastOutSlowInEasing),
         label = "heroTranslationY"
     )
 
-    // Stat cards staggered slide up + fade in (80ms increments)
+    // Stat cards staggered slide up + fade in (30ms increments)
     val statPendingAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 80, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 250, delayMillis = 50, easing = FastOutSlowInEasing),
         label = "statPendingAlpha"
     )
     val statPendingTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 30f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 80, easing = FastOutSlowInEasing),
+        targetValue = if (isContentVisible) 0f else 20f,
+        animationSpec = tween(durationMillis = 250, delayMillis = 50, easing = FastOutSlowInEasing),
         label = "statPendingTranslationY"
     )
 
     val statInProgressAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 160, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 250, delayMillis = 80, easing = FastOutSlowInEasing),
         label = "statInProgressAlpha"
     )
     val statInProgressTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 30f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 160, easing = FastOutSlowInEasing),
+        targetValue = if (isContentVisible) 0f else 20f,
+        animationSpec = tween(durationMillis = 250, delayMillis = 80, easing = FastOutSlowInEasing),
         label = "statInProgressTranslationY"
     )
 
     val statDoneAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 240, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 250, delayMillis = 110, easing = FastOutSlowInEasing),
         label = "statDoneAlpha"
     )
     val statDoneTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 30f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 240, easing = FastOutSlowInEasing),
+        targetValue = if (isContentVisible) 0f else 20f,
+        animationSpec = tween(durationMillis = 250, delayMillis = 110, easing = FastOutSlowInEasing),
         label = "statDoneTranslationY"
     )
 
     val statOverdueAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 320, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 250, delayMillis = 140, easing = FastOutSlowInEasing),
         label = "statOverdueAlpha"
     )
     val statOverdueTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 30f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 320, easing = FastOutSlowInEasing),
+        targetValue = if (isContentVisible) 0f else 20f,
+        animationSpec = tween(durationMillis = 250, delayMillis = 140, easing = FastOutSlowInEasing),
         label = "statOverdueTranslationY"
     )
 
     // Urgent tasks section (header + empty card / items) smoothly fades in last
     val urgentAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 400, easing = FastOutSlowInEasing),
+        animationSpec = tween(durationMillis = 250, delayMillis = 170, easing = FastOutSlowInEasing),
         label = "urgentAlpha"
     )
     val urgentTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 30f,
-        animationSpec = tween(durationMillis = 450, delayMillis = 400, easing = FastOutSlowInEasing),
+        targetValue = if (isContentVisible) 0f else 20f,
+        animationSpec = tween(durationMillis = 250, delayMillis = 170, easing = FastOutSlowInEasing),
         label = "urgentTranslationY"
     )
 
@@ -612,7 +613,7 @@ private fun UrgentTaskCard(
     val pressScale by animateFloatAsState(
         targetValue = if (isPressed) 0.98f else 1.0f,
         animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
+            dampingRatio = Spring.DampingRatioLowBouncy,
             stiffness = Spring.StiffnessMedium
         ),
         label = "urgentTaskPressScale"

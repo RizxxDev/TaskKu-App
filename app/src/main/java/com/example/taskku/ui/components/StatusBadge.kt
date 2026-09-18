@@ -13,19 +13,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+private val statusColorCache = java.util.concurrent.ConcurrentHashMap<String, Color>()
+
+fun parseStatusColor(colorHex: String): Color {
+    return statusColorCache.computeIfAbsent(colorHex) { hex ->
+        try {
+            Color(android.graphics.Color.parseColor(hex))
+        } catch (e: Exception) {
+            Color.Gray
+        }
+    }
+}
+
 @Composable
 fun StatusBadge(
     statusName: String,
     colorHex: String,
     modifier: Modifier = Modifier
 ) {
-    val parsedColor = remember(colorHex) {
-        try {
-            Color(android.graphics.Color.parseColor(colorHex))
-        } catch (e: Exception) {
-            Color.Gray
-        }
-    }
+    val parsedColor = remember(colorHex) { parseStatusColor(colorHex) }
 
     Box(
         modifier = modifier
@@ -40,3 +46,4 @@ fun StatusBadge(
         )
     }
 }
+

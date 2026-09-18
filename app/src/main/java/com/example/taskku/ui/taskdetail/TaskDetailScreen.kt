@@ -568,14 +568,18 @@ private fun SubtaskItemRow(
             }
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .graphicsLayer { alpha = textAlpha }
+        ) {
             val lineColor = MaterialTheme.colorScheme.onSurfaceVariant
             var textLayoutResult by remember(subtask.title) { mutableStateOf<TextLayoutResult?>(null) }
 
             Text(
                 text = subtask.title,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = textAlpha),
+                color = MaterialTheme.colorScheme.onSurface,
                 onTextLayout = { textLayoutResult = it },
                 modifier = Modifier.drawWithContent {
                     drawContent()
@@ -618,7 +622,7 @@ private fun SubtaskItemRow(
                 Text(
                     text = "Dikerjakan oleh: $assignedMemberName",
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = textAlpha)
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }

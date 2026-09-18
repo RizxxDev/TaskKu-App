@@ -29,6 +29,7 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.graphicsLayer
@@ -80,8 +81,44 @@ fun MainScreen(
     val app = context.applicationContext as TaskKuApplication
     val container = app.container
 
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+    val dashboardViewModelFactory = remember(container) {
+        DashboardViewModelFactory(container.taskRepository, container.timetableRepository)
+    }
+    val taskListViewModelFactory = remember(container, context) {
+        TaskListViewModelFactory(
+            taskRepository = container.taskRepository,
+            subjectRepository = container.subjectRepository,
+            statusRepository = container.statusRepository,
+            appPreferences = container.appPreferences,
+            appContext = context.applicationContext
+        )
+    }
+    val timetableViewModelFactory = remember(container) {
+        TimetableViewModelFactory(
+            timetableRepository = container.timetableRepository,
+            subjectRepository = container.subjectRepository
+        )
+    }
+    val calendarViewModelFactory = remember(container) {
+        CalendarViewModelFactory(container.taskRepository)
+    }
+    val settingsViewModelFactory = remember(container) {
+        SettingsViewModelFactory(
+            appPreferences = container.appPreferences,
+            subjectRepository = container.subjectRepository,
+            statusRepository = container.statusRepository,
+            exportImportManager = container.exportImportManager
+        )
+    }
 
+    val dashboardViewModel: DashboardViewModel = viewModel(factory = dashboardViewModelFactory)
+    val taskListViewModel: TaskListViewModel = viewModel(factory = taskListViewModelFactory)
+    val timetableViewModel: TimetableViewModel = viewModel(factory = timetableViewModelFactory)
+    val calendarViewModel: CalendarViewModel = viewModel(factory = calendarViewModelFactory)
+    val settingsViewModel: SettingsViewModel = viewModel(factory = settingsViewModelFactory)
+
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+    val saveableStateHolder = rememberSaveableStateHolder()
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -94,14 +131,14 @@ fun MainScreen(
                     LaunchedEffect(isSelected) {
                         if (isSelected) {
                             iconScale.animateTo(
-                                targetValue = 1.15f,
-                                animationSpec = tween(120, easing = FastOutSlowInEasing)
+                                targetValue = 1.12f,
+                                animationSpec = tween(90, easing = FastOutSlowInEasing)
                             )
                             iconScale.animateTo(
                                 targetValue = 1.0f,
                                 animationSpec = spring(
-                                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                                    stiffness = Spring.StiffnessMediumLow
+                                    dampingRatio = Spring.DampingRatioLowBouncy,
+                                    stiffness = Spring.StiffnessMedium
                                 )
                             )
                         } else {
@@ -116,14 +153,14 @@ fun MainScreen(
                                 coroutineScope.launch {
                                     iconScale.snapTo(1.0f)
                                     iconScale.animateTo(
-                                        targetValue = 1.15f,
-                                        animationSpec = tween(120, easing = FastOutSlowInEasing)
+                                        targetValue = 1.12f,
+                                        animationSpec = tween(90, easing = FastOutSlowInEasing)
                                     )
                                     iconScale.animateTo(
                                         targetValue = 1.0f,
                                         animationSpec = spring(
-                                            dampingRatio = Spring.DampingRatioMediumBouncy,
-                                            stiffness = Spring.StiffnessMediumLow
+                                            dampingRatio = Spring.DampingRatioLowBouncy,
+                                            stiffness = Spring.StiffnessMedium
                                         )
                                     )
                                 }
@@ -159,96 +196,71 @@ fun MainScreen(
             AnimatedContent(
                 targetState = selectedTabIndex,
                 transitionSpec = {
+                    val duration = 200
+                    val offsetFraction = 0.1f
                     if (targetState > initialState) {
                         (slideInHorizontally(
-                            animationSpec = tween(300, easing = FastOutSlowInEasing),
-                            initialOffsetX = { fullWidth -> fullWidth }
-                        ) + fadeIn(animationSpec = tween(300))).togetherWith(
+                            animationSpec = tween(duration, easing = FastOutSlowInEasing),
+                            initialOffsetX = { fullWidth -> (fullWidth * offsetFraction).toInt() }
+                        ) + fadeIn(animationSpec = tween(duration, easing = FastOutSlowInEasing))).togetherWith(
                             slideOutHorizontally(
-                                animationSpec = tween(300, easing = FastOutSlowInEasing),
-                                targetOffsetX = { fullWidth -> -fullWidth }
-                            ) + fadeOut(animationSpec = tween(300))
+                                animationSpec = tween(duration, easing = FastOutSlowInEasing),
+                                targetOffsetX = { fullWidth -> (-fullWidth * offsetFraction).toInt() }
+                            ) + fadeOut(animationSpec = tween(duration, easing = FastOutSlowInEasing))
                         )
                     } else {
                         (slideInHorizontally(
-                            animationSpec = tween(300, easing = FastOutSlowInEasing),
-                            initialOffsetX = { fullWidth -> -fullWidth }
-                        ) + fadeIn(animationSpec = tween(300))).togetherWith(
+                            animationSpec = tween(duration, easing = FastOutSlowInEasing),
+                            initialOffsetX = { fullWidth -> (-fullWidth * offsetFraction).toInt() }
+                        ) + fadeIn(animationSpec = tween(duration, easing = FastOutSlowInEasing))).togetherWith(
                             slideOutHorizontally(
-                                animationSpec = tween(300, easing = FastOutSlowInEasing),
-                                targetOffsetX = { fullWidth -> fullWidth }
-                            ) + fadeOut(animationSpec = tween(300))
+                                animationSpec = tween(duration, easing = FastOutSlowInEasing),
+                                targetOffsetX = { fullWidth -> (fullWidth * offsetFraction).toInt() }
+                            ) + fadeOut(animationSpec = tween(duration, easing = FastOutSlowInEasing))
                         )
                     }
                 },
                 label = "TabContentAnimation",
                 modifier = Modifier.fillMaxSize()
             ) { tabIndex ->
-                when (NavigationTab.entries[tabIndex]) {
-                    NavigationTab.DASHBOARD -> {
-                        val dashboardViewModel: DashboardViewModel = viewModel(
-                            factory = DashboardViewModelFactory(container.taskRepository, container.timetableRepository)
-                        )
-                        DashboardScreen(
-                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                            onAddTaskClick = { onNavigate(TaskForm(null)) },
-                            onAddHomeworkForSubject = { subject, deadlineDate ->
-                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                            },
-                            viewModel = dashboardViewModel
-                        )
-                    }
-                    NavigationTab.TASKS -> {
-                        val taskListViewModel: TaskListViewModel = viewModel(
-                            factory = TaskListViewModelFactory(
-                                taskRepository = container.taskRepository,
-                                subjectRepository = container.subjectRepository,
-                                statusRepository = container.statusRepository,
-                                appPreferences = container.appPreferences,
-                                appContext = context.applicationContext
+                saveableStateHolder.SaveableStateProvider(key = tabIndex) {
+                    when (NavigationTab.entries[tabIndex]) {
+                        NavigationTab.DASHBOARD -> {
+                            DashboardScreen(
+                                onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                                onAddTaskClick = { onNavigate(TaskForm(null)) },
+                                onAddHomeworkForSubject = { subject, deadlineDate ->
+                                    onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                                },
+                                viewModel = dashboardViewModel
                             )
-                        )
-                        TaskListScreen(
-                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                            onAddTaskClick = { onNavigate(TaskForm(null)) },
-                            viewModel = taskListViewModel
-                        )
-                    }
-                    NavigationTab.TIMETABLE -> {
-                        val timetableViewModel: TimetableViewModel = viewModel(
-                            factory = TimetableViewModelFactory(
-                                timetableRepository = container.timetableRepository,
-                                subjectRepository = container.subjectRepository
+                        }
+                        NavigationTab.TASKS -> {
+                            TaskListScreen(
+                                onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                                onAddTaskClick = { onNavigate(TaskForm(null)) },
+                                viewModel = taskListViewModel
                             )
-                        )
-                        TimetableScreen(
-                            onNavigateToTaskForm = { subject, deadlineDate ->
-                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                            },
-                            viewModel = timetableViewModel
-                        )
-                    }
-                    NavigationTab.CALENDAR -> {
-                        val calendarViewModel: CalendarViewModel = viewModel(
-                            factory = CalendarViewModelFactory(container.taskRepository)
-                        )
-                        CalendarScreen(
-                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                            viewModel = calendarViewModel
-                        )
-                    }
-                    NavigationTab.SETTINGS -> {
-                        val settingsViewModel: SettingsViewModel = viewModel(
-                            factory = SettingsViewModelFactory(
-                                appPreferences = container.appPreferences,
-                                subjectRepository = container.subjectRepository,
-                                statusRepository = container.statusRepository,
-                                exportImportManager = container.exportImportManager
+                        }
+                        NavigationTab.TIMETABLE -> {
+                            TimetableScreen(
+                                onNavigateToTaskForm = { subject, deadlineDate ->
+                                    onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                                },
+                                viewModel = timetableViewModel
                             )
-                        )
-                        SettingsScreen(
-                            viewModel = settingsViewModel
-                        )
+                        }
+                        NavigationTab.CALENDAR -> {
+                            CalendarScreen(
+                                onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                                viewModel = calendarViewModel
+                            )
+                        }
+                        NavigationTab.SETTINGS -> {
+                            SettingsScreen(
+                                viewModel = settingsViewModel
+                            )
+                        }
                     }
                 }
             }

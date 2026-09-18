@@ -255,7 +255,11 @@ fun TimetableScreen(
                     contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 80.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    items(uiState.currentDayTimetables, key = { it.id }) { item ->
+                    items(
+                        items = uiState.currentDayTimetables,
+                        key = { it.id },
+                        contentType = { "timetable_slot" }
+                    ) { item ->
                         TimetableSlotCard(
                             item = item,
                             onEdit = {

@@ -312,9 +312,9 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt": {
-    "mtime": 1789746151.405437,
-    "seen": 1789746441.8002594,
-    "ast_hash": "146f18133e6a0916364bfd90b12d13a7",
+    "mtime": 1789746764.180379,
+    "seen": 1789746998.9548752,
+    "ast_hash": "9670d17c76dd53a69c8b6db503c84e5a",
     "semantic_hash": ""
   },
   "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt": {
@@ -324,9 +324,9 @@
     "semantic_hash": ""
   },
   "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt": {
-    "mtime": 1789746172.9422643,
-    "seen": 1789746441.8002594,
-    "ast_hash": "f23d145f44257e44ff4e4333ddd76c68",
+    "mtime": 1789746881.89327,
+    "seen": 1789746998.9548752,
+    "ast_hash": "305ffd55ed47c547c455aa2ae2ac1886",
     "semantic_hash": ""
   },
   "app/src/main/java/com/example/taskku/ui/main/MainScreenViewModel.kt": {
@@ -348,9 +348,9 @@
     "semantic_hash": "33169a6b0b8e94033e963591406326af"
   },
   "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailScreen.kt": {
-    "mtime": 1789746325.2855208,
-    "seen": 1789746441.8002594,
-    "ast_hash": "acae5b7d9de584cfb4765cf37766f6a4",
+    "mtime": 1789746793.8358786,
+    "seen": 1789746998.9548752,
+    "ast_hash": "ae712729b94c25306c0ded7b883c377c",
     "semantic_hash": ""
   },
   "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt": {

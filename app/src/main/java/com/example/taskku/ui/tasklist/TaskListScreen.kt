@@ -28,6 +28,7 @@ import com.example.taskku.ui.components.SortOptionBar
 import com.example.taskku.ui.components.SubjectFilterBar
 import com.example.taskku.ui.components.TaskCard
 import com.example.taskku.ui.components.getTagIcon
+import com.example.taskku.ui.components.themeColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -181,17 +182,19 @@ fun TaskListScreen(
                     .padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                item {
+                item(key = "all_tags", contentType = "tag_chip") {
                     FilterChip(
                         selected = uiState.selectedTag == null,
                         onClick = { viewModel.onTagSelect(null) },
                         label = { Text("Semua Tag") }
                     )
                 }
-                items(TaskTag.entries.toTypedArray()) { tag ->
-                    val tagColor = remember(tag.colorHex) {
-                        try { Color(android.graphics.Color.parseColor(tag.colorHex)) } catch (e: Exception) { Color(0xFF0984E3) }
-                    }
+                items(
+                    items = TaskTag.entries,
+                    key = { it.name },
+                    contentType = { "tag_chip" }
+                ) { tag ->
+                    val tagColor = tag.themeColor
                     val isSelected = uiState.selectedTag == tag
                     FilterChip(
                         selected = isSelected,

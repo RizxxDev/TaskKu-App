@@ -80,7 +80,7 @@ fun CalendarScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 // 1. Month Navigation Header
-                item {
+                item(key = "month_card", contentType = "header") {
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -165,7 +165,7 @@ fun CalendarScreen(
                 }
 
                 // 2. Selected Date Header
-                item {
+                item(key = "selected_date_header", contentType = "header") {
                     Text(
                         text = selectedDateFormat.format(uiState.selectedDate.time),
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
@@ -175,7 +175,7 @@ fun CalendarScreen(
 
                 // 3. Task list for selected date
                 if (uiState.selectedDateTasks.isEmpty()) {
-                    item {
+                    item(key = "empty_state", contentType = "empty") {
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(16.dp),
