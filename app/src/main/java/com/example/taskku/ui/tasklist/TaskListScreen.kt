@@ -296,7 +296,9 @@ fun TaskListScreen(
 
                         if (uiState.isSelectionMode) {
                             Row(
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .animateItem(),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Checkbox(
@@ -317,7 +319,8 @@ fun TaskListScreen(
                                 task = task,
                                 onTaskClick = onTaskClick,
                                 onDeleteClick = onDeleteClick,
-                                onLongClick = onToggleSelection
+                                onLongClick = onToggleSelection,
+                                modifier = Modifier.animateItem()
                             )
                         }
                     }

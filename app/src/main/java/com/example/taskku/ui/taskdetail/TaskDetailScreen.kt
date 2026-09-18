@@ -1,5 +1,11 @@
 package com.example.taskku.ui.taskdetail
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,12 +23,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.taskku.domain.model.Subtask
 import com.example.taskku.domain.model.TaskType
 import com.example.taskku.ui.components.DeadlineText
 import com.example.taskku.ui.components.DifficultyBadge
@@ -358,35 +372,11 @@ fun TaskDetailScreen(
 
                                 task.subtasks.forEach { subtask ->
                                     val assignedMember = task.members.find { it.id == subtask.assignedMemberId }
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .clickable { viewModel.onToggleSubtask(subtask.id, !subtask.isCompleted) }
-                                            .padding(vertical = 4.dp),
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Checkbox(
-                                            checked = subtask.isCompleted,
-                                            onCheckedChange = { viewModel.onToggleSubtask(subtask.id, it) }
-                                        )
-                                        Spacer(modifier = Modifier.width(8.dp))
-                                        Column(modifier = Modifier.weight(1f)) {
-                                            Text(
-                                                text = subtask.title,
-                                                style = MaterialTheme.typography.bodyMedium.copy(
-                                                    textDecoration = if (subtask.isCompleted) TextDecoration.LineThrough else TextDecoration.None
-                                                ),
-                                                color = if (subtask.isCompleted) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
-                                            )
-                                            if (assignedMember != null) {
-                                                Text(
-                                                    text = "Dikerjakan oleh: ${assignedMember.name}",
-                                                    style = MaterialTheme.typography.labelSmall,
-                                                    color = MaterialTheme.colorScheme.primary
-                                                )
-                                            }
-                                        }
-                                    }
+                                    SubtaskItemRow(
+                                        subtask = subtask,
+                                        assignedMemberName = assignedMember?.name,
+                                        onToggle = { isChecked -> viewModel.onToggleSubtask(subtask.id, isChecked) }
+                                    )
                                 }
                             }
                         }
@@ -502,3 +492,130 @@ fun TaskDetailScreen(
         }
     }
 }
+
+@Composable
+private fun SubtaskItemRow(
+    subtask: Subtask,
+    assignedMemberName: String?,
+    onToggle: (Boolean) -> Unit
+) {
+    val haptic = LocalHapticFeedback.current
+    val checkboxScale = remember { Animatable(1.0f) }
+    var isInitial by remember { mutableStateOf(true) }
+
+    LaunchedEffect(subtask.isCompleted) {
+        if (isInitial) {
+            isInitial = false
+            return@LaunchedEffect
+        }
+        // Spring bounce: 0.8 -> 1.15 -> 1.0
+        checkboxScale.animateTo(
+            targetValue = 0.8f,
+            animationSpec = tween(durationMillis = 80, easing = FastOutSlowInEasing)
+        )
+        checkboxScale.animateTo(
+            targetValue = 1.15f,
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessMedium
+            )
+        )
+        checkboxScale.animateTo(
+            targetValue = 1.0f,
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessLow
+            )
+        )
+    }
+
+    val strikethroughProgress by animateFloatAsState(
+        targetValue = if (subtask.isCompleted) 1f else 0f,
+        animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing),
+        label = "subtaskStrikethrough"
+    )
+    val textAlpha by animateFloatAsState(
+        targetValue = if (subtask.isCompleted) 0.5f else 1.0f,
+        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing),
+        label = "subtaskTextAlpha"
+    )
+
+    val toggleAction = {
+        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+        onToggle(!subtask.isCompleted)
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .clickable(onClick = toggleAction)
+            .padding(vertical = 4.dp, horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = subtask.isCompleted,
+            onCheckedChange = { toggleAction() },
+            modifier = Modifier.graphicsLayer {
+                scaleX = checkboxScale.value
+                scaleY = checkboxScale.value
+            }
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Column(modifier = Modifier.weight(1f)) {
+            val lineColor = MaterialTheme.colorScheme.onSurfaceVariant
+            var textLayoutResult by remember { mutableStateOf<TextLayoutResult?>(null) }
+
+            Text(
+                text = subtask.title,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = textAlpha),
+                onTextLayout = { textLayoutResult = it },
+                modifier = Modifier.drawWithContent {
+                    drawContent()
+                    if (strikethroughProgress > 0f) {
+                        val layout = textLayoutResult
+                        val strokeWidth = 1.5.dp.toPx()
+                        if (layout != null) {
+                            val lineCount = layout.lineCount
+                            for (line in 0 until lineCount) {
+                                val lineTop = layout.getLineTop(line)
+                                val lineBottom = layout.getLineBottom(line)
+                                val lineY = (lineTop + lineBottom) / 2f
+                                val lineLeft = layout.getLineLeft(line)
+                                val lineRight = layout.getLineRight(line)
+                                val lineWidth = lineRight - lineLeft
+                                val lineProgress = (strikethroughProgress * lineCount - line).coerceIn(0f, 1f)
+                                if (lineProgress > 0f) {
+                                    drawLine(
+                                        color = lineColor,
+                                        start = Offset(x = lineLeft, y = lineY),
+                                        end = Offset(x = lineLeft + lineWidth * lineProgress, y = lineY),
+                                        strokeWidth = strokeWidth,
+                                        cap = StrokeCap.Round
+                                    )
+                                }
+                            }
+                        } else {
+                            drawLine(
+                                color = lineColor,
+                                start = Offset(x = 0f, y = size.height / 2f),
+                                end = Offset(x = size.width * strikethroughProgress, y = size.height / 2f),
+                                strokeWidth = strokeWidth,
+                                cap = StrokeCap.Round
+                            )
+                        }
+                    }
+                }
+            )
+            if (assignedMemberName != null) {
+                Text(
+                    text = "Dikerjakan oleh: $assignedMemberName",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = textAlpha)
+                )
+            }
+        }
+    }
+}
+

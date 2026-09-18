@@ -13,13 +13,25 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.TaskAlt
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -43,13 +55,103 @@ fun DashboardScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    var isVisible by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        isVisible = true
+    }
+
+    // 1. Header slide down + fade in (0ms delay)
+    val headerAlpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 0, easing = FastOutSlowInEasing),
+        label = "headerAlpha"
+    )
+    val headerTranslationY by animateFloatAsState(
+        targetValue = if (isVisible) 0f else -30f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 0, easing = FastOutSlowInEasing),
+        label = "headerTranslationY"
+    )
+
+    // Hero cards (Next Class & Weekly Progress)
+    val heroAlpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 50, easing = FastOutSlowInEasing),
+        label = "heroAlpha"
+    )
+    val heroTranslationY by animateFloatAsState(
+        targetValue = if (isVisible) 0f else 30f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 50, easing = FastOutSlowInEasing),
+        label = "heroTranslationY"
+    )
+
+    // Stat cards staggered slide up + fade in (80ms increments)
+    val statPendingAlpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 80, easing = FastOutSlowInEasing),
+        label = "statPendingAlpha"
+    )
+    val statPendingTranslationY by animateFloatAsState(
+        targetValue = if (isVisible) 0f else 30f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 80, easing = FastOutSlowInEasing),
+        label = "statPendingTranslationY"
+    )
+
+    val statInProgressAlpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 160, easing = FastOutSlowInEasing),
+        label = "statInProgressAlpha"
+    )
+    val statInProgressTranslationY by animateFloatAsState(
+        targetValue = if (isVisible) 0f else 30f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 160, easing = FastOutSlowInEasing),
+        label = "statInProgressTranslationY"
+    )
+
+    val statDoneAlpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 240, easing = FastOutSlowInEasing),
+        label = "statDoneAlpha"
+    )
+    val statDoneTranslationY by animateFloatAsState(
+        targetValue = if (isVisible) 0f else 30f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 240, easing = FastOutSlowInEasing),
+        label = "statDoneTranslationY"
+    )
+
+    val statOverdueAlpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 320, easing = FastOutSlowInEasing),
+        label = "statOverdueAlpha"
+    )
+    val statOverdueTranslationY by animateFloatAsState(
+        targetValue = if (isVisible) 0f else 30f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 320, easing = FastOutSlowInEasing),
+        label = "statOverdueTranslationY"
+    )
+
+    // Urgent tasks section (header + empty card / items) smoothly fades in last
+    val urgentAlpha by animateFloatAsState(
+        targetValue = if (isVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 400, easing = FastOutSlowInEasing),
+        label = "urgentAlpha"
+    )
+    val urgentTranslationY by animateFloatAsState(
+        targetValue = if (isVisible) 0f else 30f,
+        animationSpec = tween(durationMillis = 450, delayMillis = 400, easing = FastOutSlowInEasing),
+        label = "urgentTranslationY"
+    )
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.graphicsLayer {
+                            alpha = headerAlpha
+                            translationY = headerTranslationY
+                        }
                     ) {
                         Surface(
                             shape = RoundedCornerShape(10.dp),
@@ -110,7 +212,12 @@ fun DashboardScreen(
                 item {
                     val nextClass = uiState.nextClassToday
                     Card(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .graphicsLayer {
+                                alpha = heroAlpha
+                                translationY = heroTranslationY
+                            },
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.secondaryContainer
@@ -226,7 +333,12 @@ fun DashboardScreen(
                 // 1. Progress Minggu Ini Card
                 item {
                     Card(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .graphicsLayer {
+                                alpha = heroAlpha
+                                translationY = heroTranslationY
+                            },
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -274,7 +386,7 @@ fun DashboardScreen(
                     }
                 }
 
-                // 2. Statistik Cepat Section
+                // 2. Statistik Cepat Section (Staggered 80ms delay increments)
                 item {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Text(
@@ -291,14 +403,24 @@ fun DashboardScreen(
                                 count = uiState.pendingCount,
                                 icon = Icons.Outlined.HourglassEmpty,
                                 color = StatusTodo,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .graphicsLayer {
+                                        alpha = statPendingAlpha
+                                        translationY = statPendingTranslationY
+                                    }
                             )
                             StatCard(
                                 title = "Dikerjakan",
                                 count = uiState.inProgressCount,
                                 icon = Icons.Outlined.PendingActions,
                                 color = StatusInProgress,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .graphicsLayer {
+                                        alpha = statInProgressAlpha
+                                        translationY = statInProgressTranslationY
+                                    }
                             )
                         }
 
@@ -311,22 +433,38 @@ fun DashboardScreen(
                                 count = uiState.doneCount,
                                 icon = Icons.Outlined.CheckCircle,
                                 color = StatusDone,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .graphicsLayer {
+                                        alpha = statDoneAlpha
+                                        translationY = statDoneTranslationY
+                                    }
                             )
                             StatCard(
                                 title = "Overdue",
                                 count = uiState.overdueCount,
                                 icon = Icons.Outlined.ErrorOutline,
                                 color = CalendarOverdue,
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .graphicsLayer {
+                                        alpha = statOverdueAlpha
+                                        translationY = statOverdueTranslationY
+                                    }
                             )
                         }
                     }
                 }
 
-                // 3. Tugas Mendesak Section Header & Empty state
+                // 3. Tugas Mendesak Section Header & Empty state (fades in last)
                 item {
-                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Column(
+                        modifier = Modifier.graphicsLayer {
+                            alpha = urgentAlpha
+                            translationY = urgentTranslationY
+                        },
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -375,7 +513,7 @@ fun DashboardScreen(
                     }
                 }
 
-                // 3b. Tugas Mendesak Items with recycling and stable keys
+                // 3b. Tugas Mendesak Items with recycling, stable keys, and smooth animation
                 if (uiState.urgentTasks.isNotEmpty()) {
                     items(
                         items = uiState.urgentTasks,
@@ -384,7 +522,13 @@ fun DashboardScreen(
                     ) { task ->
                         UrgentTaskCard(
                             task = task,
-                            onTaskClick = onTaskClick
+                            onTaskClick = onTaskClick,
+                            modifier = Modifier
+                                .animateItem()
+                                .graphicsLayer {
+                                    alpha = urgentAlpha
+                                    translationY = urgentTranslationY
+                                }
                         )
                     }
                 }
@@ -445,10 +589,28 @@ private fun UrgentTaskCard(
     onTaskClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val pressScale by animateFloatAsState(
+        targetValue = if (isPressed) 0.98f else 1.0f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMedium
+        ),
+        label = "urgentTaskPressScale"
+    )
+
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onTaskClick(task.id) },
+            .graphicsLayer {
+                scaleX = pressScale
+                scaleY = pressScale
+            }
+            .clickable(
+                interactionSource = interactionSource,
+                indication = ripple()
+            ) { onTaskClick(task.id) },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface

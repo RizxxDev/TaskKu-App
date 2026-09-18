@@ -1,7 +1,12 @@
 package com.example.taskku.ui.components
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -10,12 +15,15 @@ import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.taskku.domain.model.Task
@@ -39,6 +47,17 @@ fun TaskCard(
                 false
             }
         }
+    )
+
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val pressScale by animateFloatAsState(
+        targetValue = if (isPressed) 0.98f else 1.0f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMedium
+        ),
+        label = "taskCardPressScale"
     )
 
     SwipeToDismissBox(
@@ -67,7 +86,13 @@ fun TaskCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
+                .graphicsLayer {
+                    scaleX = pressScale
+                    scaleY = pressScale
+                }
                 .combinedClickable(
+                    interactionSource = interactionSource,
+                    indication = ripple(),
                     onClick = { onTaskClick(task.id) },
                     onLongClick = onLongClick?.let { { it(task.id) } }
                 ),

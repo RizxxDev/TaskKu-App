@@ -1,5 +1,16 @@
 package com.example.taskku.ui.main
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -19,6 +30,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -73,13 +85,37 @@ fun MainScreen(
             NavigationBar {
                 NavigationTab.entries.forEachIndexed { index, tab ->
                     val isSelected = selectedTabIndex == index
+                    val iconScale = remember { Animatable(1.0f) }
+
+                    LaunchedEffect(isSelected) {
+                        if (isSelected) {
+                            iconScale.animateTo(
+                                targetValue = 1.15f,
+                                animationSpec = tween(120, easing = FastOutSlowInEasing)
+                            )
+                            iconScale.animateTo(
+                                targetValue = 1.0f,
+                                animationSpec = spring(
+                                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                                    stiffness = Spring.StiffnessMediumLow
+                                )
+                            )
+                        } else {
+                            iconScale.snapTo(1.0f)
+                        }
+                    }
+
                     NavigationBarItem(
                         selected = isSelected,
                         onClick = { selectedTabIndex = index },
                         icon = {
                             Icon(
                                 imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
-                                contentDescription = tab.title
+                                contentDescription = tab.title,
+                                modifier = Modifier.graphicsLayer {
+                                    scaleX = iconScale.value
+                                    scaleY = iconScale.value
+                                }
                             )
                         },
                         label = { Text(tab.title) }
@@ -96,71 +132,100 @@ fun MainScreen(
                 .padding(bottom = innerPadding.calculateBottomPadding())
                 .consumeWindowInsets(PaddingValues(bottom = innerPadding.calculateBottomPadding()))
         ) {
-            when (NavigationTab.entries[selectedTabIndex]) {
-                NavigationTab.DASHBOARD -> {
-                    val dashboardViewModel: DashboardViewModel = viewModel(
-                        factory = DashboardViewModelFactory(container.taskRepository, container.timetableRepository)
-                    )
-                    DashboardScreen(
-                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                        onAddTaskClick = { onNavigate(TaskForm(null)) },
-                        onAddHomeworkForSubject = { subject, deadlineDate ->
-                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                        },
-                        viewModel = dashboardViewModel
-                    )
-                }
-                NavigationTab.TASKS -> {
-                    val taskListViewModel: TaskListViewModel = viewModel(
-                        factory = TaskListViewModelFactory(
-                            taskRepository = container.taskRepository,
-                            subjectRepository = container.subjectRepository,
-                            statusRepository = container.statusRepository,
-                            appPreferences = container.appPreferences,
-                            appContext = context.applicationContext
+            AnimatedContent(
+                targetState = selectedTabIndex,
+                transitionSpec = {
+                    if (targetState > initialState) {
+                        (slideInHorizontally(
+                            animationSpec = tween(300, easing = FastOutSlowInEasing),
+                            initialOffsetX = { fullWidth -> fullWidth }
+                        ) + fadeIn(animationSpec = tween(300))).togetherWith(
+                            slideOutHorizontally(
+                                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                                targetOffsetX = { fullWidth -> -fullWidth }
+                            ) + fadeOut(animationSpec = tween(300))
                         )
-                    )
-                    TaskListScreen(
-                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                        onAddTaskClick = { onNavigate(TaskForm(null)) },
-                        viewModel = taskListViewModel
-                    )
-                }
-                NavigationTab.TIMETABLE -> {
-                    val timetableViewModel: TimetableViewModel = viewModel(
-                        factory = TimetableViewModelFactory(
-                            timetableRepository = container.timetableRepository,
-                            subjectRepository = container.subjectRepository
+                    } else {
+                        (slideInHorizontally(
+                            animationSpec = tween(300, easing = FastOutSlowInEasing),
+                            initialOffsetX = { fullWidth -> -fullWidth }
+                        ) + fadeIn(animationSpec = tween(300))).togetherWith(
+                            slideOutHorizontally(
+                                animationSpec = tween(300, easing = FastOutSlowInEasing),
+                                targetOffsetX = { fullWidth -> fullWidth }
+                            ) + fadeOut(animationSpec = tween(300))
                         )
-                    )
-                    TimetableScreen(
-                        onNavigateToTaskForm = { subject, deadlineDate ->
-                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                        },
-                        viewModel = timetableViewModel
-                    )
-                }
-                NavigationTab.CALENDAR -> {
-                    val calendarViewModel: CalendarViewModel = viewModel(
-                        factory = CalendarViewModelFactory(container.taskRepository)
-                    )
-                    CalendarScreen(
-                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                        viewModel = calendarViewModel
-                    )
-                }
-                NavigationTab.SETTINGS -> {
-                    val settingsViewModel: SettingsViewModel = viewModel(
-                        factory = SettingsViewModelFactory(
-                            appPreferences = container.appPreferences,
-                            subjectRepository = container.subjectRepository,
-                            statusRepository = container.statusRepository,
-                            exportImportManager = container.exportImportManager
+                    }
+                },
+                label = "TabContentAnimation",
+                modifier = Modifier.fillMaxSize()
+            ) { tabIndex ->
+                when (NavigationTab.entries[tabIndex]) {
+                    NavigationTab.DASHBOARD -> {
+                        val dashboardViewModel: DashboardViewModel = viewModel(
+                            factory = DashboardViewModelFactory(container.taskRepository, container.timetableRepository)
                         )
-                    )
-                    SettingsScreen(
-                        viewModel = settingsViewModel
-                    )
+                        DashboardScreen(
+                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                            onAddTaskClick = { onNavigate(TaskForm(null)) },
+                            onAddHomeworkForSubject = { subject, deadlineDate ->
+                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                            },
+                            viewModel = dashboardViewModel
+                        )
+                    }
+                    NavigationTab.TASKS -> {
+                        val taskListViewModel: TaskListViewModel = viewModel(
+                            factory = TaskListViewModelFactory(
+                                taskRepository = container.taskRepository,
+                                subjectRepository = container.subjectRepository,
+                                statusRepository = container.statusRepository,
+                                appPreferences = container.appPreferences,
+                                appContext = context.applicationContext
+                            )
+                        )
+                        TaskListScreen(
+                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                            onAddTaskClick = { onNavigate(TaskForm(null)) },
+                            viewModel = taskListViewModel
+                        )
+                    }
+                    NavigationTab.TIMETABLE -> {
+                        val timetableViewModel: TimetableViewModel = viewModel(
+                            factory = TimetableViewModelFactory(
+                                timetableRepository = container.timetableRepository,
+                                subjectRepository = container.subjectRepository
+                            )
+                        )
+                        TimetableScreen(
+                            onNavigateToTaskForm = { subject, deadlineDate ->
+                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                            },
+                            viewModel = timetableViewModel
+                        )
+                    }
+                    NavigationTab.CALENDAR -> {
+                        val calendarViewModel: CalendarViewModel = viewModel(
+                            factory = CalendarViewModelFactory(container.taskRepository)
+                        )
+                        CalendarScreen(
+                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                            viewModel = calendarViewModel
+                        )
+                    }
+                    NavigationTab.SETTINGS -> {
+                        val settingsViewModel: SettingsViewModel = viewModel(
+                            factory = SettingsViewModelFactory(
+                                appPreferences = container.appPreferences,
+                                subjectRepository = container.subjectRepository,
+                                statusRepository = container.statusRepository,
+                                exportImportManager = container.exportImportManager
+                            )
+                        )
+                        SettingsScreen(
+                            viewModel = settingsViewModel
+                        )
+                    }
                 }
             }
         }
