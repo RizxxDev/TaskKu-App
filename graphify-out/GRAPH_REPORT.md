@@ -1,7 +1,7 @@
 # Graph Report - TaskKu  (2026-09-18)
 
 ## Corpus Check
-- 100 files · ~37,191 words
+- 100 files · ~37,317 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 23 file(s) not represented in the graph (top: .xml 15, (none) 3, .properties 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `33c5dceb`
+- Built from commit: `a337a155`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

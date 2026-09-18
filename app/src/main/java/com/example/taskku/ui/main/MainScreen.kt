@@ -30,11 +30,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavKey
+import kotlinx.coroutines.launch
 import com.example.taskku.TaskDetail
 import com.example.taskku.TaskForm
 import com.example.taskku.TaskKuApplication
@@ -80,6 +82,8 @@ fun MainScreen(
 
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
 
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         bottomBar = {
             NavigationBar {
@@ -107,7 +111,26 @@ fun MainScreen(
 
                     NavigationBarItem(
                         selected = isSelected,
-                        onClick = { selectedTabIndex = index },
+                        onClick = {
+                            if (selectedTabIndex == index) {
+                                coroutineScope.launch {
+                                    iconScale.snapTo(1.0f)
+                                    iconScale.animateTo(
+                                        targetValue = 1.15f,
+                                        animationSpec = tween(120, easing = FastOutSlowInEasing)
+                                    )
+                                    iconScale.animateTo(
+                                        targetValue = 1.0f,
+                                        animationSpec = spring(
+                                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                                            stiffness = Spring.StiffnessMediumLow
+                                        )
+                                    )
+                                }
+                            } else {
+                                selectedTabIndex = index
+                            }
+                        },
                         icon = {
                             Icon(
                                 imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
@@ -131,6 +154,7 @@ fun MainScreen(
                 .fillMaxSize()
                 .padding(bottom = innerPadding.calculateBottomPadding())
                 .consumeWindowInsets(PaddingValues(bottom = innerPadding.calculateBottomPadding()))
+                .clipToBounds()
         ) {
             AnimatedContent(
                 targetState = selectedTabIndex,

@@ -55,88 +55,106 @@ fun DashboardScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    var isVisible by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) {
-        isVisible = true
+    val greeting = remember {
+        val hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
+        when (hour) {
+            in 4..10 -> "Selamat Pagi! 🌅"
+            in 11..14 -> "Selamat Siang! ☀️"
+            in 15..18 -> "Selamat Sore! 🌇"
+            else -> "Selamat Malam! 🌙"
+        }
     }
 
-    // 1. Header slide down + fade in (0ms delay)
+    // 1. Header & welcome greeting slide down + fade in on enter (0ms delay)
+    var isHeaderVisible by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        isHeaderVisible = true
+    }
+
     val headerAlpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
+        targetValue = if (isHeaderVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 450, delayMillis = 0, easing = FastOutSlowInEasing),
         label = "headerAlpha"
     )
     val headerTranslationY by animateFloatAsState(
-        targetValue = if (isVisible) 0f else -30f,
+        targetValue = if (isHeaderVisible) 0f else -30f,
         animationSpec = tween(durationMillis = 450, delayMillis = 0, easing = FastOutSlowInEasing),
         label = "headerTranslationY"
     )
 
+    // Staggered entrance for content activates once database loading completes
+    var isContentVisible by remember { mutableStateOf(false) }
+    LaunchedEffect(uiState.isLoading) {
+        if (!uiState.isLoading) {
+            isContentVisible = true
+        }
+    }
+
     // Hero cards (Next Class & Weekly Progress)
     val heroAlpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
+        targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 450, delayMillis = 50, easing = FastOutSlowInEasing),
         label = "heroAlpha"
     )
     val heroTranslationY by animateFloatAsState(
-        targetValue = if (isVisible) 0f else 30f,
+        targetValue = if (isContentVisible) 0f else 30f,
         animationSpec = tween(durationMillis = 450, delayMillis = 50, easing = FastOutSlowInEasing),
         label = "heroTranslationY"
     )
 
     // Stat cards staggered slide up + fade in (80ms increments)
     val statPendingAlpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
+        targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 450, delayMillis = 80, easing = FastOutSlowInEasing),
         label = "statPendingAlpha"
     )
     val statPendingTranslationY by animateFloatAsState(
-        targetValue = if (isVisible) 0f else 30f,
+        targetValue = if (isContentVisible) 0f else 30f,
         animationSpec = tween(durationMillis = 450, delayMillis = 80, easing = FastOutSlowInEasing),
         label = "statPendingTranslationY"
     )
 
     val statInProgressAlpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
+        targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 450, delayMillis = 160, easing = FastOutSlowInEasing),
         label = "statInProgressAlpha"
     )
     val statInProgressTranslationY by animateFloatAsState(
-        targetValue = if (isVisible) 0f else 30f,
+        targetValue = if (isContentVisible) 0f else 30f,
         animationSpec = tween(durationMillis = 450, delayMillis = 160, easing = FastOutSlowInEasing),
         label = "statInProgressTranslationY"
     )
 
     val statDoneAlpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
+        targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 450, delayMillis = 240, easing = FastOutSlowInEasing),
         label = "statDoneAlpha"
     )
     val statDoneTranslationY by animateFloatAsState(
-        targetValue = if (isVisible) 0f else 30f,
+        targetValue = if (isContentVisible) 0f else 30f,
         animationSpec = tween(durationMillis = 450, delayMillis = 240, easing = FastOutSlowInEasing),
         label = "statDoneTranslationY"
     )
 
     val statOverdueAlpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
+        targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 450, delayMillis = 320, easing = FastOutSlowInEasing),
         label = "statOverdueAlpha"
     )
     val statOverdueTranslationY by animateFloatAsState(
-        targetValue = if (isVisible) 0f else 30f,
+        targetValue = if (isContentVisible) 0f else 30f,
         animationSpec = tween(durationMillis = 450, delayMillis = 320, easing = FastOutSlowInEasing),
         label = "statOverdueTranslationY"
     )
 
     // Urgent tasks section (header + empty card / items) smoothly fades in last
     val urgentAlpha by animateFloatAsState(
-        targetValue = if (isVisible) 1f else 0f,
+        targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 450, delayMillis = 400, easing = FastOutSlowInEasing),
         label = "urgentAlpha"
     )
     val urgentTranslationY by animateFloatAsState(
-        targetValue = if (isVisible) 0f else 30f,
+        targetValue = if (isContentVisible) 0f else 30f,
         animationSpec = tween(durationMillis = 450, delayMillis = 400, easing = FastOutSlowInEasing),
         label = "urgentTranslationY"
     )
@@ -174,7 +192,7 @@ fun DashboardScreen(
                                 color = MaterialTheme.colorScheme.primary
                             )
                             Text(
-                                text = "Pencatat Tugas Sekolah",
+                                text = greeting,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )

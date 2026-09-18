@@ -371,12 +371,14 @@ fun TaskDetailScreen(
                                 )
 
                                 task.subtasks.forEach { subtask ->
-                                    val assignedMember = task.members.find { it.id == subtask.assignedMemberId }
-                                    SubtaskItemRow(
-                                        subtask = subtask,
-                                        assignedMemberName = assignedMember?.name,
-                                        onToggle = { isChecked -> viewModel.onToggleSubtask(subtask.id, isChecked) }
-                                    )
+                                    key(subtask.id) {
+                                        val assignedMember = task.members.find { it.id == subtask.assignedMemberId }
+                                        SubtaskItemRow(
+                                            subtask = subtask,
+                                            assignedMemberName = assignedMember?.name,
+                                            onToggle = { isChecked -> viewModel.onToggleSubtask(subtask.id, isChecked) }
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -508,25 +510,29 @@ private fun SubtaskItemRow(
             isInitial = false
             return@LaunchedEffect
         }
-        // Spring bounce: 0.8 -> 1.15 -> 1.0
-        checkboxScale.animateTo(
-            targetValue = 0.8f,
-            animationSpec = tween(durationMillis = 80, easing = FastOutSlowInEasing)
-        )
-        checkboxScale.animateTo(
-            targetValue = 1.15f,
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioMediumBouncy,
-                stiffness = Spring.StiffnessMedium
+        if (subtask.isCompleted) {
+            // Spring bounce: 0.8 -> 1.15 -> 1.0
+            checkboxScale.animateTo(
+                targetValue = 0.8f,
+                animationSpec = tween(durationMillis = 80, easing = FastOutSlowInEasing)
             )
-        )
-        checkboxScale.animateTo(
-            targetValue = 1.0f,
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioMediumBouncy,
-                stiffness = Spring.StiffnessLow
+            checkboxScale.animateTo(
+                targetValue = 1.15f,
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessMedium
+                )
             )
-        )
+            checkboxScale.animateTo(
+                targetValue = 1.0f,
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessLow
+                )
+            )
+        } else {
+            checkboxScale.snapTo(1.0f)
+        }
     }
 
     val strikethroughProgress by animateFloatAsState(
@@ -564,7 +570,7 @@ private fun SubtaskItemRow(
         Spacer(modifier = Modifier.width(8.dp))
         Column(modifier = Modifier.weight(1f)) {
             val lineColor = MaterialTheme.colorScheme.onSurfaceVariant
-            var textLayoutResult by remember { mutableStateOf<TextLayoutResult?>(null) }
+            var textLayoutResult by remember(subtask.title) { mutableStateOf<TextLayoutResult?>(null) }
 
             Text(
                 text = subtask.title,
