@@ -1,7 +1,8 @@
 package com.example.taskku.domain.model
 
 import androidx.compose.runtime.Immutable
-import java.util.Calendar
+import java.time.LocalDate
+import java.time.LocalTime
 import java.util.Locale
 
 enum class SchoolDay(val dayOfWeek: Int, val displayName: String, val shortName: String) {
@@ -17,19 +18,8 @@ enum class SchoolDay(val dayOfWeek: Int, val displayName: String, val shortName:
         fun fromDayOfWeek(day: Int): SchoolDay =
             entries.find { it.dayOfWeek == day } ?: SENIN
 
-        fun currentDayOfWeek(): Int {
-            val cal = Calendar.getInstance()
-            return when (cal.get(Calendar.DAY_OF_WEEK)) {
-                Calendar.MONDAY -> 1
-                Calendar.TUESDAY -> 2
-                Calendar.WEDNESDAY -> 3
-                Calendar.THURSDAY -> 4
-                Calendar.FRIDAY -> 5
-                Calendar.SATURDAY -> 6
-                Calendar.SUNDAY -> 7
-                else -> 1
-            }
-        }
+        fun currentDayOfWeek(): Int =
+            LocalDate.now().dayOfWeek.value
     }
 }
 
@@ -50,13 +40,11 @@ data class TimetableItem(
         get() = "$startTime - $endTime"
 
     fun isCurrentlyActive(): Boolean {
-        val cal = Calendar.getInstance()
         val currentDay = SchoolDay.currentDayOfWeek()
         if (currentDay != dayOfWeek) return false
 
-        val currentHour = cal.get(Calendar.HOUR_OF_DAY)
-        val currentMin = cal.get(Calendar.MINUTE)
-        val nowFormatted = String.format(Locale.ROOT, "%02d:%02d", currentHour, currentMin)
+        val now = LocalTime.now()
+        val nowFormatted = String.format(Locale.ROOT, "%02d:%02d", now.hour, now.minute)
 
         return nowFormatted in startTime..endTime
     }

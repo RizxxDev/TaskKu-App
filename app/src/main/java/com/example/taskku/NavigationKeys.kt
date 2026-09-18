@@ -17,5 +17,6 @@ data class TaskDetail(val taskId: Long) : NavKey
 data class TaskForm(
     val taskId: Long? = null,
     val initialSubject: String? = null,
-    val initialDeadlineDate: Long? = null
+    val initialDeadlineDate: Long? = null,
+    val initialTag: String? = null
 ) : NavKey

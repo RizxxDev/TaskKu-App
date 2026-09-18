@@ -70,8 +70,9 @@ fun MainNavigation(
             entry<TaskForm> { key ->
                 val app = context.applicationContext as TaskKuApplication
                 val container = app.container
+                val parsedTag = key.initialTag?.let { com.example.taskku.domain.model.TaskTag.fromString(it) }
                 val formViewModel: TaskFormViewModel = viewModel(
-                    key = "task_form_${key.taskId ?: 0}_${key.initialSubject.orEmpty()}_${key.initialDeadlineDate ?: 0}",
+                    key = "task_form_${key.taskId ?: 0}_${key.initialSubject.orEmpty()}_${key.initialDeadlineDate ?: 0}_${key.initialTag.orEmpty()}",
                     factory = TaskFormViewModelFactory(
                         taskId = key.taskId,
                         taskRepository = container.taskRepository,
@@ -79,7 +80,8 @@ fun MainNavigation(
                         statusRepository = container.statusRepository,
                         appContext = context.applicationContext,
                         initialSubject = key.initialSubject,
-                        initialDeadlineDate = key.initialDeadlineDate
+                        initialDeadlineDate = key.initialDeadlineDate,
+                        initialTag = parsedTag
                     )
                 )
                 TaskFormScreen(

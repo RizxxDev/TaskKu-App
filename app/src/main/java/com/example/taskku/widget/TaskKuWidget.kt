@@ -158,7 +158,7 @@ private fun WidgetRoot(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "📖 Pelajaran berikutnya: ${nextClass.subject} (${nextClass.startTime} - ${nextClass.endTime})$roomText",
+                    text = "📖 Pelajaran berikutnya hari ini: ${nextClass.subject} (${nextClass.startTime} - ${nextClass.endTime})$roomText",
                     style = TextStyle(
                         color = GlanceTheme.colors.primary,
                         fontWeight = FontWeight.Medium,

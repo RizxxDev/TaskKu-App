@@ -105,7 +105,7 @@ fun MainScreen(
                         onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
                         onAddTaskClick = { onNavigate(TaskForm(null)) },
                         onAddHomeworkForSubject = { subject, deadlineDate ->
-                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate))
+                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
                         },
                         viewModel = dashboardViewModel
                     )
@@ -135,7 +135,7 @@ fun MainScreen(
                     )
                     TimetableScreen(
                         onNavigateToTaskForm = { subject, deadlineDate ->
-                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate))
+                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
                         },
                         viewModel = timetableViewModel
                     )

@@ -104,7 +104,9 @@ class TaskListViewModel(
                 it.title.lowercase().contains(q) ||
                 it.description.lowercase().contains(q) ||
                 it.subject.lowercase().contains(q) ||
-                it.groupName.lowercase().contains(q)
+                it.groupName.lowercase().contains(q) ||
+                it.tag.displayName.lowercase().contains(q) ||
+                it.tag.name.lowercase().contains(q)
             }
         }
 

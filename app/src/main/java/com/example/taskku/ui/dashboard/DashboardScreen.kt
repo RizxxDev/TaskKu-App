@@ -144,17 +144,37 @@ fun DashboardScreen(
                             }
 
                             if (nextClass != null) {
+                                val isOngoing = nextClass.isCurrentlyActive()
                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     Text(
-                                        text = "Pelajaran berikutnya hari ini:",
+                                        text = if (isOngoing) "Sedang berlangsung saat ini:" else "Pelajaran berikutnya hari ini:",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
                                     )
-                                    Text(
-                                        text = "${nextClass.subject} (${nextClass.startTime} - ${nextClass.endTime})",
-                                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                                    )
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                    ) {
+                                        Text(
+                                            text = "${nextClass.subject} (${nextClass.startTime} - ${nextClass.endTime})",
+                                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                                        )
+                                        if (isOngoing) {
+                                            Surface(
+                                                shape = RoundedCornerShape(4.dp),
+                                                color = MaterialTheme.colorScheme.primary,
+                                                modifier = Modifier.padding(start = 2.dp)
+                                            ) {
+                                                Text(
+                                                    text = "Sedang Berlangsung",
+                                                    color = MaterialTheme.colorScheme.onPrimary,
+                                                    style = MaterialTheme.typography.labelSmall,
+                                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                                )
+                                            }
+                                        }
+                                    }
                                     if (nextClass.room.isNotBlank() || nextClass.teacher.isNotBlank()) {
                                         val details = listOfNotNull(
                                             nextClass.room.takeIf { it.isNotBlank() }?.let { "Ruang $it" },

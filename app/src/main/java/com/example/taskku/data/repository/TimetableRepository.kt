@@ -97,10 +97,8 @@ class TimetableRepositoryImpl(
         return timetableDao.getAllTimetables()
             .map { list ->
                 val currentDay = SchoolDay.currentDayOfWeek()
-                val cal = Calendar.getInstance()
-                val currentHour = cal.get(Calendar.HOUR_OF_DAY)
-                val currentMin = cal.get(Calendar.MINUTE)
-                val currentTime = String.format(Locale.ROOT, "%02d:%02d", currentHour, currentMin)
+                val now = java.time.LocalTime.now()
+                val currentTime = String.format(Locale.ROOT, "%02d:%02d", now.hour, now.minute)
 
                 list.filter { it.dayOfWeek == currentDay }
                     .map { it.toDomainModel() }

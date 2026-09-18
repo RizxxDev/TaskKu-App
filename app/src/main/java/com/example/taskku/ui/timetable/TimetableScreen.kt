@@ -88,6 +88,7 @@ fun TimetableScreen(
                     room = room,
                     teacher = teacher
                 )
+                viewModel.onSelectDay(dayOfWeek)
                 showAddEditDialog = false
                 editingItem = null
             }
@@ -558,16 +559,25 @@ fun TimetableAddEditDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    OutlinedTextField(
-                        value = startTime,
-                        onValueChange = {},
-                        readOnly = true,
-                        label = { Text("Mulai *") },
-                        trailingIcon = {
-                            Icon(
-                                Icons.Outlined.AccessTime,
-                                contentDescription = null,
-                                modifier = Modifier.clickable {
+                    Box(modifier = Modifier.weight(1f)) {
+                        OutlinedTextField(
+                            value = startTime,
+                            onValueChange = {},
+                            readOnly = true,
+                            label = { Text("Mulai *") },
+                            trailingIcon = {
+                                Icon(
+                                    Icons.Outlined.AccessTime,
+                                    contentDescription = null
+                                )
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        Box(
+                            modifier = Modifier
+                                .matchParentSize()
+                                .clickable {
                                     val parts = startTime.split(":")
                                     val h = parts.getOrNull(0)?.toIntOrNull() ?: 7
                                     val m = parts.getOrNull(1)?.toIntOrNull() ?: 30
@@ -575,31 +585,28 @@ fun TimetableAddEditDialog(
                                         startTime = String.format(Locale.ROOT, "%02d:%02d", hour, min)
                                     }, h, m, true).show()
                                 }
-                            )
-                        },
-                        modifier = Modifier
-                            .weight(1f)
-                            .clickable {
-                                val parts = startTime.split(":")
-                                val h = parts.getOrNull(0)?.toIntOrNull() ?: 7
-                                val m = parts.getOrNull(1)?.toIntOrNull() ?: 30
-                                TimePickerDialog(context, { _, hour, min ->
-                                    startTime = String.format(Locale.ROOT, "%02d:%02d", hour, min)
-                                }, h, m, true).show()
-                            },
-                        shape = RoundedCornerShape(12.dp)
-                    )
+                        )
+                    }
 
-                    OutlinedTextField(
-                        value = endTime,
-                        onValueChange = {},
-                        readOnly = true,
-                        label = { Text("Selesai *") },
-                        trailingIcon = {
-                            Icon(
-                                Icons.Outlined.AccessTime,
-                                contentDescription = null,
-                                modifier = Modifier.clickable {
+                    Box(modifier = Modifier.weight(1f)) {
+                        OutlinedTextField(
+                            value = endTime,
+                            onValueChange = {},
+                            readOnly = true,
+                            label = { Text("Selesai *") },
+                            trailingIcon = {
+                                Icon(
+                                    Icons.Outlined.AccessTime,
+                                    contentDescription = null
+                                )
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        Box(
+                            modifier = Modifier
+                                .matchParentSize()
+                                .clickable {
                                     val parts = endTime.split(":")
                                     val h = parts.getOrNull(0)?.toIntOrNull() ?: 9
                                     val m = parts.getOrNull(1)?.toIntOrNull() ?: 0
@@ -607,20 +614,8 @@ fun TimetableAddEditDialog(
                                         endTime = String.format(Locale.ROOT, "%02d:%02d", hour, min)
                                     }, h, m, true).show()
                                 }
-                            )
-                        },
-                        modifier = Modifier
-                            .weight(1f)
-                            .clickable {
-                                val parts = endTime.split(":")
-                                val h = parts.getOrNull(0)?.toIntOrNull() ?: 9
-                                val m = parts.getOrNull(1)?.toIntOrNull() ?: 0
-                                TimePickerDialog(context, { _, hour, min ->
-                                    endTime = String.format(Locale.ROOT, "%02d:%02d", hour, min)
-                                }, h, m, true).show()
-                            },
-                        shape = RoundedCornerShape(12.dp)
-                    )
+                        )
+                    }
                 }
 
                 // Room input

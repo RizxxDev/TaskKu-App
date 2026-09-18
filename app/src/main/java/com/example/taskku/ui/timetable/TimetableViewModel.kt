@@ -11,25 +11,35 @@ import com.example.taskku.domain.model.Subject
 import com.example.taskku.domain.model.TimetableItem
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.util.Calendar
+import java.time.ZonedDateTime
 
-fun calculateNextMeetingDate(item: TimetableItem): Long {
-    val cal = Calendar.getInstance()
-    val today = SchoolDay.currentDayOfWeek()
+fun calculateNextMeetingDate(
+    item: TimetableItem,
+    referenceZonedDateTime: ZonedDateTime = ZonedDateTime.now()
+): Long {
+    val today = referenceZonedDateTime.dayOfWeek.value // 1 = Senin .. 7 = Minggu
     val daysDiff = (item.dayOfWeek - today + 7) % 7
-    // If today is the class, next meeting is in 7 days.
-    // If class is later this week, next week's meeting is that day + 7 days.
-    val daysToAdd = if (daysDiff == 0) 7 else daysDiff + 7
-    cal.add(Calendar.DAY_OF_YEAR, daysToAdd)
+    // If today is the class day, next week's meeting is in 7 days.
+    // If the class is later this week (item.dayOfWeek > today), the upcoming meeting this week is in daysDiff days,
+    // so the next meeting after that (pertemuan minggu depan) is daysDiff + 7 days.
+    // If the class was earlier this week (item.dayOfWeek < today), this week's class has already passed,
+    // so the upcoming occurrence (in daysDiff days) is already next week's meeting.
+    val daysToAdd = when {
+        daysDiff == 0 -> 7L
+        item.dayOfWeek > today -> (daysDiff + 7).toLong()
+        else -> daysDiff.toLong()
+    }
 
     val parts = item.startTime.split(":")
     val hour = parts.getOrNull(0)?.toIntOrNull() ?: 7
     val min = parts.getOrNull(1)?.toIntOrNull() ?: 0
-    cal.set(Calendar.HOUR_OF_DAY, hour)
-    cal.set(Calendar.MINUTE, min)
-    cal.set(Calendar.SECOND, 0)
-    cal.set(Calendar.MILLISECOND, 0)
-    return cal.timeInMillis
+
+    val targetDate = referenceZonedDateTime.plusDays(daysToAdd)
+        .withHour(hour)
+        .withMinute(min)
+        .withSecond(0)
+        .withNano(0)
+    return targetDate.toInstant().toEpochMilli()
 }
 
 class TimetableViewModel(

@@ -276,4 +276,24 @@ class TaskListViewModelTest {
         assertNull(state.selectedTag)
         assertEquals(3, state.tasks.size)
     }
+
+    @Test
+    fun searchQuery_matchesTaskTag() = runTest(testDispatcher) {
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.uiState.collect() }
+        testScheduler.advanceUntilIdle()
+
+        // Task 2 has tag PRAKTIKUM ("Praktikum")
+        viewModel.onSearchQueryChange("Praktikum")
+        testScheduler.advanceUntilIdle()
+        var state = viewModel.uiState.value
+        assertEquals(1, state.tasks.size)
+        assertEquals(2L, state.tasks[0].id)
+
+        // Task 3 has tag PROYEK ("Proyek")
+        viewModel.onSearchQueryChange("proyek")
+        testScheduler.advanceUntilIdle()
+        state = viewModel.uiState.value
+        assertEquals(1, state.tasks.size)
+        assertEquals(3L, state.tasks[0].id)
+    }
 }
