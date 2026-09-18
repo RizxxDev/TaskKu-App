@@ -18,7 +18,12 @@ private val statusColorCache = java.util.concurrent.ConcurrentHashMap<String, Co
 fun parseStatusColor(colorHex: String): Color {
     return statusColorCache.computeIfAbsent(colorHex) { hex ->
         try {
-            Color(android.graphics.Color.parseColor(hex))
+            val clean = if (hex.startsWith("#")) hex.substring(1) else hex
+            when (clean.length) {
+                6 -> Color(0xFF000000L or clean.toLong(16))
+                8 -> Color(clean.toLong(16))
+                else -> Color.Gray
+            }
         } catch (e: Exception) {
             Color.Gray
         }

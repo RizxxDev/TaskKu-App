@@ -34,21 +34,10 @@ import com.example.taskku.domain.model.TaskType
 fun TaskCard(
     task: Task,
     onTaskClick: (Long) -> Unit,
-    onDeleteClick: (Long) -> Unit,
+    onDeleteClick: ((Long) -> Unit)? = null,
     onLongClick: ((Long) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
-    val dismissState = rememberSwipeToDismissBoxState(
-        confirmValueChange = {
-            if (it == SwipeToDismissBoxValue.EndToStart) {
-                onDeleteClick(task.id)
-                true
-            } else {
-                false
-            }
-        }
-    )
-
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val pressScale by animateFloatAsState(
@@ -60,30 +49,9 @@ fun TaskCard(
         label = "taskCardPressScale"
     )
 
-    SwipeToDismissBox(
-        state = dismissState,
-        backgroundContent = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(vertical = 8.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(MaterialTheme.colorScheme.error)
-                    .padding(horizontal = 20.dp),
-                contentAlignment = Alignment.CenterEnd
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = "Hapus Tugas",
-                    tint = MaterialTheme.colorScheme.onError
-                )
-            }
-        },
-        enableDismissFromStartToEnd = false,
-        modifier = modifier
-    ) {
+    val cardContent = @Composable { cardModifier: Modifier ->
         Card(
-            modifier = Modifier
+            modifier = cardModifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
                 .graphicsLayer {
@@ -167,5 +135,45 @@ fun TaskCard(
                 }
             }
         }
+    }
+
+    if (onDeleteClick != null) {
+        val dismissState = rememberSwipeToDismissBoxState(
+            confirmValueChange = {
+                if (it == SwipeToDismissBoxValue.EndToStart) {
+                    onDeleteClick(task.id)
+                    true
+                } else {
+                    false
+                }
+            }
+        )
+
+        SwipeToDismissBox(
+            state = dismissState,
+            backgroundContent = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(vertical = 8.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.error)
+                        .padding(horizontal = 20.dp),
+                    contentAlignment = Alignment.CenterEnd
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Hapus Tugas",
+                        tint = MaterialTheme.colorScheme.onError
+                    )
+                }
+            },
+            enableDismissFromStartToEnd = false,
+            modifier = modifier
+        ) {
+            cardContent(Modifier)
+        }
+    } else {
+        cardContent(modifier)
     }
 }

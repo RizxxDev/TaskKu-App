@@ -40,7 +40,6 @@ import java.util.Calendar
 import java.util.Locale
 
 private val DAYS_OF_WEEK = listOf("Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min")
-private val NOOP_LONG_CONSUMER: (Long) -> Unit = {}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -203,8 +202,7 @@ fun CalendarScreen(
                     ) { task ->
                         TaskCard(
                             task = task,
-                            onTaskClick = onTaskClick,
-                            onDeleteClick = NOOP_LONG_CONSUMER
+                            onTaskClick = onTaskClick
                         )
                     }
                 }

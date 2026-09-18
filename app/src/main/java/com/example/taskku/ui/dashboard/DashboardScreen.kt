@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -77,11 +76,6 @@ fun DashboardScreen(
         animationSpec = tween(durationMillis = 250, delayMillis = 0, easing = FastOutSlowInEasing),
         label = "headerAlpha"
     )
-    val headerTranslationY by animateFloatAsState(
-        targetValue = if (isHeaderVisible) 0f else -20f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 0, easing = FastOutSlowInEasing),
-        label = "headerTranslationY"
-    )
 
     // Staggered entrance for content activates once database loading completes
     var isContentVisible by rememberSaveable { mutableStateOf(false) }
@@ -97,11 +91,6 @@ fun DashboardScreen(
         animationSpec = tween(durationMillis = 250, delayMillis = 30, easing = FastOutSlowInEasing),
         label = "heroAlpha"
     )
-    val heroTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 20f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 30, easing = FastOutSlowInEasing),
-        label = "heroTranslationY"
-    )
 
     // Stat cards staggered slide up + fade in (30ms increments)
     val statPendingAlpha by animateFloatAsState(
@@ -109,21 +98,11 @@ fun DashboardScreen(
         animationSpec = tween(durationMillis = 250, delayMillis = 50, easing = FastOutSlowInEasing),
         label = "statPendingAlpha"
     )
-    val statPendingTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 20f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 50, easing = FastOutSlowInEasing),
-        label = "statPendingTranslationY"
-    )
 
     val statInProgressAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 250, delayMillis = 80, easing = FastOutSlowInEasing),
         label = "statInProgressAlpha"
-    )
-    val statInProgressTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 20f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 80, easing = FastOutSlowInEasing),
-        label = "statInProgressTranslationY"
     )
 
     val statDoneAlpha by animateFloatAsState(
@@ -131,21 +110,11 @@ fun DashboardScreen(
         animationSpec = tween(durationMillis = 250, delayMillis = 110, easing = FastOutSlowInEasing),
         label = "statDoneAlpha"
     )
-    val statDoneTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 20f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 110, easing = FastOutSlowInEasing),
-        label = "statDoneTranslationY"
-    )
 
     val statOverdueAlpha by animateFloatAsState(
         targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 250, delayMillis = 140, easing = FastOutSlowInEasing),
         label = "statOverdueAlpha"
-    )
-    val statOverdueTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 20f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 140, easing = FastOutSlowInEasing),
-        label = "statOverdueTranslationY"
     )
 
     // Urgent tasks section (header + empty card / items) smoothly fades in last
@@ -153,11 +122,6 @@ fun DashboardScreen(
         targetValue = if (isContentVisible) 1f else 0f,
         animationSpec = tween(durationMillis = 250, delayMillis = 170, easing = FastOutSlowInEasing),
         label = "urgentAlpha"
-    )
-    val urgentTranslationY by animateFloatAsState(
-        targetValue = if (isContentVisible) 0f else 20f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 170, easing = FastOutSlowInEasing),
-        label = "urgentTranslationY"
     )
 
     Scaffold(
@@ -169,7 +133,7 @@ fun DashboardScreen(
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.graphicsLayer {
                             alpha = headerAlpha
-                            translationY = headerTranslationY
+                            translationY = (headerAlpha - 1f) * 20f
                         }
                     ) {
                         Surface(
@@ -228,14 +192,14 @@ fun DashboardScreen(
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 // Pelajaran Berikutnya Hari Ini Card
-                item {
+                item(key = "next_class_card", contentType = "hero_card") {
                     val nextClass = uiState.nextClassToday
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .graphicsLayer {
                                 alpha = heroAlpha
-                                translationY = heroTranslationY
+                                translationY = (1f - heroAlpha) * 20f
                             },
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(
@@ -350,13 +314,13 @@ fun DashboardScreen(
                 }
 
                 // 1. Progress Minggu Ini Card
-                item {
+                item(key = "weekly_progress_card", contentType = "progress_card") {
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .graphicsLayer {
                                 alpha = heroAlpha
-                                translationY = heroTranslationY
+                                translationY = (1f - heroAlpha) * 20f
                             },
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(
@@ -405,8 +369,8 @@ fun DashboardScreen(
                     }
                 }
 
-                // 2. Statistik Cepat Section (Staggered 80ms delay increments)
-                item {
+                // 2. Statistik Cepat Section (Staggered 30ms delay increments)
+                item(key = "stat_cards_grid", contentType = "stat_cards") {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Text(
                             text = "Statistik Cepat",
@@ -426,7 +390,7 @@ fun DashboardScreen(
                                     .weight(1f)
                                     .graphicsLayer {
                                         alpha = statPendingAlpha
-                                        translationY = statPendingTranslationY
+                                        translationY = (1f - statPendingAlpha) * 20f
                                     }
                             )
                             StatCard(
@@ -438,7 +402,7 @@ fun DashboardScreen(
                                     .weight(1f)
                                     .graphicsLayer {
                                         alpha = statInProgressAlpha
-                                        translationY = statInProgressTranslationY
+                                        translationY = (1f - statInProgressAlpha) * 20f
                                     }
                             )
                         }
@@ -456,7 +420,7 @@ fun DashboardScreen(
                                     .weight(1f)
                                     .graphicsLayer {
                                         alpha = statDoneAlpha
-                                        translationY = statDoneTranslationY
+                                        translationY = (1f - statDoneAlpha) * 20f
                                     }
                             )
                             StatCard(
@@ -468,7 +432,7 @@ fun DashboardScreen(
                                     .weight(1f)
                                     .graphicsLayer {
                                         alpha = statOverdueAlpha
-                                        translationY = statOverdueTranslationY
+                                        translationY = (1f - statOverdueAlpha) * 20f
                                     }
                             )
                         }
@@ -476,11 +440,11 @@ fun DashboardScreen(
                 }
 
                 // 3. Tugas Mendesak Section Header & Empty state (fades in last)
-                item {
+                item(key = "urgent_header", contentType = "urgent_header") {
                     Column(
                         modifier = Modifier.graphicsLayer {
                             alpha = urgentAlpha
-                            translationY = urgentTranslationY
+                            translationY = (1f - urgentAlpha) * 20f
                         },
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
@@ -546,7 +510,7 @@ fun DashboardScreen(
                                 .animateItem()
                                 .graphicsLayer {
                                     alpha = urgentAlpha
-                                    translationY = urgentTranslationY
+                                    translationY = (1f - urgentAlpha) * 20f
                                 }
                         )
                     }

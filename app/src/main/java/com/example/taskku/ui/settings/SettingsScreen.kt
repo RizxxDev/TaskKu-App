@@ -190,7 +190,7 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             // 1. Tema Aplikasi
-            item {
+            item(key = "theme_section", contentType = "settings_card") {
                 SectionCard(title = "Tema Tampilan", icon = Icons.Outlined.Palette) {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text(
@@ -226,7 +226,7 @@ fun SettingsScreen(
             }
 
             // 2. Kelola Mata Pelajaran
-            item {
+            item(key = "subject_section", contentType = "settings_card") {
                 SectionCard(
                     title = "Kelola Mata Pelajaran",
                     icon = Icons.AutoMirrored.Outlined.MenuBook,
@@ -300,7 +300,7 @@ fun SettingsScreen(
             }
 
             // 3. Kelola Status Tugas
-            item {
+            item(key = "status_section", contentType = "settings_card") {
                 SectionCard(
                     title = "Kelola Status Tugas",
                     icon = Icons.Outlined.Checklist,
@@ -421,7 +421,7 @@ fun SettingsScreen(
             }
 
             // 4. Cadangkan & Pulihkan (Backup & Restore)
-            item {
+            item(key = "backup_section", contentType = "settings_card") {
                 SectionCard(title = "Cadangkan & Pulihkan", icon = Icons.Outlined.CloudSync) {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Text(
@@ -478,7 +478,7 @@ fun SettingsScreen(
             }
 
             // 5. Tentang Aplikasi
-            item {
+            item(key = "about_section", contentType = "settings_card") {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(20.dp),

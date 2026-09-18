@@ -84,13 +84,14 @@ fun MainScreen(
     val dashboardViewModelFactory = remember(container) {
         DashboardViewModelFactory(container.taskRepository, container.timetableRepository)
     }
-    val taskListViewModelFactory = remember(container, context) {
+    val appContext = remember(context) { context.applicationContext }
+    val taskListViewModelFactory = remember(container, appContext) {
         TaskListViewModelFactory(
             taskRepository = container.taskRepository,
             subjectRepository = container.subjectRepository,
             statusRepository = container.statusRepository,
             appPreferences = container.appPreferences,
-            appContext = context.applicationContext
+            appContext = appContext
         )
     }
     val timetableViewModelFactory = remember(container) {
@@ -126,7 +127,7 @@ fun MainScreen(
             NavigationBar {
                 NavigationTab.entries.forEachIndexed { index, tab ->
                     val isSelected = selectedTabIndex == index
-                    val iconScale = remember { Animatable(1.0f) }
+                    val iconScale = remember(tab) { Animatable(1.0f) }
 
                     LaunchedEffect(isSelected) {
                         if (isSelected) {

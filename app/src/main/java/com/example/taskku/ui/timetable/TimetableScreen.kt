@@ -30,6 +30,15 @@ import com.example.taskku.domain.model.SchoolDay
 import com.example.taskku.domain.model.TimetableItem
 import java.util.Locale
 
+private val SCHOOL_DAYS = listOf(
+    SchoolDay.SENIN,
+    SchoolDay.SELASA,
+    SchoolDay.RABU,
+    SchoolDay.KAMIS,
+    SchoolDay.JUMAT,
+    SchoolDay.SABTU
+)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TimetableScreen(
@@ -147,21 +156,12 @@ fun TimetableScreen(
                 .fillMaxSize()
         ) {
             // Day selection tab row (Senin to Sabtu)
-            val schoolDays = listOf(
-                SchoolDay.SENIN,
-                SchoolDay.SELASA,
-                SchoolDay.RABU,
-                SchoolDay.KAMIS,
-                SchoolDay.JUMAT,
-                SchoolDay.SABTU
-            )
-
             ScrollableTabRow(
-                selectedTabIndex = schoolDays.indexOfFirst { it.dayOfWeek == uiState.selectedDay }.coerceAtLeast(0),
+                selectedTabIndex = SCHOOL_DAYS.indexOfFirst { it.dayOfWeek == uiState.selectedDay }.coerceAtLeast(0),
                 edgePadding = 16.dp,
                 divider = { HorizontalDivider() }
             ) {
-                schoolDays.forEach { schoolDay ->
+                SCHOOL_DAYS.forEach { schoolDay ->
                     val isSelected = uiState.selectedDay == schoolDay.dayOfWeek
                     val count = uiState.timetablesByDay[schoolDay.dayOfWeek]?.size ?: 0
                     Tab(
