@@ -185,3 +185,50 @@ class FakeStatusRepository : StatusRepository {
         statusesFlow.value = statusesFlow.value.filter { it.id != statusId }
     }
 }
+
+class FakeTimetableRepository : com.example.taskku.data.repository.TimetableRepository {
+    val timetablesFlow = MutableStateFlow<List<TimetableItem>>(emptyList())
+    private var nextId = 1L
+
+    override suspend fun insertTimetable(item: TimetableItem): Long {
+        val id = if (item.id > 0) item.id else nextId++
+        val newItem = item.copy(id = id)
+        timetablesFlow.value = timetablesFlow.value + newItem
+        return id
+    }
+
+    override suspend fun updateTimetable(item: TimetableItem) {
+        timetablesFlow.value = timetablesFlow.value.map {
+            if (it.id == item.id) item else it
+        }
+    }
+
+    override suspend fun deleteTimetable(item: TimetableItem) {
+        timetablesFlow.value = timetablesFlow.value.filter { it.id != item.id }
+    }
+
+    override suspend fun deleteTimetableById(id: Long) {
+        timetablesFlow.value = timetablesFlow.value.filter { it.id != id }
+    }
+
+    override fun getAllTimetables(): Flow<List<TimetableItem>> = timetablesFlow
+
+    override fun getTimetablesByDay(dayOfWeek: Int): Flow<List<TimetableItem>> =
+        timetablesFlow.map { list -> list.filter { it.dayOfWeek == dayOfWeek } }
+
+    override fun getTimetableById(id: Long): Flow<TimetableItem?> =
+        timetablesFlow.map { list -> list.find { it.id == id } }
+
+    override fun getUpcomingNextClass(): Flow<TimetableItem?> =
+        timetablesFlow.map { list ->
+            val currentDay = SchoolDay.currentDayOfWeek()
+            val cal = java.util.Calendar.getInstance()
+            val currentHour = cal.get(java.util.Calendar.HOUR_OF_DAY)
+            val currentMin = cal.get(java.util.Calendar.MINUTE)
+            val currentTime = String.format(java.util.Locale.ROOT, "%02d:%02d", currentHour, currentMin)
+
+            list.filter { it.dayOfWeek == currentDay }
+                .sortedBy { it.startTime }
+                .firstOrNull { it.endTime > currentTime }
+        }
+}

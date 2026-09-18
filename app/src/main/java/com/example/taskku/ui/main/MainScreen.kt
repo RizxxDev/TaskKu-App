@@ -39,6 +39,12 @@ import com.example.taskku.ui.tasklist.TaskListScreen
 import com.example.taskku.ui.tasklist.TaskListViewModel
 import com.example.taskku.ui.tasklist.TaskListViewModelFactory
 
+import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.outlined.Schedule
+import com.example.taskku.ui.timetable.TimetableScreen
+import com.example.taskku.ui.timetable.TimetableViewModel
+import com.example.taskku.ui.timetable.TimetableViewModelFactory
+
 enum class NavigationTab(
     val title: String,
     val selectedIcon: ImageVector,
@@ -46,6 +52,7 @@ enum class NavigationTab(
 ) {
     DASHBOARD("Dashboard", Icons.Filled.Dashboard, Icons.Outlined.Dashboard),
     TASKS("Tugas", Icons.AutoMirrored.Filled.Assignment, Icons.AutoMirrored.Outlined.Assignment),
+    TIMETABLE("Jadwal", Icons.Filled.Schedule, Icons.Outlined.Schedule),
     CALENDAR("Kalender", Icons.Filled.CalendarMonth, Icons.Outlined.CalendarMonth),
     SETTINGS("Pengaturan", Icons.Filled.Settings, Icons.Outlined.Settings)
 }
@@ -92,11 +99,14 @@ fun MainScreen(
             when (NavigationTab.entries[selectedTabIndex]) {
                 NavigationTab.DASHBOARD -> {
                     val dashboardViewModel: DashboardViewModel = viewModel(
-                        factory = DashboardViewModelFactory(container.taskRepository)
+                        factory = DashboardViewModelFactory(container.taskRepository, container.timetableRepository)
                     )
                     DashboardScreen(
                         onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
                         onAddTaskClick = { onNavigate(TaskForm(null)) },
+                        onAddHomeworkForSubject = { subject, deadlineDate ->
+                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate))
+                        },
                         viewModel = dashboardViewModel
                     )
                 }
@@ -114,6 +124,20 @@ fun MainScreen(
                         onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
                         onAddTaskClick = { onNavigate(TaskForm(null)) },
                         viewModel = taskListViewModel
+                    )
+                }
+                NavigationTab.TIMETABLE -> {
+                    val timetableViewModel: TimetableViewModel = viewModel(
+                        factory = TimetableViewModelFactory(
+                            timetableRepository = container.timetableRepository,
+                            subjectRepository = container.subjectRepository
+                        )
+                    )
+                    TimetableScreen(
+                        onNavigateToTaskForm = { subject, deadlineDate ->
+                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate))
+                        },
+                        viewModel = timetableViewModel
                     )
                 }
                 NavigationTab.CALENDAR -> {

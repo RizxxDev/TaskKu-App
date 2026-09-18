@@ -5,15 +5,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.taskku.data.repository.TaskRepository
+import com.example.taskku.data.repository.TimetableRepository
 import com.example.taskku.domain.model.Task
+import com.example.taskku.domain.model.TimetableItem
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import java.util.Calendar
 
 class DashboardViewModel(
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val timetableRepository: TimetableRepository? = null
 ) : ViewModel() {
 
     @Immutable
@@ -26,10 +30,16 @@ class DashboardViewModel(
         val thisWeekTotalCount: Int = 0,
         val thisWeekDoneCount: Int = 0,
         val thisWeekProgress: Float = 0f,
+        val nextClassToday: TimetableItem? = null,
         val isLoading: Boolean = true
     )
 
-    val uiState: StateFlow<UiState> = taskRepository.getAllTasks().map { tasks ->
+    private val nextClassFlow = timetableRepository?.getUpcomingNextClass() ?: flowOf(null)
+
+    val uiState: StateFlow<UiState> = combine(
+        taskRepository.getAllTasks(),
+        nextClassFlow
+    ) { tasks, nextClass ->
         val now = System.currentTimeMillis()
 
         val cal = Calendar.getInstance().apply {
@@ -93,6 +103,7 @@ class DashboardViewModel(
             thisWeekTotalCount = weekTotal,
             thisWeekDoneCount = weekDone,
             thisWeekProgress = progress,
+            nextClassToday = nextClass,
             isLoading = false
         )
     }.stateIn(
@@ -103,12 +114,13 @@ class DashboardViewModel(
 }
 
 class DashboardViewModelFactory(
-    private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository,
+    private val timetableRepository: TimetableRepository? = null
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DashboardViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return DashboardViewModel(taskRepository) as T
+            return DashboardViewModel(taskRepository, timetableRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

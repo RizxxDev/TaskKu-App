@@ -28,6 +28,9 @@ import com.example.taskku.domain.model.Task
 import com.example.taskku.theme.*
 import com.example.taskku.ui.components.DeadlineText
 import com.example.taskku.ui.components.DifficultyBadge
+import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.automirrored.outlined.Assignment
+import com.example.taskku.ui.timetable.calculateNextMeetingDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,7 +38,8 @@ fun DashboardScreen(
     onTaskClick: (Long) -> Unit,
     onAddTaskClick: () -> Unit,
     viewModel: DashboardViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onAddHomeworkForSubject: ((String, Long) -> Unit)? = null
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -102,6 +106,103 @@ fun DashboardScreen(
                 contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 80.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
+                // Pelajaran Berikutnya Hari Ini Card
+                item {
+                    val nextClass = uiState.nextClassToday
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(20.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Schedule,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                    Text(
+                                        text = "Jadwal Pelajaran Hari Ini",
+                                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                }
+                            }
+
+                            if (nextClass != null) {
+                                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    Text(
+                                        text = "Pelajaran berikutnya hari ini:",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
+                                    )
+                                    Text(
+                                        text = "${nextClass.subject} (${nextClass.startTime} - ${nextClass.endTime})",
+                                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                                    )
+                                    if (nextClass.room.isNotBlank() || nextClass.teacher.isNotBlank()) {
+                                        val details = listOfNotNull(
+                                            nextClass.room.takeIf { it.isNotBlank() }?.let { "Ruang $it" },
+                                            nextClass.teacher.takeIf { it.isNotBlank() }?.let { "Guru: $it" }
+                                        ).joinToString(" • ")
+                                        Text(
+                                            text = details,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
+                                        )
+                                    }
+                                }
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End
+                                ) {
+                                    FilledTonalButton(
+                                        onClick = {
+                                            val nextMeeting = calculateNextMeetingDate(nextClass)
+                                            onAddHomeworkForSubject?.invoke(nextClass.subject, nextMeeting) ?: onAddTaskClick()
+                                        },
+                                        shape = RoundedCornerShape(10.dp),
+                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.AutoMirrored.Outlined.Assignment,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(
+                                            text = "Ada PR untuk mapel ini?",
+                                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold)
+                                        )
+                                    }
+                                }
+                            } else {
+                                Text(
+                                    text = "Tidak ada jadwal pelajaran lagi hari ini 🎉",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
+                                )
+                            }
+                        }
+                    }
+                }
+
                 // 1. Progress Minggu Ini Card
                 item {
                     Card(

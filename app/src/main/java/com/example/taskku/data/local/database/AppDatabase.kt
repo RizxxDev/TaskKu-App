@@ -19,9 +19,10 @@ import kotlinx.coroutines.launch
         SubtaskEntity::class,
         AttachmentEntity::class,
         StatusEntity::class,
-        SubjectEntity::class
+        SubjectEntity::class,
+        TimetableEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -31,6 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun attachmentDao(): AttachmentDao
     abstract fun statusDao(): StatusDao
     abstract fun subjectDao(): SubjectDao
+    abstract fun timetableDao(): TimetableDao
 
     companion object {
         @Volatile
@@ -51,6 +53,16 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE `tasks` ADD COLUMN `tag` TEXT NOT NULL DEFAULT 'PR'")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_tasks_tag` ON `tasks` (`tag`)")
+                db.execSQL("CREATE TABLE IF NOT EXISTS `timetables` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `subject` TEXT NOT NULL, `dayOfWeek` INTEGER NOT NULL, `startTime` TEXT NOT NULL, `endTime` TEXT NOT NULL, `room` TEXT NOT NULL, `teacher` TEXT NOT NULL)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_timetables_dayOfWeek` ON `timetables` (`dayOfWeek`)")
+                db.execSQL("CREATE INDEX IF NOT EXISTS `index_timetables_subject` ON `timetables` (`subject`)")
+            }
+        }
+
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -58,7 +70,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "taskku_database"
                 )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .fallbackToDestructiveMigration()
                 .addCallback(AppDatabaseCallback())
                 .build()

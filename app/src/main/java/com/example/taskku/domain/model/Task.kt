@@ -19,6 +19,7 @@ data class Task(
     val groupName: String = "",
     val notificationEnabled: Boolean = true,
     val reminderOffset: ReminderOffset = ReminderOffset.ONE_HOUR_BEFORE,
+    val tag: TaskTag = TaskTag.PR,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis(),
     val members: List<Member> = emptyList(),

@@ -16,6 +16,7 @@ import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -59,6 +60,7 @@ class TaskListViewModelTest {
             statusId = 2,
             statusName = "Sedang Dikerjakan",
             groupName = "Kelompok Einstein",
+            tag = com.example.taskku.domain.model.TaskTag.PRAKTIKUM,
             deadlineDate = 50000L,
             createdAt = 2000L
         )
@@ -71,6 +73,7 @@ class TaskListViewModelTest {
             difficulty = Difficulty.SEDANG,
             statusId = 3,
             statusName = "Selesai",
+            tag = com.example.taskku.domain.model.TaskTag.PROYEK,
             deadlineDate = 200000L,
             createdAt = 3000L
         )
@@ -243,5 +246,34 @@ class TaskListViewModelTest {
         val state = viewModel.uiState.value
         assertEquals(2, state.tasks.size)
         assertTrue(state.tasks.none { it.id == 3L })
+    }
+
+    @Test
+    fun filterByTag_filtersTasksCorrectly() = runTest(testDispatcher) {
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.uiState.collect() }
+        testScheduler.advanceUntilIdle()
+
+        // Filter by PRAKTIKUM
+        viewModel.onTagSelect(com.example.taskku.domain.model.TaskTag.PRAKTIKUM)
+        testScheduler.advanceUntilIdle()
+        var state = viewModel.uiState.value
+        assertEquals(com.example.taskku.domain.model.TaskTag.PRAKTIKUM, state.selectedTag)
+        assertEquals(1, state.tasks.size)
+        assertEquals(2L, state.tasks[0].id)
+
+        // Filter by PROYEK
+        viewModel.onTagSelect(com.example.taskku.domain.model.TaskTag.PROYEK)
+        testScheduler.advanceUntilIdle()
+        state = viewModel.uiState.value
+        assertEquals(com.example.taskku.domain.model.TaskTag.PROYEK, state.selectedTag)
+        assertEquals(1, state.tasks.size)
+        assertEquals(3L, state.tasks[0].id)
+
+        // Clear tag filter (select same tag toggles it off, or passing null)
+        viewModel.onTagSelect(null)
+        testScheduler.advanceUntilIdle()
+        state = viewModel.uiState.value
+        assertNull(state.selectedTag)
+        assertEquals(3, state.tasks.size)
     }
 }

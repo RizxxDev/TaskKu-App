@@ -55,6 +55,7 @@ class ExportImportTest {
             description = "Deskripsi uji",
             subject = "Matematika",
             type = TaskType.KELOMPOK,
+            tag = TaskTag.PRAKTIKUM,
             difficulty = Difficulty.SULIT,
             statusId = 1,
             groupName = "Tim Hebat",
@@ -109,6 +110,7 @@ class ExportImportTest {
         assertEquals("Tugas Uji Ekspor", restoredTask.title)
         assertEquals("Matematika", restoredTask.subject)
         assertEquals(TaskType.KELOMPOK, restoredTask.type)
+        assertEquals(TaskTag.PRAKTIKUM, restoredTask.tag)
         assertEquals("Tim Hebat", restoredTask.groupName)
         assertEquals(1, restoredTask.members.size)
         assertEquals("Budi", restoredTask.members[0].name)

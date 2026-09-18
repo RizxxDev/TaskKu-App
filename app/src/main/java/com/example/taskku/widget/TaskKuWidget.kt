@@ -37,6 +37,8 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+import com.example.taskku.domain.model.TimetableItem
+
 val TaskIdKey = ActionParameters.Key<Long>("task_id")
 val TargetCompletedKey = ActionParameters.Key<Boolean>("target_completed")
 
@@ -45,6 +47,7 @@ class TaskKuWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val app = context.applicationContext as? TaskKuApplication
         val taskRepository = app?.container?.taskRepository
+        val timetableRepository = app?.container?.timetableRepository
 
         val cal = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 0)
@@ -60,6 +63,12 @@ class TaskKuWidget : GlanceAppWidget() {
             taskRepository?.getAllTasks()?.first() ?: emptyList()
         } catch (e: Exception) {
             emptyList()
+        }
+
+        val nextClass = try {
+            timetableRepository?.getUpcomingNextClass()?.firstOrNull()
+        } catch (e: Exception) {
+            null
         }
 
         // Filter for "Hari Ini & Besok":
@@ -79,7 +88,8 @@ class TaskKuWidget : GlanceAppWidget() {
                     context = context,
                     tasks = filteredTasks,
                     pendingCount = pendingCount,
-                    startOfToday = startOfToday
+                    startOfToday = startOfToday,
+                    nextClass = nextClass
                 )
             }
         }
@@ -91,7 +101,8 @@ private fun WidgetRoot(
     context: Context,
     tasks: List<Task>,
     pendingCount: Int,
-    startOfToday: Long
+    startOfToday: Long,
+    nextClass: TimetableItem? = null
 ) {
     Column(
         modifier = GlanceModifier
@@ -135,6 +146,27 @@ private fun WidgetRoot(
                     fontSize = 11.sp
                 )
             )
+        }
+
+        if (nextClass != null) {
+            val roomText = if (nextClass.room.isNotBlank()) " • Ruang ${nextClass.room}" else ""
+            Row(
+                modifier = GlanceModifier
+                    .fillMaxWidth()
+                    .padding(bottom = 6.dp)
+                    .clickable(actionStartActivity<MainActivity>()),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "📖 Pelajaran berikutnya: ${nextClass.subject} (${nextClass.startTime} - ${nextClass.endTime})$roomText",
+                    style = TextStyle(
+                        color = GlanceTheme.colors.primary,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 11.sp
+                    ),
+                    maxLines = 1
+                )
+            }
         }
 
         // Content

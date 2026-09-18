@@ -23,7 +23,10 @@ class TaskFormViewModel(
     private val taskRepository: TaskRepository,
     private val subjectRepository: SubjectRepository,
     private val statusRepository: StatusRepository,
-    private val appContext: Context? = null
+    private val appContext: Context? = null,
+    private val initialSubject: String? = null,
+    private val initialDeadlineDate: Long? = null,
+    private val initialTag: TaskTag? = null
 ) : ViewModel() {
 
     @Immutable
@@ -39,6 +42,7 @@ class TaskFormViewModel(
         val title: String = "",
         val subject: String = "",
         val type: TaskType = TaskType.PRIBADI,
+        val tag: TaskTag = TaskTag.PR,
         val description: String = "",
         val deadlineDate: Long = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 23)
@@ -63,7 +67,22 @@ class TaskFormViewModel(
         val createdAt: Long = System.currentTimeMillis()
     )
 
-    private val _formState = MutableStateFlow(FormState(isEditMode = taskId != null))
+    private val _formState = MutableStateFlow(
+        FormState(
+            isEditMode = taskId != null,
+            subject = initialSubject ?: "",
+            tag = initialTag ?: TaskTag.PR,
+            deadlineDate = initialDeadlineDate ?: Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, 23)
+                set(Calendar.MINUTE, 59)
+                set(Calendar.SECOND, 0)
+            }.timeInMillis,
+            deadlineTime = if (initialDeadlineDate != null) {
+                val cal = Calendar.getInstance().apply { timeInMillis = initialDeadlineDate }
+                String.format(java.util.Locale.ROOT, "%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
+            } else "23:59"
+        )
+    )
     val formState: StateFlow<FormState> = _formState.asStateFlow()
 
     init {
@@ -100,6 +119,7 @@ class TaskFormViewModel(
                         title = existingTask.title,
                         subject = existingTask.subject,
                         type = existingTask.type,
+                        tag = existingTask.tag,
                         description = existingTask.description,
                         deadlineDate = existingTask.deadlineDate,
                         deadlineTime = existingTask.deadlineTime,
@@ -122,7 +142,7 @@ class TaskFormViewModel(
             }
 
             _formState.value = _formState.value.copy(
-                subject = defaultSubject,
+                subject = initialSubject ?: defaultSubject,
                 statusId = defaultStatusId,
                 availableSubjects = subjects,
                 availableStatuses = statuses,
@@ -160,6 +180,10 @@ class TaskFormViewModel(
 
     fun updateType(type: TaskType) {
         _formState.value = _formState.value.copy(type = type)
+    }
+
+    fun updateTag(tag: TaskTag) {
+        _formState.value = _formState.value.copy(tag = tag)
     }
 
     fun updateDescription(description: String) {
@@ -323,6 +347,7 @@ class TaskFormViewModel(
                     groupName = if (state.type == TaskType.KELOMPOK) state.groupName.trim() else "",
                     notificationEnabled = state.notificationEnabled,
                     reminderOffset = state.reminderOffset,
+                    tag = state.tag,
                     createdAt = if (state.isEditMode) state.createdAt else System.currentTimeMillis(),
                     updatedAt = System.currentTimeMillis()
                 )
@@ -392,12 +417,15 @@ class TaskFormViewModelFactory(
     private val taskRepository: TaskRepository,
     private val subjectRepository: SubjectRepository,
     private val statusRepository: StatusRepository,
-    private val appContext: Context? = null
+    private val appContext: Context? = null,
+    private val initialSubject: String? = null,
+    private val initialDeadlineDate: Long? = null,
+    private val initialTag: TaskTag? = null
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TaskFormViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return TaskFormViewModel(taskId, taskRepository, subjectRepository, statusRepository, appContext) as T
+            return TaskFormViewModel(taskId, taskRepository, subjectRepository, statusRepository, appContext, initialSubject, initialDeadlineDate, initialTag) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

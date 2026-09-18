@@ -102,12 +102,17 @@ fun TaskCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Subject Chip placeholder - in real usage you might have Subject colored chip
-                    Text(
-                        text = task.subject,
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        TaskTagBadge(tag = task.tag)
+                        Text(
+                            text = task.subject,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                     StatusBadge(statusName = task.statusName, colorHex = task.statusColorHex)
                 }
 

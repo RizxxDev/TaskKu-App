@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey
     indices = [
         Index(value = ["statusId"]),
         Index(value = ["deadlineDate"]),
-        Index(value = ["subject"])
+        Index(value = ["subject"]),
+        Index(value = ["tag"])
     ]
 )
 data class TaskEntity(
@@ -25,6 +26,7 @@ data class TaskEntity(
     val groupName: String = "",
     val notificationEnabled: Boolean = true,
     val reminderOffset: String = com.example.taskku.domain.model.ReminderOffset.ONE_HOUR_BEFORE.name,
+    val tag: String = com.example.taskku.domain.model.TaskTag.PR.name,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long = System.currentTimeMillis()
 )

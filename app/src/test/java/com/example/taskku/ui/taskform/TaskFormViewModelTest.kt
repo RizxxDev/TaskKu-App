@@ -196,4 +196,48 @@ class TaskFormViewModelTest {
         assertNotNull(created)
         assertEquals(com.example.taskku.domain.model.ReminderOffset.ONE_DAY_19_00, created?.reminderOffset)
     }
+
+    @Test
+    fun updateTag_updatesStateAndPersists() = runTest(testDispatcher) {
+        val viewModel = TaskFormViewModel(null, taskRepository, subjectRepository, statusRepository)
+        testScheduler.advanceUntilIdle()
+
+        assertEquals(com.example.taskku.domain.model.TaskTag.PR, viewModel.formState.value.tag)
+
+        viewModel.updateTitle("Kuis Fisika Bab 4")
+        viewModel.updateSubject("Fisika")
+        viewModel.updateTag(com.example.taskku.domain.model.TaskTag.KUIS)
+
+        assertEquals(com.example.taskku.domain.model.TaskTag.KUIS, viewModel.formState.value.tag)
+
+        var saved = false
+        viewModel.saveTask { saved = true }
+        testScheduler.advanceUntilIdle()
+
+        assertTrue(saved)
+        val created = taskRepository.getAllTasks().first().find { it.title == "Kuis Fisika Bab 4" }
+        assertNotNull(created)
+        assertEquals(com.example.taskku.domain.model.TaskTag.KUIS, created?.tag)
+    }
+
+    @Test
+    fun initialValues_prefilled_whenProvidedFromTimetableShortcut() = runTest(testDispatcher) {
+        val targetDeadline = 1800000000000L
+        val viewModel = TaskFormViewModel(
+            taskId = null,
+            taskRepository = taskRepository,
+            subjectRepository = subjectRepository,
+            statusRepository = statusRepository,
+            appContext = null,
+            initialSubject = "Biologi",
+            initialDeadlineDate = targetDeadline,
+            initialTag = com.example.taskku.domain.model.TaskTag.PR
+        )
+        testScheduler.advanceUntilIdle()
+
+        val state = viewModel.formState.value
+        assertEquals("Biologi", state.subject)
+        assertEquals(targetDeadline, state.deadlineDate)
+        assertEquals(com.example.taskku.domain.model.TaskTag.PR, state.tag)
+    }
 }

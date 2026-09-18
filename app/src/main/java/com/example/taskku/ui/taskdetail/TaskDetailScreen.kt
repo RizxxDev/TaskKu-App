@@ -27,6 +27,7 @@ import com.example.taskku.domain.model.TaskType
 import com.example.taskku.ui.components.DeadlineText
 import com.example.taskku.ui.components.DifficultyBadge
 import com.example.taskku.ui.components.StatusBadge
+import com.example.taskku.ui.components.TaskTagBadge
 import com.example.taskku.util.FileStorageHelper
 import java.text.SimpleDateFormat
 import java.util.*
@@ -135,6 +136,7 @@ fun TaskDetailScreen(
                                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
+                                    TaskTagBadge(tag = task.tag)
                                     // Subject chip
                                     SuggestionChip(
                                         onClick = {},

@@ -24,7 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.taskku.domain.model.Difficulty
 import com.example.taskku.domain.model.ReminderOffset
+import com.example.taskku.domain.model.TaskTag
 import com.example.taskku.domain.model.TaskType
+import com.example.taskku.ui.components.getTagIcon
 import com.example.taskku.util.FileStorageHelper
 import java.text.SimpleDateFormat
 import java.util.*
@@ -289,6 +291,61 @@ fun TaskFormScreen(
                             },
                             modifier = Modifier.weight(1f)
                         )
+                    }
+                }
+
+                // Jenis Tagihan Tugas (PR, Kuis, Praktikum, Proyek)
+                Column {
+                    Text("Jenis Tagihan Tugas *", style = MaterialTheme.typography.labelMedium)
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        TaskTag.entries.take(2).forEach { tag ->
+                            val tagColor = remember(tag.colorHex) {
+                                try { Color(android.graphics.Color.parseColor(tag.colorHex)) } catch (e: Exception) { Color(0xFF0984E3) }
+                            }
+                            FilterChip(
+                                selected = formState.tag == tag,
+                                onClick = { viewModel.updateTag(tag) },
+                                label = { Text(tag.displayName) },
+                                leadingIcon = {
+                                    Icon(getTagIcon(tag), contentDescription = null, modifier = Modifier.size(18.dp))
+                                },
+                                colors = FilterChipDefaults.filterChipColors(
+                                    selectedContainerColor = tagColor.copy(alpha = 0.2f),
+                                    selectedLabelColor = tagColor,
+                                    selectedLeadingIconColor = tagColor
+                                ),
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        TaskTag.entries.drop(2).forEach { tag ->
+                            val tagColor = remember(tag.colorHex) {
+                                try { Color(android.graphics.Color.parseColor(tag.colorHex)) } catch (e: Exception) { Color(0xFF0984E3) }
+                            }
+                            FilterChip(
+                                selected = formState.tag == tag,
+                                onClick = { viewModel.updateTag(tag) },
+                                label = { Text(tag.displayName) },
+                                leadingIcon = {
+                                    Icon(getTagIcon(tag), contentDescription = null, modifier = Modifier.size(18.dp))
+                                },
+                                colors = FilterChipDefaults.filterChipColors(
+                                    selectedContainerColor = tagColor.copy(alpha = 0.2f),
+                                    selectedLabelColor = tagColor,
+                                    selectedLeadingIconColor = tagColor
+                                ),
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
                     }
                 }
 

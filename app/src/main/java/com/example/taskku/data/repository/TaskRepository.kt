@@ -55,6 +55,7 @@ class TaskRepositoryImpl(
             groupName = task.groupName,
             notificationEnabled = task.notificationEnabled,
             reminderOffset = ReminderOffset.fromString(task.reminderOffset),
+            tag = com.example.taskku.domain.model.TaskTag.fromString(task.tag),
             createdAt = task.createdAt,
             updatedAt = task.updatedAt,
             members = members.map { Member(it.id, it.taskId, it.name) },
@@ -77,6 +78,7 @@ class TaskRepositoryImpl(
             groupName = groupName,
             notificationEnabled = notificationEnabled,
             reminderOffset = reminderOffset.name,
+            tag = tag.name,
             createdAt = createdAt,
             updatedAt = updatedAt
         )

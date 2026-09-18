@@ -23,6 +23,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+import com.example.taskku.domain.model.TaskTag
+
 class TaskListViewModel(
     private val taskRepository: TaskRepository,
     private val subjectRepository: SubjectRepository,
@@ -36,6 +38,7 @@ class TaskListViewModel(
         val tasks: List<Task> = emptyList(),
         val subjects: List<SubjectWithCount> = emptyList(),
         val selectedSubjects: Set<String> = emptySet(),
+        val selectedTag: TaskTag? = null,
         val sortOption: SortOption = SortOption.DEADLINE,
         val sortDirection: SortDirection = SortDirection.ASC,
         val searchQuery: String = "",
@@ -45,6 +48,7 @@ class TaskListViewModel(
     )
 
     private val _selectedSubjects = MutableStateFlow<Set<String>>(emptySet())
+    private val _selectedTag = MutableStateFlow<TaskTag?>(null)
     private val _sortOption = MutableStateFlow(appPreferences?.sortOption?.value ?: SortOption.DEADLINE)
     private val _sortDirection = MutableStateFlow(appPreferences?.sortDirection?.value ?: SortDirection.ASC)
     private val _searchQuery = MutableStateFlow("")
@@ -52,6 +56,7 @@ class TaskListViewModel(
 
     private data class FilterParams(
         val selectedSubjects: Set<String>,
+        val selectedTag: TaskTag?,
         val sortOption: SortOption,
         val sortDirection: SortDirection,
         val searchQuery: String,
@@ -59,13 +64,11 @@ class TaskListViewModel(
     )
 
     private val filterParamsFlow: Flow<FilterParams> = combine(
-        _selectedSubjects,
-        _sortOption,
-        _sortDirection,
-        _searchQuery,
-        _selectedTaskIds
-    ) { selectedSubs, sortOpt, sortDir, query, selectedIds ->
-        FilterParams(selectedSubs, sortOpt, sortDir, query, selectedIds)
+        combine(_selectedSubjects, _selectedTag) { subs, tag -> subs to tag },
+        combine(_sortOption, _sortDirection) { opt, dir -> opt to dir },
+        combine(_searchQuery, _selectedTaskIds) { query, ids -> query to ids }
+    ) { (subs, tag), (sortOpt, sortDir), (query, selectedIds) ->
+        FilterParams(subs, tag, sortOpt, sortDir, query, selectedIds)
     }
 
     val uiState: StateFlow<UiState> = combine(
@@ -89,6 +92,10 @@ class TaskListViewModel(
         var filtered = rawTasks
         if (filters.selectedSubjects.isNotEmpty() && !filters.selectedSubjects.contains("Semua")) {
             filtered = filtered.filter { it.subject in filters.selectedSubjects }
+        }
+
+        if (filters.selectedTag != null) {
+            filtered = filtered.filter { it.tag == filters.selectedTag }
         }
 
         if (filters.searchQuery.isNotBlank()) {
@@ -133,6 +140,7 @@ class TaskListViewModel(
             tasks = sorted,
             subjects = subjectWithCounts,
             selectedSubjects = filters.selectedSubjects,
+            selectedTag = filters.selectedTag,
             sortOption = filters.sortOption,
             sortDirection = filters.sortDirection,
             searchQuery = filters.searchQuery,
@@ -145,6 +153,10 @@ class TaskListViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = UiState(isLoading = true)
     )
+
+    fun onTagSelect(tag: TaskTag?) {
+        _selectedTag.value = if (_selectedTag.value == tag) null else tag
+    }
 
     fun onSubjectToggle(subjectName: String) {
         if (subjectName == "Semua") {

@@ -90,6 +90,7 @@ open class ExportImportManager(
                         put("groupName", t.groupName)
                         put("notificationEnabled", t.notificationEnabled)
                         put("reminderOffset", t.reminderOffset.name)
+                        put("tag", t.tag.name)
                         put("createdAt", t.createdAt)
                         put("updatedAt", t.updatedAt)
 
@@ -313,6 +314,7 @@ open class ExportImportManager(
                     groupName = t.optString("groupName", ""),
                     notificationEnabled = t.optBoolean("notificationEnabled", true),
                     reminderOffset = ReminderOffset.fromString(t.optString("reminderOffset", "ONE_HOUR_BEFORE")),
+                    tag = TaskTag.fromString(t.optString("tag", "PR")),
                     createdAt = t.optLong("createdAt", System.currentTimeMillis()),
                     updatedAt = t.optLong("updatedAt", System.currentTimeMillis())
                 )

@@ -14,4 +14,8 @@ data class TaskDetail(val taskId: Long) : NavKey
 
 @Immutable
 @Serializable
-data class TaskForm(val taskId: Long? = null) : NavKey
+data class TaskForm(
+    val taskId: Long? = null,
+    val initialSubject: String? = null,
+    val initialDeadlineDate: Long? = null
+) : NavKey

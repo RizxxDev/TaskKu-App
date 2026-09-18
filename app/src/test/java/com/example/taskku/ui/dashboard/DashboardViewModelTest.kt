@@ -119,4 +119,29 @@ class DashboardViewModelTest {
         assertEquals(0, state.overdueCount)
         assertEquals(0f, state.thisWeekProgress, 0.001f)
     }
+
+    @Test
+    fun dashboard_resolvesUpcomingClassToday() = runTest(testDispatcher) {
+        val fakeTimetableRepo = com.example.taskku.fakes.FakeTimetableRepository()
+        val today = com.example.taskku.domain.model.SchoolDay.currentDayOfWeek()
+        val classToday = com.example.taskku.domain.model.TimetableItem(
+            id = 10,
+            subject = "Matematika",
+            dayOfWeek = today,
+            startTime = "08:45",
+            endTime = "23:59",
+            room = "Ruang 10A",
+            teacher = "Pak Budi"
+        )
+        fakeTimetableRepo.timetablesFlow.value = listOf(classToday)
+
+        viewModel = DashboardViewModel(taskRepository, fakeTimetableRepo)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.uiState.collect() }
+        testScheduler.advanceUntilIdle()
+
+        val state = viewModel.uiState.value
+        org.junit.Assert.assertNotNull(state.nextClassToday)
+        assertEquals("Matematika", state.nextClassToday?.subject)
+        assertEquals("Ruang 10A", state.nextClassToday?.room)
+    }
 }

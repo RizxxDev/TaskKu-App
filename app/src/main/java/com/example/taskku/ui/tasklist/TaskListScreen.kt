@@ -20,10 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.ui.graphics.Color
+import com.example.taskku.domain.model.TaskTag
 import com.example.taskku.ui.components.EmptyState
 import com.example.taskku.ui.components.SortOptionBar
 import com.example.taskku.ui.components.SubjectFilterBar
 import com.example.taskku.ui.components.TaskCard
+import com.example.taskku.ui.components.getTagIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -169,6 +173,45 @@ fun TaskListScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 4.dp)
             )
+
+            // Category / Tag Filter Bar
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item {
+                    FilterChip(
+                        selected = uiState.selectedTag == null,
+                        onClick = { viewModel.onTagSelect(null) },
+                        label = { Text("Semua Tag") }
+                    )
+                }
+                items(TaskTag.entries.toTypedArray()) { tag ->
+                    val tagColor = remember(tag.colorHex) {
+                        try { Color(android.graphics.Color.parseColor(tag.colorHex)) } catch (e: Exception) { Color(0xFF0984E3) }
+                    }
+                    val isSelected = uiState.selectedTag == tag
+                    FilterChip(
+                        selected = isSelected,
+                        onClick = { viewModel.onTagSelect(tag) },
+                        label = { Text(tag.displayName) },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = getTagIcon(tag),
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
+                        },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = tagColor.copy(alpha = 0.2f),
+                            selectedLabelColor = tagColor,
+                            selectedLeadingIconColor = tagColor
+                        )
+                    )
+                }
+            }
 
             // Animated Sort Option Bar
             AnimatedVisibility(visible = showSortOptions) {

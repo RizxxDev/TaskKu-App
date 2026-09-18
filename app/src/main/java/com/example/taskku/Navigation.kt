@@ -71,13 +71,15 @@ fun MainNavigation(
                 val app = context.applicationContext as TaskKuApplication
                 val container = app.container
                 val formViewModel: TaskFormViewModel = viewModel(
-                    key = "task_form_${key.taskId ?: 0}",
+                    key = "task_form_${key.taskId ?: 0}_${key.initialSubject.orEmpty()}_${key.initialDeadlineDate ?: 0}",
                     factory = TaskFormViewModelFactory(
                         taskId = key.taskId,
                         taskRepository = container.taskRepository,
                         subjectRepository = container.subjectRepository,
                         statusRepository = container.statusRepository,
-                        appContext = context.applicationContext
+                        appContext = context.applicationContext,
+                        initialSubject = key.initialSubject,
+                        initialDeadlineDate = key.initialDeadlineDate
                     )
                 )
                 TaskFormScreen(
