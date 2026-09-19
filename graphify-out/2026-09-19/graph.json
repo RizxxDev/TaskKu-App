@@ -1509,7 +1509,7 @@
       "file_type": "code",
       "norm_label": "navigationtab",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L72"
+      "source_location": "L71"
     },
     {
       "id": "app_src_test_java_com_example_taskku_ui_util_adaptivelayouttest_adaptivelayouttest",
@@ -5576,7 +5576,7 @@
       "file_type": "code",
       "norm_label": "mainnavigation()",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L19"
+      "source_location": "L27"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_taskdetail_taskdetailviewmodel_taskdetailviewmodel_onchangestatus",
@@ -5720,7 +5720,7 @@
       "file_type": "code",
       "norm_label": "animatednavicon()",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L329"
+      "source_location": "L315"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
@@ -5732,7 +5732,7 @@
       "file_type": "code",
       "norm_label": "mainscreen()",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L84"
+      "source_location": "L83"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_deletetimetable",
@@ -9511,7 +9511,7 @@
       "file_type": "code",
       "norm_label": "calendar",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L80"
+      "source_location": "L79"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_dashboard",
@@ -9522,7 +9522,7 @@
       "file_type": "code",
       "norm_label": "dashboard",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L77"
+      "source_location": "L76"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_settings",
@@ -9533,7 +9533,7 @@
       "file_type": "code",
       "norm_label": "settings",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L81"
+      "source_location": "L80"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_tasks",
@@ -9544,7 +9544,7 @@
       "file_type": "code",
       "norm_label": "tasks",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L78"
+      "source_location": "L77"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_timetable",
@@ -9555,7 +9555,7 @@
       "file_type": "code",
       "norm_label": "timetable",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L79"
+      "source_location": "L78"
     },
     {
       "id": "app_src_test_java_com_example_taskku_ui_util_adaptivelayouttest",
@@ -11093,30 +11093,6 @@
     },
     {
       "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
-      "target": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L47",
-      "weight": 1.0
-    },
-    {
-      "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
-      "target": "app_src_main_java_com_example_taskku_ui_taskdetail_taskdetailviewmodel_taskdetailviewmodelfactory",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L56",
-      "weight": 1.0
-    },
-    {
-      "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
       "target": "app_src_main_java_com_example_taskku_ui_taskdetail_taskdetailscreen_taskdetailscreen",
       "relation": "calls",
       "_origin": "ast",
@@ -11124,7 +11100,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L63",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -11136,7 +11112,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L73",
+      "source_location": "L111",
       "weight": 1.0
     },
     {
@@ -11148,7 +11124,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L76",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -11160,7 +11136,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L87",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
+      "target": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
+      "target": "app_src_main_java_com_example_taskku_ui_taskdetail_taskdetailviewmodel_taskdetailviewmodelfactory",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -11724,7 +11724,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L107",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -11736,7 +11736,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L113",
+      "source_location": "L112",
       "weight": 1.0
     },
     {
@@ -11748,7 +11748,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L116",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -11760,7 +11760,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L136",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -11772,7 +11772,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L138",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
@@ -11784,7 +11784,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L139",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -11796,7 +11796,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L192",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -11808,7 +11808,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L248",
+      "source_location": "L236",
       "weight": 1.0
     },
     {
@@ -11820,7 +11820,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L94",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -11832,7 +11832,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L98",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -14940,7 +14940,7 @@
         "target_fqn": "androidx.compose.runtime.Composable"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L4",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -15975,7 +15975,7 @@
         "target_fqn": "com.example.taskku.TaskDetail"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L35",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -15990,7 +15990,7 @@
         "target_fqn": "com.example.taskku.TaskForm"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L36",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -16035,7 +16035,7 @@
         "target_fqn": "com.example.taskku.TaskKuApplication"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L37",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -18465,7 +18465,7 @@
         "target_fqn": "com.example.taskku.ui.calendar.CalendarScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L38",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -18480,7 +18480,7 @@
         "target_fqn": "com.example.taskku.ui.calendar.CalendarViewModel"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L39",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -18495,7 +18495,7 @@
         "target_fqn": "com.example.taskku.ui.calendar.CalendarViewModelFactory"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L40",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -18735,7 +18735,7 @@
         "target_fqn": "com.example.taskku.ui.dashboard.DashboardScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L41",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -18750,7 +18750,7 @@
         "target_fqn": "com.example.taskku.ui.dashboard.DashboardViewModel"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L42",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -18765,7 +18765,7 @@
         "target_fqn": "com.example.taskku.ui.dashboard.DashboardViewModelFactory"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L43",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -18780,7 +18780,7 @@
         "target_fqn": "com.example.taskku.ui.main.MainScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L10",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -18795,7 +18795,7 @@
         "target_fqn": "com.example.taskku.ui.settings.SettingsScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L44",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -18810,7 +18810,7 @@
         "target_fqn": "com.example.taskku.ui.settings.SettingsViewModel"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L45",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -18825,7 +18825,7 @@
         "target_fqn": "com.example.taskku.ui.settings.SettingsViewModelFactory"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L46",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -18840,7 +18840,7 @@
         "target_fqn": "com.example.taskku.ui.taskdetail.TaskDetailScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L11",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -18855,7 +18855,7 @@
         "target_fqn": "com.example.taskku.ui.taskdetail.TaskDetailViewModel"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L12",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -18870,7 +18870,7 @@
         "target_fqn": "com.example.taskku.ui.taskdetail.TaskDetailViewModelFactory"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L13",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -18885,7 +18885,7 @@
         "target_fqn": "com.example.taskku.ui.taskform.TaskFormScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L14",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -18900,7 +18900,7 @@
         "target_fqn": "com.example.taskku.ui.taskform.TaskFormViewModel"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L15",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -18915,7 +18915,7 @@
         "target_fqn": "com.example.taskku.ui.taskform.TaskFormViewModelFactory"
       },
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L16",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -18930,7 +18930,7 @@
         "target_fqn": "com.example.taskku.ui.tasklist.TaskListScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L47",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -18945,7 +18945,7 @@
         "target_fqn": "com.example.taskku.ui.tasklist.TaskListViewModel"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L48",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -18960,7 +18960,7 @@
         "target_fqn": "com.example.taskku.ui.tasklist.TaskListViewModelFactory"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L49",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -18975,7 +18975,7 @@
         "target_fqn": "com.example.taskku.ui.timetable.TimetableScreen"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L66",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -18990,7 +18990,7 @@
         "target_fqn": "com.example.taskku.ui.timetable.TimetableViewModel"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L67",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -19005,7 +19005,7 @@
         "target_fqn": "com.example.taskku.ui.timetable.TimetableViewModelFactory"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L68",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -19065,7 +19065,7 @@
         "target_fqn": "com.example.taskku.ui.util.isCompactHeight"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L69",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -19110,7 +19110,7 @@
         "target_fqn": "com.example.taskku.ui.util.isWideDisplay"
       },
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L70",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -21000,7 +21000,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L329",
+      "source_location": "L315",
       "weight": 1.0
     },
     {
@@ -21012,7 +21012,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L366",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -23226,7 +23226,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L77",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -23237,7 +23237,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L78",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -23248,7 +23248,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L79",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -23259,7 +23259,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L80",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -23270,7 +23270,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L81",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -24073,7 +24073,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L19",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -24546,7 +24546,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L329",
+      "source_location": "L315",
       "weight": 1.0
     },
     {
@@ -24557,7 +24557,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L366",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -24568,7 +24568,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L72",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -30430,18 +30430,6 @@
     },
     {
       "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
-      "target": "app_src_main_java_com_example_taskku_navigationkeys_taskdetail",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "call",
-      "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L37",
-      "weight": 1.0
-    },
-    {
-      "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
       "target": "app_src_main_java_com_example_taskku_navigationkeys_taskform",
       "relation": "calls",
       "_origin": "ast",
@@ -30449,7 +30437,19 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
-      "source_location": "L66",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
+      "target": "app_src_main_java_com_example_taskku_navigationkeys_taskdetail",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -30934,5 +30934,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "05c161b8f7d10f23de0af3da1b1815fd80a99344"
+  "built_at_commit": "02d310a1331c5d14025b46d60935bd3d7dc4d649"
 }

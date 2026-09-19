@@ -23,6 +23,7 @@ import com.example.taskku.ui.taskform.TaskFormScreen
 import com.example.taskku.ui.taskform.TaskFormViewModel
 import com.example.taskku.ui.taskform.TaskFormViewModelFactory
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 
 @Composable
 fun MainNavigation(
@@ -63,7 +64,9 @@ fun MainNavigation(
                 ) + fadeOut(
                     animationSpec = tween(durationMillis = 150)
                 )
-            )
+            ).apply {
+                targetContentZIndex = 1f
+            }
         },
         popTransitionSpec = {
             (slideInHorizontally(
@@ -78,7 +81,9 @@ fun MainNavigation(
                 ) + fadeOut(
                     animationSpec = tween(durationMillis = 150)
                 )
-            )
+            ).apply {
+                targetContentZIndex = -1f
+            }
         },
         entryProvider = entryProvider {
             entry<Main> {
@@ -89,14 +94,17 @@ fun MainNavigation(
             entry<TaskDetail> { key ->
                 val app = context.applicationContext as TaskKuApplication
                 val container = app.container
-                val detailViewModel: TaskDetailViewModel = viewModel(
-                    key = "task_detail_${key.taskId}",
-                    factory = TaskDetailViewModelFactory(
+                val factory = remember(key.taskId) {
+                    TaskDetailViewModelFactory(
                         taskId = key.taskId,
                         taskRepository = container.taskRepository,
                         statusRepository = container.statusRepository,
                         appContext = context.applicationContext
                     )
+                }
+                val detailViewModel: TaskDetailViewModel = viewModel(
+                    key = "task_detail_${key.taskId}",
+                    factory = factory
                 )
                 TaskDetailScreen(
                     taskId = key.taskId,
@@ -108,10 +116,11 @@ fun MainNavigation(
             entry<TaskForm> { key ->
                 val app = context.applicationContext as TaskKuApplication
                 val container = app.container
-                val parsedTag = key.initialTag?.let { com.example.taskku.domain.model.TaskTag.fromString(it) }
-                val formViewModel: TaskFormViewModel = viewModel(
-                    key = "task_form_${key.taskId ?: 0}_${key.initialSubject.orEmpty()}_${key.initialDeadlineDate ?: 0}_${key.initialTag.orEmpty()}",
-                    factory = TaskFormViewModelFactory(
+                val parsedTag = remember(key.initialTag) {
+                    key.initialTag?.let { com.example.taskku.domain.model.TaskTag.fromString(it) }
+                }
+                val factory = remember(key.taskId, key.initialSubject, key.initialDeadlineDate, parsedTag) {
+                    TaskFormViewModelFactory(
                         taskId = key.taskId,
                         taskRepository = container.taskRepository,
                         subjectRepository = container.subjectRepository,
@@ -121,6 +130,10 @@ fun MainNavigation(
                         initialDeadlineDate = key.initialDeadlineDate,
                         initialTag = parsedTag
                     )
+                }
+                val formViewModel: TaskFormViewModel = viewModel(
+                    key = "task_form_${key.taskId ?: 0}_${key.initialSubject.orEmpty()}_${key.initialDeadlineDate ?: 0}_${key.initialTag.orEmpty()}",
+                    factory = factory
                 )
                 TaskFormScreen(
                     taskId = key.taskId,

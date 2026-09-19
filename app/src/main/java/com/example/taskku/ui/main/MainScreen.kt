@@ -17,6 +17,7 @@ import androidx.compose.material.icons.automirrored.outlined.Assignment
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Dashboard
 import androidx.compose.material.icons.filled.Settings
+import androidx.activity.compose.BackHandler
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Dashboard
 import androidx.compose.material.icons.outlined.Settings
@@ -28,7 +29,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavKey
 import com.example.taskku.TaskDetail
@@ -127,7 +130,12 @@ fun MainScreen(
     val settingsViewModel: SettingsViewModel = viewModel(factory = settingsViewModelFactory)
 
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+    var visitedTabs by rememberSaveable { mutableStateOf(setOf(0)) }
     val saveableStateHolder = rememberSaveableStateHolder()
+
+    BackHandler(enabled = selectedTabIndex != 0) {
+        selectedTabIndex = 0
+    }
 
     val isWide = isWideDisplay()
 
@@ -141,39 +149,54 @@ fun MainScreen(
 
     @Composable
     fun TabContent() {
-        saveableStateHolder.SaveableStateProvider(key = selectedTabIndex) {
-            when (NavigationTab.entries[selectedTabIndex]) {
-                NavigationTab.DASHBOARD -> {
-                    DashboardScreen(
-                        onTaskClick = onTaskDetailClick,
-                        onAddTaskClick = onAddTaskClick,
-                        onAddHomeworkForSubject = onAddHomeworkForSubject,
-                        viewModel = dashboardViewModel
-                    )
-                }
-                NavigationTab.TASKS -> {
-                    TaskListScreen(
-                        onTaskClick = onTaskDetailClick,
-                        onAddTaskClick = onAddTaskClick,
-                        viewModel = taskListViewModel
-                    )
-                }
-                NavigationTab.TIMETABLE -> {
-                    TimetableScreen(
-                        onNavigateToTaskForm = onAddHomeworkForSubject,
-                        viewModel = timetableViewModel
-                    )
-                }
-                NavigationTab.CALENDAR -> {
-                    CalendarScreen(
-                        onTaskClick = onTaskDetailClick,
-                        viewModel = calendarViewModel
-                    )
-                }
-                NavigationTab.SETTINGS -> {
-                    SettingsScreen(
-                        viewModel = settingsViewModel
-                    )
+        Box(modifier = Modifier.fillMaxSize()) {
+            NavigationTab.entries.forEachIndexed { index, tab ->
+                if (index in visitedTabs) {
+                    val isSelected = selectedTabIndex == index
+                    key(tab) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .retainTab(isSelected)
+                        ) {
+                            saveableStateHolder.SaveableStateProvider(key = tab.name) {
+                                when (tab) {
+                                    NavigationTab.DASHBOARD -> {
+                                        DashboardScreen(
+                                            onTaskClick = onTaskDetailClick,
+                                            onAddTaskClick = onAddTaskClick,
+                                            onAddHomeworkForSubject = onAddHomeworkForSubject,
+                                            viewModel = dashboardViewModel
+                                        )
+                                    }
+                                    NavigationTab.TASKS -> {
+                                        TaskListScreen(
+                                            onTaskClick = onTaskDetailClick,
+                                            onAddTaskClick = onAddTaskClick,
+                                            viewModel = taskListViewModel
+                                        )
+                                    }
+                                    NavigationTab.TIMETABLE -> {
+                                        TimetableScreen(
+                                            onNavigateToTaskForm = onAddHomeworkForSubject,
+                                            viewModel = timetableViewModel
+                                        )
+                                    }
+                                    NavigationTab.CALENDAR -> {
+                                        CalendarScreen(
+                                            onTaskClick = onTaskDetailClick,
+                                            viewModel = calendarViewModel
+                                        )
+                                    }
+                                    NavigationTab.SETTINGS -> {
+                                        SettingsScreen(
+                                            viewModel = settingsViewModel
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -229,6 +252,9 @@ fun MainScreen(
                                 selected = isSelected,
                                 onClick = {
                                     if (selectedTabIndex != index) {
+                                        if (index !in visitedTabs) {
+                                            visitedTabs = visitedTabs + index
+                                        }
                                         selectedTabIndex = index
                                     }
                                 },
@@ -274,6 +300,9 @@ fun MainScreen(
                             selected = isSelected,
                             onClick = {
                                 if (selectedTabIndex != index) {
+                                    if (index !in visitedTabs) {
+                                        visitedTabs = visitedTabs + index
+                                    }
                                     selectedTabIndex = index
                                 }
                             },
@@ -311,6 +340,23 @@ fun MainScreen(
         }
     }
 }
+
+private fun Modifier.retainTab(visible: Boolean): Modifier = this
+    .layout { measurable, constraints ->
+        val placeable = measurable.measure(constraints)
+        layout(placeable.width, placeable.height) {
+            if (visible) {
+                placeable.place(0, 0)
+            }
+        }
+    }
+    .then(
+        if (!visible) {
+            Modifier.clearAndSetSemantics { }
+        } else {
+            Modifier
+        }
+    )
 
 @Composable
 private fun AnimatedNavIcon(
