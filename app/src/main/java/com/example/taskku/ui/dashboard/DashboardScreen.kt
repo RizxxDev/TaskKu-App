@@ -12,26 +12,13 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.TaskAlt
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -65,76 +52,13 @@ fun DashboardScreen(
         }
     }
 
-    // 1. Header & welcome greeting slide down + fade in on enter (0ms delay)
-    var isHeaderVisible by rememberSaveable { mutableStateOf(false) }
-    LaunchedEffect(Unit) {
-        isHeaderVisible = true
-    }
-
-    val headerAlpha by animateFloatAsState(
-        targetValue = if (isHeaderVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 0, easing = FastOutSlowInEasing),
-        label = "headerAlpha"
-    )
-
-    // Staggered entrance for content activates once database loading completes
-    var isContentVisible by rememberSaveable { mutableStateOf(false) }
-    LaunchedEffect(uiState.isLoading) {
-        if (!uiState.isLoading) {
-            isContentVisible = true
-        }
-    }
-
-    // Hero cards (Next Class & Weekly Progress)
-    val heroAlpha by animateFloatAsState(
-        targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 30, easing = FastOutSlowInEasing),
-        label = "heroAlpha"
-    )
-
-    // Stat cards staggered slide up + fade in (30ms increments)
-    val statPendingAlpha by animateFloatAsState(
-        targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 50, easing = FastOutSlowInEasing),
-        label = "statPendingAlpha"
-    )
-
-    val statInProgressAlpha by animateFloatAsState(
-        targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 80, easing = FastOutSlowInEasing),
-        label = "statInProgressAlpha"
-    )
-
-    val statDoneAlpha by animateFloatAsState(
-        targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 110, easing = FastOutSlowInEasing),
-        label = "statDoneAlpha"
-    )
-
-    val statOverdueAlpha by animateFloatAsState(
-        targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 140, easing = FastOutSlowInEasing),
-        label = "statOverdueAlpha"
-    )
-
-    // Urgent tasks section (header + empty card / items) smoothly fades in last
-    val urgentAlpha by animateFloatAsState(
-        targetValue = if (isContentVisible) 1f else 0f,
-        animationSpec = tween(durationMillis = 250, delayMillis = 170, easing = FastOutSlowInEasing),
-        label = "urgentAlpha"
-    )
-
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.graphicsLayer {
-                            alpha = headerAlpha
-                            translationY = (headerAlpha - 1f) * 20f
-                        }
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Surface(
                             shape = RoundedCornerShape(10.dp),
@@ -196,11 +120,7 @@ fun DashboardScreen(
                     val nextClass = uiState.nextClassToday
                     Card(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .graphicsLayer {
-                                alpha = heroAlpha
-                                translationY = (1f - heroAlpha) * 20f
-                            },
+                            .fillMaxWidth(),
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.secondaryContainer
@@ -317,11 +237,7 @@ fun DashboardScreen(
                 item(key = "weekly_progress_card", contentType = "progress_card") {
                     Card(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .graphicsLayer {
-                                alpha = heroAlpha
-                                translationY = (1f - heroAlpha) * 20f
-                            },
+                            .fillMaxWidth(),
                         shape = RoundedCornerShape(20.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -369,7 +285,7 @@ fun DashboardScreen(
                     }
                 }
 
-                // 2. Statistik Cepat Section (Staggered 30ms delay increments)
+                // 2. Statistik Cepat Section
                 item(key = "stat_cards_grid", contentType = "stat_cards") {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                         Text(
@@ -386,24 +302,14 @@ fun DashboardScreen(
                                 count = uiState.pendingCount,
                                 icon = Icons.Outlined.HourglassEmpty,
                                 color = StatusTodo,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .graphicsLayer {
-                                        alpha = statPendingAlpha
-                                        translationY = (1f - statPendingAlpha) * 20f
-                                    }
+                                modifier = Modifier.weight(1f)
                             )
                             StatCard(
                                 title = "Dikerjakan",
                                 count = uiState.inProgressCount,
                                 icon = Icons.Outlined.PendingActions,
                                 color = StatusInProgress,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .graphicsLayer {
-                                        alpha = statInProgressAlpha
-                                        translationY = (1f - statInProgressAlpha) * 20f
-                                    }
+                                modifier = Modifier.weight(1f)
                             )
                         }
 
@@ -416,36 +322,23 @@ fun DashboardScreen(
                                 count = uiState.doneCount,
                                 icon = Icons.Outlined.CheckCircle,
                                 color = StatusDone,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .graphicsLayer {
-                                        alpha = statDoneAlpha
-                                        translationY = (1f - statDoneAlpha) * 20f
-                                    }
+                                modifier = Modifier.weight(1f)
                             )
                             StatCard(
                                 title = "Overdue",
                                 count = uiState.overdueCount,
                                 icon = Icons.Outlined.ErrorOutline,
                                 color = CalendarOverdue,
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .graphicsLayer {
-                                        alpha = statOverdueAlpha
-                                        translationY = (1f - statOverdueAlpha) * 20f
-                                    }
+                                modifier = Modifier.weight(1f)
                             )
                         }
                     }
                 }
 
-                // 3. Tugas Mendesak Section Header & Empty state (fades in last)
+                // 3. Tugas Mendesak Section Header & Empty state
                 item(key = "urgent_header", contentType = "urgent_header") {
                     Column(
-                        modifier = Modifier.graphicsLayer {
-                            alpha = urgentAlpha
-                            translationY = (1f - urgentAlpha) * 20f
-                        },
+                        modifier = Modifier.fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Row(
@@ -506,12 +399,7 @@ fun DashboardScreen(
                         UrgentTaskCard(
                             task = task,
                             onTaskClick = onTaskClick,
-                            modifier = Modifier
-                                .animateItem()
-                                .graphicsLayer {
-                                    alpha = urgentAlpha
-                                    translationY = (1f - urgentAlpha) * 20f
-                                }
+                            modifier = Modifier.animateItem()
                         )
                     }
                 }
@@ -572,28 +460,10 @@ private fun UrgentTaskCard(
     onTaskClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val pressScale by animateFloatAsState(
-        targetValue = if (isPressed) 0.98f else 1.0f,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioLowBouncy,
-            stiffness = Spring.StiffnessMedium
-        ),
-        label = "urgentTaskPressScale"
-    )
-
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .graphicsLayer {
-                scaleX = pressScale
-                scaleY = pressScale
-            }
-            .clickable(
-                interactionSource = interactionSource,
-                indication = ripple()
-            ) { onTaskClick(task.id) },
+            .clickable { onTaskClick(task.id) },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface

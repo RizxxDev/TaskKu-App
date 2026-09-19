@@ -8,8 +8,6 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -197,29 +195,7 @@ fun MainScreen(
             AnimatedContent(
                 targetState = selectedTabIndex,
                 transitionSpec = {
-                    val duration = 200
-                    val offsetFraction = 0.1f
-                    if (targetState > initialState) {
-                        (slideInHorizontally(
-                            animationSpec = tween(duration, easing = FastOutSlowInEasing),
-                            initialOffsetX = { fullWidth -> (fullWidth * offsetFraction).toInt() }
-                        ) + fadeIn(animationSpec = tween(duration, easing = FastOutSlowInEasing))).togetherWith(
-                            slideOutHorizontally(
-                                animationSpec = tween(duration, easing = FastOutSlowInEasing),
-                                targetOffsetX = { fullWidth -> (-fullWidth * offsetFraction).toInt() }
-                            ) + fadeOut(animationSpec = tween(duration, easing = FastOutSlowInEasing))
-                        )
-                    } else {
-                        (slideInHorizontally(
-                            animationSpec = tween(duration, easing = FastOutSlowInEasing),
-                            initialOffsetX = { fullWidth -> (-fullWidth * offsetFraction).toInt() }
-                        ) + fadeIn(animationSpec = tween(duration, easing = FastOutSlowInEasing))).togetherWith(
-                            slideOutHorizontally(
-                                animationSpec = tween(duration, easing = FastOutSlowInEasing),
-                                targetOffsetX = { fullWidth -> (fullWidth * offsetFraction).toInt() }
-                            ) + fadeOut(animationSpec = tween(duration, easing = FastOutSlowInEasing))
-                        )
-                    }
+                    fadeIn(animationSpec = tween(150)) togetherWith fadeOut(animationSpec = tween(150))
                 },
                 label = "TabContentAnimation",
                 modifier = Modifier.fillMaxSize()

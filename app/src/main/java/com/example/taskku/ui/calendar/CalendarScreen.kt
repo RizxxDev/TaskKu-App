@@ -35,8 +35,11 @@ import com.example.taskku.theme.CalendarUpcoming
 import com.example.taskku.theme.CalendarUrgent
 import com.example.taskku.ui.components.EmptyState
 import com.example.taskku.ui.components.TaskCard
-import java.text.SimpleDateFormat
-import java.util.Calendar
+import java.time.Instant
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 private val DAYS_OF_WEEK = listOf("Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min")
@@ -49,8 +52,8 @@ fun CalendarScreen(
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val monthFormat = remember { SimpleDateFormat("MMMM yyyy", Locale("id", "ID")) }
-    val selectedDateFormat = remember { SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID")) }
+    val monthFormat = remember { DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id", "ID")) }
+    val selectedDateFormat = remember { DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale("id", "ID")) }
 
     Scaffold(
         topBar = {
@@ -121,7 +124,7 @@ fun CalendarScreen(
                                     )
                                 }
                                 Text(
-                                    text = monthFormat.format(uiState.currentMonth.time),
+                                    text = uiState.currentYearMonth.format(monthFormat),
                                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
@@ -151,7 +154,7 @@ fun CalendarScreen(
 
                             // Calendar Days Grid
                             CalendarGrid(
-                                currentMonth = uiState.currentMonth,
+                                currentYearMonth = uiState.currentYearMonth,
                                 selectedDate = uiState.selectedDate,
                                 tasksByDate = uiState.tasksByDate,
                                 onDateSelected = viewModel::onDateSelected
@@ -166,7 +169,7 @@ fun CalendarScreen(
                 // 2. Selected Date Header
                 item(key = "selected_date_header", contentType = "header") {
                     Text(
-                        text = selectedDateFormat.format(uiState.selectedDate.time),
+                        text = uiState.selectedDate.format(selectedDateFormat),
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -230,37 +233,32 @@ private data class CalendarGridInfo(
 
 @Composable
 private fun CalendarGrid(
-    currentMonth: Calendar,
-    selectedDate: Calendar,
+    currentYearMonth: YearMonth,
+    selectedDate: LocalDate,
     tasksByDate: Map<String, List<Task>>,
     onDateSelected: (Long) -> Unit
 ) {
-    val gridInfo = remember(currentMonth, selectedDate, tasksByDate) {
-        val cal = currentMonth.clone() as Calendar
-        cal.set(Calendar.DAY_OF_MONTH, 1)
+    val gridInfo = remember(currentYearMonth, selectedDate, tasksByDate) {
+        val firstDayOfMonth = currentYearMonth.atDay(1)
+        val firstDayOfWeek = (firstDayOfMonth.dayOfWeek.value + 6) % 7
+        val daysInMonth = currentYearMonth.lengthOfMonth()
 
-        val firstDayOfWeek = (cal.get(Calendar.DAY_OF_WEEK) + 5) % 7
-        val daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val today = LocalDate.now()
+        val isSameMonthAsToday = currentYearMonth == YearMonth.from(today)
+        val todayDay = if (isSameMonthAsToday) today.dayOfMonth else -1
 
-        val todayCal = Calendar.getInstance()
-        val isSameMonthAsToday = todayCal.get(Calendar.YEAR) == currentMonth.get(Calendar.YEAR) &&
-                todayCal.get(Calendar.MONTH) == currentMonth.get(Calendar.MONTH)
-        val todayDay = if (isSameMonthAsToday) todayCal.get(Calendar.DAY_OF_MONTH) else -1
-
-        val isSameMonthAsSelected = selectedDate.get(Calendar.YEAR) == currentMonth.get(Calendar.YEAR) &&
-                selectedDate.get(Calendar.MONTH) == currentMonth.get(Calendar.MONTH)
-        val selectedDay = if (isSameMonthAsSelected) selectedDate.get(Calendar.DAY_OF_MONTH) else -1
+        val isSameMonthAsSelected = currentYearMonth == YearMonth.from(selectedDate)
+        val selectedDay = if (isSameMonthAsSelected) selectedDate.dayOfMonth else -1
 
         val totalCells = firstDayOfWeek + daysInMonth
         val totalRows = (totalCells + 6) / 7
 
         val now = System.currentTimeMillis()
-        val year = currentMonth.get(Calendar.YEAR)
-        val month = currentMonth.get(Calendar.MONTH) + 1
         val cellMap = HashMap<Int, CalendarCellData>(daysInMonth)
 
         for (day in 1..daysInMonth) {
-            val dateKey = String.format(Locale.ROOT, "%04d-%02d-%02d", year, month, day)
+            val dayDate = currentYearMonth.atDay(day)
+            val dateKey = dayDate.format(DateTimeFormatter.ISO_LOCAL_DATE)
             val tasks = tasksByDate[dateKey] ?: emptyList()
 
             val dotColors = ArrayList<Color>(4)
@@ -276,14 +274,14 @@ private fun CalendarGrid(
                 }
             }
 
-            val dayCal = (currentMonth.clone() as Calendar).apply { set(Calendar.DAY_OF_MONTH, day) }
+            val dayMillis = dayDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
             cellMap[day] = CalendarCellData(
                 dayNumber = day,
                 isToday = day == todayDay,
                 isSelected = day == selectedDay,
                 dotColors = dotColors,
-                dateMillis = dayCal.timeInMillis
+                dateMillis = dayMillis
             )
         }
 

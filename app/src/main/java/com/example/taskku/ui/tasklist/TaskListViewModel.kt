@@ -15,13 +15,24 @@ import com.example.taskku.domain.model.SortOption
 import com.example.taskku.domain.model.Task
 import com.example.taskku.notification.NotificationScheduler
 import com.example.taskku.ui.components.SubjectWithCount
+import com.example.taskku.util.DispatcherProvider
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import com.example.taskku.domain.model.TaskTag
 
@@ -30,7 +41,8 @@ class TaskListViewModel(
     private val subjectRepository: SubjectRepository,
     private val statusRepository: StatusRepository,
     private val appPreferences: AppPreferences? = null,
-    private val appContext: Context? = null
+    private val appContext: Context? = null,
+    private val defaultDispatcher: CoroutineDispatcher = DispatcherProvider.defaultComputation
 ) : ViewModel() {
 
     @Immutable
@@ -54,24 +66,38 @@ class TaskListViewModel(
     private val _searchQuery = MutableStateFlow("")
     private val _selectedTaskIds = MutableStateFlow<Set<Long>>(emptySet())
 
+    @OptIn(FlowPreview::class)
+    private val debouncedSearchQuery: Flow<String> = flow {
+        emit(_searchQuery.value)
+        emitAll(_searchQuery.drop(1).debounce(300L).distinctUntilChanged())
+    }
+
     private data class FilterParams(
         val selectedSubjects: Set<String>,
         val selectedTag: TaskTag?,
         val sortOption: SortOption,
         val sortDirection: SortDirection,
-        val searchQuery: String,
-        val selectedTaskIds: Set<Long>
+        val searchQuery: String
     )
 
     private val filterParamsFlow: Flow<FilterParams> = combine(
         combine(_selectedSubjects, _selectedTag) { subs, tag -> subs to tag },
         combine(_sortOption, _sortDirection) { opt, dir -> opt to dir },
-        combine(_searchQuery, _selectedTaskIds) { query, ids -> query to ids }
-    ) { (subs, tag), (sortOpt, sortDir), (query, selectedIds) ->
-        FilterParams(subs, tag, sortOpt, sortDir, query, selectedIds)
+        debouncedSearchQuery
+    ) { (subs, tag), (sortOpt, sortDir), query ->
+        FilterParams(subs, tag, sortOpt, sortDir, query)
     }
 
-    val uiState: StateFlow<UiState> = combine(
+    private data class FilteredData(
+        val tasks: List<Task>,
+        val subjects: List<SubjectWithCount>,
+        val selectedSubjects: Set<String>,
+        val selectedTag: TaskTag?,
+        val sortOption: SortOption,
+        val sortDirection: SortDirection
+    )
+
+    private val filteredDataFlow: Flow<FilteredData> = combine(
         taskRepository.getAllTasks(),
         subjectRepository.getVisibleSubjects(),
         filterParamsFlow
@@ -135,22 +161,36 @@ class TaskListViewModel(
                 if (filters.sortDirection == SortDirection.ASC) filtered.sortedBy { it.subject.lowercase() }
                 else filtered.sortedByDescending { it.subject.lowercase() }
             }
-            else -> filtered
         }
 
-        UiState(
+        FilteredData(
             tasks = sorted,
             subjects = subjectWithCounts,
             selectedSubjects = filters.selectedSubjects,
             selectedTag = filters.selectedTag,
             sortOption = filters.sortOption,
-            sortDirection = filters.sortDirection,
-            searchQuery = filters.searchQuery,
-            selectedTaskIds = filters.selectedTaskIds,
-            isSelectionMode = filters.selectedTaskIds.isNotEmpty(),
+            sortDirection = filters.sortDirection
+        )
+    }.flowOn(defaultDispatcher)
+
+    val uiState: StateFlow<UiState> = combine(
+        filteredDataFlow,
+        _searchQuery,
+        _selectedTaskIds
+    ) { data, currentQuery, selectedIds ->
+        UiState(
+            tasks = data.tasks,
+            subjects = data.subjects,
+            selectedSubjects = data.selectedSubjects,
+            selectedTag = data.selectedTag,
+            sortOption = data.sortOption,
+            sortDirection = data.sortDirection,
+            searchQuery = currentQuery,
+            selectedTaskIds = selectedIds,
+            isSelectionMode = selectedIds.isNotEmpty(),
             isLoading = false
         )
-    }.stateIn(
+    }.flowOn(defaultDispatcher).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = UiState(isLoading = true)
@@ -207,7 +247,11 @@ class TaskListViewModel(
 
     fun onDeleteTask(taskId: Long) {
         viewModelScope.launch {
-            appContext?.let { NotificationScheduler.cancelNotifications(it, taskId) }
+            appContext?.let { ctx ->
+                withContext(Dispatchers.IO) {
+                    NotificationScheduler.cancelNotifications(ctx, taskId)
+                }
+            }
             taskRepository.deleteTaskById(taskId)
         }
     }
@@ -215,8 +259,12 @@ class TaskListViewModel(
     fun onBulkDelete() {
         val idsToDelete = _selectedTaskIds.value.toList()
         viewModelScope.launch {
-            idsToDelete.forEach { id ->
-                appContext?.let { NotificationScheduler.cancelNotifications(it, id) }
+            appContext?.let { ctx ->
+                withContext(Dispatchers.IO) {
+                    idsToDelete.forEach { id ->
+                        NotificationScheduler.cancelNotifications(ctx, id)
+                    }
+                }
             }
             taskRepository.deleteTasksByIds(idsToDelete)
             _selectedTaskIds.value = emptySet()

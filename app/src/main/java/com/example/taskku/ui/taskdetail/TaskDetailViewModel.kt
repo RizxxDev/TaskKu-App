@@ -10,12 +10,14 @@ import com.example.taskku.data.repository.TaskRepository
 import com.example.taskku.domain.model.Status
 import com.example.taskku.domain.model.Task
 import com.example.taskku.notification.NotificationScheduler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TaskDetailViewModel(
     private val taskId: Long,
@@ -64,8 +66,10 @@ class TaskDetailViewModel(
                     statusName = targetStatus.name,
                     statusColorHex = targetStatus.colorHex
                 )
-                appContext?.let {
-                    NotificationScheduler.updateTaskNotifications(it, updatedTask)
+                appContext?.let { ctx ->
+                    withContext(Dispatchers.IO) {
+                        NotificationScheduler.updateTaskNotifications(ctx, updatedTask)
+                    }
                 }
             }
         }
@@ -73,8 +77,10 @@ class TaskDetailViewModel(
 
     fun onDeleteTask(onSuccess: () -> Unit) {
         viewModelScope.launch {
-            appContext?.let {
-                NotificationScheduler.cancelNotifications(it, taskId)
+            appContext?.let { ctx ->
+                withContext(Dispatchers.IO) {
+                    NotificationScheduler.cancelNotifications(ctx, taskId)
+                }
             }
             taskRepository.deleteTaskById(taskId)
             onSuccess()

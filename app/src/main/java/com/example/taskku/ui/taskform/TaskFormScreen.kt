@@ -69,11 +69,8 @@ fun TaskFormScreen(
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetMultipleContents()
     ) { uris ->
-        uris.forEach { uri ->
-            val (attachment, error) = FileStorageHelper.saveUriToTempFile(context, uri)
-            if (attachment != null) {
-                viewModel.addAttachment(attachment)
-            } else if (error != null) {
+        if (uris.isNotEmpty()) {
+            viewModel.processSelectedUris(uris, context) { error ->
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show()
             }
         }

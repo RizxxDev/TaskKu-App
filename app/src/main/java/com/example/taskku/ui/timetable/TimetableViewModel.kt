@@ -9,6 +9,9 @@ import com.example.taskku.data.repository.TimetableRepository
 import com.example.taskku.domain.model.SchoolDay
 import com.example.taskku.domain.model.Subject
 import com.example.taskku.domain.model.TimetableItem
+import com.example.taskku.util.DispatcherProvider
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
@@ -44,7 +47,8 @@ fun calculateNextMeetingDate(
 
 class TimetableViewModel(
     private val timetableRepository: TimetableRepository,
-    private val subjectRepository: SubjectRepository
+    private val subjectRepository: SubjectRepository,
+    private val defaultDispatcher: CoroutineDispatcher = DispatcherProvider.defaultComputation
 ) : ViewModel() {
 
     @Immutable
@@ -80,7 +84,7 @@ class TimetableViewModel(
             availableSubjects = subjects,
             isLoading = false
         )
-    }.stateIn(
+    }.flowOn(defaultDispatcher).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = UiState(selectedDay = initialDay, isLoading = true)

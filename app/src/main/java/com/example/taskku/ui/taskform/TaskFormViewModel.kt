@@ -11,11 +11,13 @@ import com.example.taskku.data.repository.TaskRepository
 import com.example.taskku.domain.model.*
 import com.example.taskku.notification.NotificationScheduler
 import com.example.taskku.util.FileStorageHelper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
 
 class TaskFormViewModel(
@@ -281,6 +283,32 @@ class TaskFormViewModel(
         )
     }
 
+    fun processSelectedUris(
+        uris: List<android.net.Uri>,
+        context: Context? = null,
+        onErrorMessage: ((String) -> Unit)? = null
+    ) {
+        val targetContext = context ?: appContext ?: return
+        viewModelScope.launch(Dispatchers.IO) {
+            val newAttachments = mutableListOf<Attachment>()
+            for (uri in uris) {
+                val (attachment, error) = FileStorageHelper.saveUriToTempFile(targetContext, uri)
+                if (attachment != null) {
+                    newAttachments.add(attachment)
+                } else if (error != null && onErrorMessage != null) {
+                    withContext(Dispatchers.Main) {
+                        onErrorMessage(error)
+                    }
+                }
+            }
+            if (newAttachments.isNotEmpty()) {
+                _formState.value = _formState.value.copy(
+                    attachments = _formState.value.attachments + newAttachments
+                )
+            }
+        }
+    }
+
     fun removeAttachment(index: Int) {
         if (index in _formState.value.attachments.indices) {
             val removed = _formState.value.attachments[index]
@@ -354,8 +382,10 @@ class TaskFormViewModel(
 
                 // Commit temporary attachments to permanent storage upon saving (AGENTS.md Rule B)
                 val permanentAttachments = appContext?.let { ctx ->
-                    state.attachments.map { att ->
-                        FileStorageHelper.commitAttachment(ctx, att)
+                    withContext(Dispatchers.IO) {
+                        state.attachments.map { att ->
+                            FileStorageHelper.commitAttachment(ctx, att)
+                        }
                     }
                 } ?: state.attachments
 
@@ -376,7 +406,9 @@ class TaskFormViewModel(
                     appContext?.let {
                         val status = state.availableStatuses.find { s -> s.id == task.statusId }
                         val updatedTaskWithStatus = task.copy(statusName = status?.name ?: "")
-                        NotificationScheduler.updateTaskNotifications(it, updatedTaskWithStatus)
+                        withContext(Dispatchers.IO) {
+                            NotificationScheduler.updateTaskNotifications(it, updatedTaskWithStatus)
+                        }
                     }
                 } else {
                     val subtaskEntities = state.subtasks.map { st ->
@@ -395,7 +427,9 @@ class TaskFormViewModel(
                     appContext?.let {
                         val status = state.availableStatuses.find { s -> s.id == task.statusId }
                         val taskWithId = task.copy(id = newTaskId, statusName = status?.name ?: "")
-                        NotificationScheduler.updateTaskNotifications(it, taskWithId)
+                        withContext(Dispatchers.IO) {
+                            NotificationScheduler.updateTaskNotifications(it, taskWithId)
+                        }
                     }
                 }
 

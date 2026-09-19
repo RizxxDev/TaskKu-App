@@ -8,8 +8,12 @@ import com.example.taskku.data.repository.TaskRepository
 import com.example.taskku.data.repository.TimetableRepository
 import com.example.taskku.domain.model.Task
 import com.example.taskku.domain.model.TimetableItem
+import com.example.taskku.util.DispatcherProvider
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -17,7 +21,8 @@ import java.util.Calendar
 
 class DashboardViewModel(
     private val taskRepository: TaskRepository,
-    private val timetableRepository: TimetableRepository? = null
+    private val timetableRepository: TimetableRepository? = null,
+    private val defaultDispatcher: CoroutineDispatcher = DispatcherProvider.defaultComputation
 ) : ViewModel() {
 
     @Immutable
@@ -106,7 +111,7 @@ class DashboardViewModel(
             nextClassToday = nextClass,
             isLoading = false
         )
-    }.stateIn(
+    }.flowOn(defaultDispatcher).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = UiState(isLoading = true)
