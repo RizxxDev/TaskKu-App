@@ -57,6 +57,8 @@ fun DashboardScreen(
         }
     }
 
+    val isWide = isWideDisplay()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -105,11 +107,9 @@ fun DashboardScreen(
                 Icon(Icons.Default.Add, contentDescription = "Tambah Tugas")
             }
         },
-        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
+        contentWindowInsets = if (isWide) ScaffoldDefaults.contentWindowInsets else ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
         modifier = modifier
     ) { innerPadding ->
-        val isWide = isWideDisplay()
-
         if (uiState.isLoading) {
             Box(modifier = Modifier.fillMaxSize().padding(innerPadding), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
@@ -125,10 +125,10 @@ fun DashboardScreen(
                 // Left Column: Next class, Weekly progress, Quick stats
                 Column(
                     modifier = Modifier
-                        .weight(1f)
+                        .weight(1.15f)
                         .fillMaxHeight()
                         .verticalScroll(rememberScrollState())
-                        .padding(start = 24.dp, end = 4.dp, top = 8.dp, bottom = 80.dp),
+                        .padding(start = 24.dp, end = 4.dp, top = 8.dp, bottom = 24.dp),
                     verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     NextClassCard(
@@ -295,7 +295,10 @@ private fun NextClassCard(
                         Text(
                             text = "${nextClass.subject} (${nextClass.startTime} - ${nextClass.endTime})",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                            modifier = Modifier.weight(1f, fill = false),
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
                         )
                         if (isOngoing) {
                             Surface(
@@ -539,7 +542,7 @@ private fun StatCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(12.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -558,15 +561,15 @@ private fun StatCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(6.dp))
             Box(
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(36.dp)
                     .clip(CircleShape)
                     .background(color.copy(alpha = 0.15f)),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(22.dp))
+                Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(20.dp))
             }
         }
     }

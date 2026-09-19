@@ -13,6 +13,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+import androidx.compose.ui.text.style.TextOverflow
+
 private val statusColorCache = java.util.concurrent.ConcurrentHashMap<String, Color>()
 
 fun parseStatusColor(colorHex: String): Color {
@@ -47,7 +49,9 @@ fun StatusBadge(
         Text(
             text = statusName,
             color = parsedColor,
-            style = MaterialTheme.typography.labelMedium
+            style = MaterialTheme.typography.labelMedium,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }

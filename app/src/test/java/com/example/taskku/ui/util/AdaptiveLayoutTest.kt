@@ -43,4 +43,37 @@ class AdaptiveLayoutTest {
         assertEquals(WindowWidthSizeClass.EXPANDED, sizeClass1200)
         assertTrue(sizeClass1200.isWide)
     }
+
+    @Test
+    fun compactHeightBreakpoint_lessThan480dp() {
+        val height360 = WindowHeightSizeClass.fromHeight(360)
+        assertEquals(WindowHeightSizeClass.COMPACT, height360)
+        assertTrue(height360.isCompact)
+
+        val height479 = WindowHeightSizeClass.fromHeight(479)
+        assertEquals(WindowHeightSizeClass.COMPACT, height479)
+        assertTrue(height479.isCompact)
+    }
+
+    @Test
+    fun mediumHeightBreakpoint_between480And899dp() {
+        val height480 = WindowHeightSizeClass.fromHeight(480)
+        assertEquals(WindowHeightSizeClass.MEDIUM, height480)
+        assertFalse(height480.isCompact)
+
+        val height800 = WindowHeightSizeClass.fromHeight(800)
+        assertEquals(WindowHeightSizeClass.MEDIUM, height800)
+        assertFalse(height800.isCompact)
+    }
+
+    @Test
+    fun expandedHeightBreakpoint_900dpOrMore() {
+        val height900 = WindowHeightSizeClass.fromHeight(900)
+        assertEquals(WindowHeightSizeClass.EXPANDED, height900)
+        assertFalse(height900.isCompact)
+
+        val height1200 = WindowHeightSizeClass.fromHeight(1200)
+        assertEquals(WindowHeightSizeClass.EXPANDED, height1200)
+        assertFalse(height1200.isCompact)
+    }
 }

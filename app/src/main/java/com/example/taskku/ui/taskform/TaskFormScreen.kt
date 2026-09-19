@@ -386,7 +386,7 @@ fun TaskFormScreen(
                             )
                         },
                         modifier = Modifier
-                            .weight(1f)
+                            .weight(1.4f)
                             .clickable { showDatePicker = true },
                         shape = RoundedCornerShape(12.dp)
                     )
@@ -418,7 +418,8 @@ fun TaskFormScreen(
                             )
                         },
                         modifier = Modifier
-                            .width(120.dp)
+                            .weight(1f)
+                            .widthIn(min = 120.dp)
                             .clickable {
                                 val parts = formState.deadlineTime.split(":")
                                 val hour = parts.getOrNull(0)?.toIntOrNull() ?: 23
@@ -774,7 +775,7 @@ fun TaskFormScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Column {
+                            Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
                                 Text("Lampiran File", style = MaterialTheme.typography.titleMedium)
                                 Text(
                                     "Foto (10MB), Video (50MB), Dokumen (25MB)",

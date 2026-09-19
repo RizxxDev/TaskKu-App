@@ -109,6 +109,8 @@ fun TimetableScreen(
         )
     }
 
+    val isWide = isWideDisplay()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -152,7 +154,7 @@ fun TimetableScreen(
                 Icon(Icons.Default.Add, contentDescription = "Tambah Jadwal")
             }
         },
-        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
+        contentWindowInsets = if (isWide) ScaffoldDefaults.contentWindowInsets else ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
         modifier = modifier
     ) { innerPadding ->
         Column(
@@ -160,8 +162,6 @@ fun TimetableScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            val isWide = isWideDisplay()
-
             @Composable
             fun DayTabs() {
                 SCHOOL_DAYS.forEach { schoolDay ->
@@ -180,9 +180,12 @@ fun TimetableScreen(
                                     Surface(
                                         shape = CircleShape,
                                         color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
-                                        modifier = Modifier.size(18.dp)
+                                        modifier = Modifier.sizeIn(minWidth = 18.dp, minHeight = 18.dp)
                                     ) {
-                                        Box(contentAlignment = Alignment.Center) {
+                                        Box(
+                                            contentAlignment = Alignment.Center,
+                                            modifier = Modifier.padding(horizontal = 4.dp, vertical = 1.dp)
+                                        ) {
                                             Text(
                                                 text = count.toString(),
                                                 style = MaterialTheme.typography.labelSmall,
@@ -376,6 +379,7 @@ fun TimetableSlotCard(
                             text = item.subject,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f, fill = false),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -455,7 +459,8 @@ fun TimetableSlotCard(
                     if (item.room.isNotBlank()) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            modifier = Modifier.weight(1f, fill = false)
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.MeetingRoom,
@@ -466,7 +471,9 @@ fun TimetableSlotCard(
                             Text(
                                 text = item.room,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
                     }
@@ -474,7 +481,8 @@ fun TimetableSlotCard(
                     if (item.teacher.isNotBlank()) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            modifier = Modifier.weight(1f, fill = false)
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Person,
@@ -485,7 +493,9 @@ fun TimetableSlotCard(
                             Text(
                                 text = item.teacher,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
                     }

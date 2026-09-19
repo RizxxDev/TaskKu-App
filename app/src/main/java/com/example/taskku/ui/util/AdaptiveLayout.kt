@@ -1,6 +1,7 @@
 package com.example.taskku.ui.util
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
 
 /**
@@ -30,12 +31,51 @@ enum class WindowWidthSizeClass {
 }
 
 /**
+ * Standard window height size classes based on Material 3 guidelines:
+ * - COMPACT: < 480dp (landscape phones)
+ * - MEDIUM: 480dp - 899dp (portrait phones, small tablets)
+ * - EXPANDED: >= 900dp (tablets, foldables unfolded portrait)
+ */
+enum class WindowHeightSizeClass {
+    COMPACT,
+    MEDIUM,
+    EXPANDED;
+
+    val isCompact: Boolean
+        get() = this == COMPACT
+
+    companion object {
+        const val COMPACT_MAX_HEIGHT = 480
+        const val MEDIUM_MAX_HEIGHT = 900
+
+        fun fromHeight(heightDp: Int): WindowHeightSizeClass = when {
+            heightDp < COMPACT_MAX_HEIGHT -> COMPACT
+            heightDp < MEDIUM_MAX_HEIGHT -> MEDIUM
+            else -> EXPANDED
+        }
+    }
+}
+
+/**
  * Returns the current [WindowWidthSizeClass] based on the current screen width in DP.
  */
 @Composable
 fun rememberWindowWidthSizeClass(): WindowWidthSizeClass {
     val configuration = LocalConfiguration.current
-    return WindowWidthSizeClass.fromWidth(configuration.screenWidthDp)
+    return remember(configuration.screenWidthDp) {
+        WindowWidthSizeClass.fromWidth(configuration.screenWidthDp)
+    }
+}
+
+/**
+ * Returns the current [WindowHeightSizeClass] based on the current screen height in DP.
+ */
+@Composable
+fun rememberWindowHeightSizeClass(): WindowHeightSizeClass {
+    val configuration = LocalConfiguration.current
+    return remember(configuration.screenHeightDp) {
+        WindowHeightSizeClass.fromHeight(configuration.screenHeightDp)
+    }
 }
 
 /**
@@ -44,4 +84,12 @@ fun rememberWindowWidthSizeClass(): WindowWidthSizeClass {
 @Composable
 fun isWideDisplay(): Boolean {
     return rememberWindowWidthSizeClass().isWide
+}
+
+/**
+ * Returns true if the screen height is < 480dp (Compact height, typical for landscape phones).
+ */
+@Composable
+fun isCompactHeight(): Boolean {
+    return rememberWindowHeightSizeClass().isCompact
 }

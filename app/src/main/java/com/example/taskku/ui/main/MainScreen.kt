@@ -55,17 +55,22 @@ import com.example.taskku.ui.tasklist.TaskListViewModelFactory
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.TaskAlt
 import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.taskku.ui.timetable.TimetableScreen
 import com.example.taskku.ui.timetable.TimetableViewModel
 import com.example.taskku.ui.timetable.TimetableViewModelFactory
+import com.example.taskku.ui.util.isCompactHeight
 import com.example.taskku.ui.util.isWideDisplay
 
 enum class NavigationTab(
@@ -185,6 +190,8 @@ fun MainScreen(
         }
     }
 
+    val isCompactHeight = isCompactHeight()
+
     if (isWide) {
         Scaffold(
             contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -198,90 +205,59 @@ fun MainScreen(
                 NavigationRail(
                     modifier = Modifier.fillMaxHeight(),
                     header = {
+                        val headerSize = if (isCompactHeight) 32.dp else 42.dp
+                        val iconSize = if (isCompactHeight) 18.dp else 24.dp
+                        val headerPadding = if (isCompactHeight) 6.dp else 12.dp
                         Surface(
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(10.dp),
                             color = MaterialTheme.colorScheme.primaryContainer,
                             modifier = Modifier
-                                .padding(top = 12.dp, bottom = 16.dp)
-                                .size(42.dp)
+                                .padding(top = headerPadding, bottom = headerPadding)
+                                .size(headerSize)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Icon(
                                     imageVector = Icons.Filled.TaskAlt,
                                     contentDescription = "Logo TaskKu",
                                     tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(24.dp)
+                                    modifier = Modifier.size(iconSize)
                                 )
                             }
                         }
                     }
                 ) {
-                    Spacer(modifier = Modifier.weight(1f, fill = false))
-                    NavigationTab.entries.forEachIndexed { index, tab ->
-                        val isSelected = selectedTabIndex == index
-                        val iconScale = remember(tab) { Animatable(1.0f) }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        NavigationTab.entries.forEachIndexed { index, tab ->
+                            val isSelected = selectedTabIndex == index
 
-                        LaunchedEffect(isSelected) {
-                            if (isSelected) {
-                                iconScale.animateTo(
-                                    targetValue = 1.12f,
-                                    animationSpec = tween(90, easing = FastOutSlowInEasing)
-                                )
-                                iconScale.animateTo(
-                                    targetValue = 1.0f,
-                                    animationSpec = spring(
-                                        dampingRatio = Spring.DampingRatioLowBouncy,
-                                        stiffness = Spring.StiffnessMedium
+                            NavigationRailItem(
+                                selected = isSelected,
+                                onClick = { selectedTabIndex = index },
+                                icon = {
+                                    AnimatedNavIcon(
+                                        isSelected = isSelected,
+                                        selectedIcon = tab.selectedIcon,
+                                        unselectedIcon = tab.unselectedIcon,
+                                        contentDescription = tab.title
                                     )
-                                )
-                            } else {
-                                iconScale.snapTo(1.0f)
-                            }
+                                },
+                                label = {
+                                    Text(
+                                        text = tab.title,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                },
+                                alwaysShowLabel = !isCompactHeight
+                            )
                         }
-
-                        NavigationRailItem(
-                            selected = isSelected,
-                            onClick = {
-                                if (selectedTabIndex == index) {
-                                    coroutineScope.launch {
-                                        iconScale.snapTo(1.0f)
-                                        iconScale.animateTo(
-                                            targetValue = 1.12f,
-                                            animationSpec = tween(90, easing = FastOutSlowInEasing)
-                                        )
-                                        iconScale.animateTo(
-                                            targetValue = 1.0f,
-                                            animationSpec = spring(
-                                                dampingRatio = Spring.DampingRatioLowBouncy,
-                                                stiffness = Spring.StiffnessMedium
-                                            )
-                                        )
-                                    }
-                                } else {
-                                    selectedTabIndex = index
-                                }
-                            },
-                            icon = {
-                                Icon(
-                                    imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
-                                    contentDescription = tab.title,
-                                    modifier = Modifier.graphicsLayer {
-                                        scaleX = iconScale.value
-                                        scaleY = iconScale.value
-                                    }
-                                )
-                            },
-                            label = {
-                                Text(
-                                    text = tab.title,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            },
-                            alwaysShowLabel = false
-                        )
                     }
-                    Spacer(modifier = Modifier.weight(1f, fill = false))
                 }
 
                 Box(
@@ -300,56 +276,16 @@ fun MainScreen(
                 NavigationBar {
                     NavigationTab.entries.forEachIndexed { index, tab ->
                         val isSelected = selectedTabIndex == index
-                        val iconScale = remember(tab) { Animatable(1.0f) }
-
-                        LaunchedEffect(isSelected) {
-                            if (isSelected) {
-                                iconScale.animateTo(
-                                    targetValue = 1.12f,
-                                    animationSpec = tween(90, easing = FastOutSlowInEasing)
-                                )
-                                iconScale.animateTo(
-                                    targetValue = 1.0f,
-                                    animationSpec = spring(
-                                        dampingRatio = Spring.DampingRatioLowBouncy,
-                                        stiffness = Spring.StiffnessMedium
-                                    )
-                                )
-                            } else {
-                                iconScale.snapTo(1.0f)
-                            }
-                        }
 
                         NavigationBarItem(
                             selected = isSelected,
-                            onClick = {
-                                if (selectedTabIndex == index) {
-                                    coroutineScope.launch {
-                                        iconScale.snapTo(1.0f)
-                                        iconScale.animateTo(
-                                            targetValue = 1.12f,
-                                            animationSpec = tween(90, easing = FastOutSlowInEasing)
-                                        )
-                                        iconScale.animateTo(
-                                            targetValue = 1.0f,
-                                            animationSpec = spring(
-                                                dampingRatio = Spring.DampingRatioLowBouncy,
-                                                stiffness = Spring.StiffnessMedium
-                                            )
-                                        )
-                                    }
-                                } else {
-                                    selectedTabIndex = index
-                                }
-                            },
+                            onClick = { selectedTabIndex = index },
                             icon = {
-                                Icon(
-                                    imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
-                                    contentDescription = tab.title,
-                                    modifier = Modifier.graphicsLayer {
-                                        scaleX = iconScale.value
-                                        scaleY = iconScale.value
-                                    }
+                                AnimatedNavIcon(
+                                    isSelected = isSelected,
+                                    selectedIcon = tab.selectedIcon,
+                                    unselectedIcon = tab.unselectedIcon,
+                                    contentDescription = tab.title
                                 )
                             },
                             label = {
@@ -377,6 +313,43 @@ fun MainScreen(
             }
         }
     }
+}
+
+@Composable
+private fun AnimatedNavIcon(
+    isSelected: Boolean,
+    selectedIcon: ImageVector,
+    unselectedIcon: ImageVector,
+    contentDescription: String?
+) {
+    val iconScale = remember { Animatable(1.0f) }
+
+    LaunchedEffect(isSelected) {
+        if (isSelected) {
+            iconScale.animateTo(
+                targetValue = 1.12f,
+                animationSpec = tween(90, easing = FastOutSlowInEasing)
+            )
+            iconScale.animateTo(
+                targetValue = 1.0f,
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioLowBouncy,
+                    stiffness = Spring.StiffnessMedium
+                )
+            )
+        } else {
+            iconScale.snapTo(1.0f)
+        }
+    }
+
+    Icon(
+        imageVector = if (isSelected) selectedIcon else unselectedIcon,
+        contentDescription = contentDescription,
+        modifier = Modifier.graphicsLayer {
+            scaleX = iconScale.value
+            scaleY = iconScale.value
+        }
+    )
 }
 
 @Composable

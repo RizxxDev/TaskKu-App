@@ -58,17 +58,17 @@ fun CalendarScreen(
     val monthFormat = remember { DateTimeFormatter.ofPattern("MMMM yyyy", Locale.forLanguageTag("id-ID")) }
     val selectedDateFormat = remember { DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale.forLanguageTag("id-ID")) }
 
+    val isWide = isWideDisplay()
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Kalender Tugas", fontWeight = FontWeight.Bold) }
             )
         },
-        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
+        contentWindowInsets = if (isWide) ScaffoldDefaults.contentWindowInsets else ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
         modifier = modifier
     ) { innerPadding ->
-        val isWide = isWideDisplay()
-
         if (uiState.isLoading) {
             Box(
                 modifier = Modifier
@@ -89,7 +89,7 @@ fun CalendarScreen(
                 // Left pane: Monthly calendar grid & status legend
                 Column(
                     modifier = Modifier
-                        .weight(1.1f)
+                        .weight(1.3f)
                         .fillMaxHeight()
                         .verticalScroll(rememberScrollState())
                         .padding(start = 24.dp, end = 4.dp, top = 8.dp, bottom = 24.dp),
@@ -227,7 +227,7 @@ private fun MonthCalendarCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(horizontal = 12.dp, vertical = 14.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Row(
@@ -421,7 +421,7 @@ private fun DayCell(
 ) {
     Column(
         modifier = modifier
-            .aspectRatio(1f)
+            .defaultMinSize(minWidth = 32.dp, minHeight = 36.dp)
             .padding(2.dp)
             .clip(RoundedCornerShape(10.dp))
             .then(

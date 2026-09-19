@@ -95,6 +95,8 @@ fun TaskListScreen(
         )
     }
 
+    val isWide = isWideDisplay()
+
     Scaffold(
         topBar = {
             if (uiState.isSelectionMode) {
@@ -138,7 +140,7 @@ fun TaskListScreen(
                 }
             }
         },
-        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
+        contentWindowInsets = if (isWide) ScaffoldDefaults.contentWindowInsets else ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
         modifier = modifier
     ) { innerPadding ->
         Column(
@@ -283,8 +285,6 @@ fun TaskListScreen(
 
                 val onDeleteClick = remember { { id: Long -> taskToDeleteId = id } }
                 val onToggleSelection = remember(viewModel) { { id: Long -> viewModel.onToggleTaskSelection(id) } }
-
-                val isWide = isWideDisplay()
 
                 if (isWide) {
                     LazyVerticalGrid(
