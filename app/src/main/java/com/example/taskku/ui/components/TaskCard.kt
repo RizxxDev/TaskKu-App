@@ -11,6 +11,7 @@ import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,6 +20,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.taskku.domain.model.Task
 import com.example.taskku.domain.model.TaskType
+
+private val TaskCardShape = RoundedCornerShape(16.dp)
+private val TaskCardElevation = 2.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +52,7 @@ fun TaskCard(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(vertical = 8.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(TaskCardShape)
                         .background(MaterialTheme.colorScheme.error)
                         .padding(horizontal = 20.dp),
                     contentAlignment = Alignment.CenterEnd
@@ -88,20 +92,25 @@ private fun TaskCardContent(
     onLongClick: ((Long) -> Unit)?,
     modifier: Modifier = Modifier
 ) {
+    val clickAction = remember(task.id, onTaskClick) { { onTaskClick(task.id) } }
+    val longClickAction = remember(task.id, onLongClick) {
+        if (onLongClick != null) { { onLongClick(task.id) } } else null
+    }
+
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .clip(TaskCardShape)
             .combinedClickable(
-                onClick = { onTaskClick(task.id) },
-                onLongClick = onLongClick?.let { { it(task.id) } }
+                onClick = clickAction,
+                onLongClick = longClickAction
             ),
-        shape = RoundedCornerShape(16.dp),
+        shape = TaskCardShape,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = TaskCardElevation)
     ) {
         Column(
             modifier = Modifier
@@ -161,20 +170,24 @@ private fun TaskCardContent(
                     DeadlineText(deadlineMillis = task.deadlineMillis)
                 }
                 Spacer(modifier = Modifier.width(8.dp))
+                val isKelompok = task.type == TaskType.KELOMPOK
+                val typeText = remember(task.type, task.memberCount) {
+                    if (isKelompok) "Kelompok (${task.memberCount})" else "Pribadi"
+                }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.weight(1f, fill = false),
                     horizontalArrangement = Arrangement.End
                 ) {
                     Icon(
-                        imageVector = if (task.type == TaskType.KELOMPOK) Icons.Outlined.Group else Icons.Outlined.Person,
+                        imageVector = if (isKelompok) Icons.Outlined.Group else Icons.Outlined.Person,
                         contentDescription = "Tipe Tugas",
                         modifier = Modifier.size(16.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = if (task.type == TaskType.KELOMPOK) "Kelompok (${task.memberCount})" else "Pribadi",
+                        text = typeText,
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,

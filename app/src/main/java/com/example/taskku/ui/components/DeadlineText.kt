@@ -8,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,11 +19,16 @@ import com.example.taskku.ui.util.DeadlineInfo
 fun DeadlineText(
     deadlineMillis: Long,
     modifier: Modifier = Modifier,
-    deadlineInfo: DeadlineInfo = DeadlineFormatter.getDeadlineInfo(deadlineMillis)
+    deadlineInfo: DeadlineInfo? = null
 ) {
+    val resolvedDeadlineInfo = deadlineInfo ?: remember(deadlineMillis) {
+        DeadlineFormatter.getDeadlineInfo(deadlineMillis)
+    }
     val defaultColor = MaterialTheme.colorScheme.onSurfaceVariant
-    val color = deadlineInfo.getColor(defaultColor)
-    val icon = deadlineInfo.icon
+    val color = remember(resolvedDeadlineInfo, defaultColor) {
+        resolvedDeadlineInfo.getColor(defaultColor)
+    }
+    val icon = resolvedDeadlineInfo.icon
 
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
@@ -33,7 +39,7 @@ fun DeadlineText(
         )
         Spacer(modifier = Modifier.width(4.dp))
         Text(
-            text = deadlineInfo.text,
+            text = resolvedDeadlineInfo.text,
             color = color,
             style = MaterialTheme.typography.bodyMedium
         )

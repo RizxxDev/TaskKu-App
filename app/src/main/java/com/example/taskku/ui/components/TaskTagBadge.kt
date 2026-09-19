@@ -60,6 +60,8 @@ fun getTagIcon(tag: TaskTag): ImageVector {
     }
 }
 
+private val TagBadgeShape = RoundedCornerShape(6.dp)
+
 @Composable
 fun TaskTagBadge(
     tag: TaskTag,
@@ -70,7 +72,7 @@ fun TaskTagBadge(
 
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(6.dp))
+            .clip(TagBadgeShape)
             .background(tag.containerColor)
             .padding(horizontal = 6.dp, vertical = 2.dp)
     ) {

@@ -139,7 +139,7 @@ fun MainScreen(
     fun TabContent() {
         HorizontalPager(
             state = pagerState,
-            beyondViewportPageCount = 4,
+            beyondViewportPageCount = 0,
             userScrollEnabled = false,
             key = { page -> NavigationTab.entries[page].name },
             modifier = Modifier.fillMaxSize()

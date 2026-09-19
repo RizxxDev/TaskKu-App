@@ -5,6 +5,11 @@ plugins {
   alias(libs.plugins.ksp)
 }
 
+composeCompiler {
+    enableStrongSkippingMode = true
+}
+
+
 android {
     namespace = "com.example.taskku"
     compileSdk = 36

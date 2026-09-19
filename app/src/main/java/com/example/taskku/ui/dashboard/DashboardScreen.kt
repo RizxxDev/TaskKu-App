@@ -575,18 +575,21 @@ private fun StatCard(
     }
 }
 
+private val UrgentCardShape = RoundedCornerShape(16.dp)
+
 @Composable
 private fun UrgentTaskCard(
     task: Task,
     onTaskClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val clickAction = remember(task.id, onTaskClick) { { onTaskClick(task.id) } }
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .clickable { onTaskClick(task.id) },
-        shape = RoundedCornerShape(16.dp),
+            .clip(UrgentCardShape)
+            .clickable(onClick = clickAction),
+        shape = UrgentCardShape,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         )

@@ -36,16 +36,25 @@ data class TimetableItem(
     val dayName: String
         get() = SchoolDay.fromDayOfWeek(dayOfWeek).displayName
 
-    val timeRange: String
-        get() = "$startTime - $endTime"
+    val timeRange: String = "$startTime - $endTime"
 
     fun isCurrentlyActive(): Boolean {
         val currentDay = SchoolDay.currentDayOfWeek()
         if (currentDay != dayOfWeek) return false
 
         val now = LocalTime.now()
-        val nowFormatted = String.format(Locale.ROOT, "%02d:%02d", now.hour, now.minute)
+        val nowMinutes = now.hour * 60 + now.minute
+        val startMinutes = parseMinutes(startTime)
+        val endMinutes = parseMinutes(endTime)
 
-        return nowFormatted in startTime..endTime
+        return nowMinutes in startMinutes..endMinutes
     }
+}
+
+private fun parseMinutes(timeStr: String): Int {
+    val colonIdx = timeStr.indexOf(':')
+    if (colonIdx <= 0) return -1
+    val h = timeStr.substring(0, colonIdx).toIntOrNull() ?: return -1
+    val m = timeStr.substring(colonIdx + 1).toIntOrNull() ?: return -1
+    return h * 60 + m
 }

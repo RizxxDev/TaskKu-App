@@ -338,6 +338,11 @@ fun TimetableScreen(
     }
 }
 
+private val TimetableCardShape = RoundedCornerShape(16.dp)
+private val OngoingBadgeShape = RoundedCornerShape(4.dp)
+private val AddHomeworkButtonShape = RoundedCornerShape(10.dp)
+private val TimetableCardElevation = 2.dp
+
 @Composable
 fun TimetableSlotCard(
     item: TimetableItem,
@@ -348,15 +353,25 @@ fun TimetableSlotCard(
 ) {
     var menuExpanded by remember { mutableStateOf(false) }
     val isActive = remember(item) { item.isCurrentlyActive() }
+    val primaryContainer = MaterialTheme.colorScheme.primaryContainer
+    val surfaceVariant = MaterialTheme.colorScheme.surfaceVariant
+    val containerColor = remember(isActive, primaryContainer, surfaceVariant) {
+        if (isActive) primaryContainer.copy(alpha = 0.4f) else surfaceVariant
+    }
+    val outlineVariant = MaterialTheme.colorScheme.outlineVariant
+    val dividerColor = remember(outlineVariant) {
+        outlineVariant.copy(alpha = 0.5f)
+    }
+    val onOpenMenu = remember { { menuExpanded = true } }
+    val onDismissMenu = remember { { menuExpanded = false } }
+    val onEditClick = remember(onEdit) { { menuExpanded = false; onEdit() } }
+    val onDeleteClick = remember(onDelete) { { menuExpanded = false; onDelete() } }
 
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isActive) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
-            else MaterialTheme.colorScheme.surfaceVariant
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        shape = TimetableCardShape,
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+        elevation = CardDefaults.cardElevation(defaultElevation = TimetableCardElevation)
     ) {
         Column(
             modifier = Modifier
@@ -385,7 +400,7 @@ fun TimetableSlotCard(
                         )
                         if (isActive) {
                             Surface(
-                                shape = RoundedCornerShape(4.dp),
+                                shape = OngoingBadgeShape,
                                 color = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.padding(start = 4.dp)
                             ) {
@@ -422,28 +437,22 @@ fun TimetableSlotCard(
                 }
 
                 Box {
-                    IconButton(onClick = { menuExpanded = true }) {
+                    IconButton(onClick = onOpenMenu) {
                         Icon(Icons.Default.MoreVert, contentDescription = "Opsi")
                     }
                     DropdownMenu(
                         expanded = menuExpanded,
-                        onDismissRequest = { menuExpanded = false }
+                        onDismissRequest = onDismissMenu
                     ) {
                         DropdownMenuItem(
                             text = { Text("Edit Jadwal") },
                             leadingIcon = { Icon(Icons.Default.Edit, contentDescription = null) },
-                            onClick = {
-                                menuExpanded = false
-                                onEdit()
-                            }
+                            onClick = onEditClick
                         )
                         DropdownMenuItem(
                             text = { Text("Hapus", color = MaterialTheme.colorScheme.error) },
                             leadingIcon = { Icon(Icons.Default.Delete, contentDescription = null, tint = MaterialTheme.colorScheme.error) },
-                            onClick = {
-                                menuExpanded = false
-                                onDelete()
-                            }
+                            onClick = onDeleteClick
                         )
                     }
                 }
@@ -502,13 +511,13 @@ fun TimetableSlotCard(
                 }
             }
 
-            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+            HorizontalDivider(color = dividerColor)
 
             // Row 3: Shortcut action button "Ada PR untuk mapel ini?"
             FilledTonalButton(
                 onClick = onAddHomework,
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(10.dp),
+                shape = AddHomeworkButtonShape,
                 contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp)
             ) {
                 Icon(

@@ -1,31 +1,32 @@
 package com.example.taskku.ui.tasklist
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import com.example.taskku.ui.util.isWideDisplay
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Sort
+import androidx.compose.material.icons.automirrored.outlined.Assignment
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.automirrored.outlined.Assignment
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.IntOffset
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.taskku.domain.model.TaskTag
 import com.example.taskku.ui.components.EmptyState
 import com.example.taskku.ui.components.SortOptionBar
@@ -33,6 +34,12 @@ import com.example.taskku.ui.components.SubjectFilterBar
 import com.example.taskku.ui.components.TaskCard
 import com.example.taskku.ui.components.getTagIcon
 import com.example.taskku.ui.components.themeColor
+import com.example.taskku.ui.util.isWideDisplay
+
+private val TaskItemFadeSpec = tween<Float>(durationMillis = 150)
+private val TaskItemPlacementSpec = tween<IntOffset>(durationMillis = 150)
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -310,7 +317,11 @@ fun TaskListScreen(
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .animateItem(),
+                                        .animateItem(
+                                            fadeInSpec = TaskItemFadeSpec,
+                                            fadeOutSpec = TaskItemFadeSpec,
+                                            placementSpec = TaskItemPlacementSpec
+                                        ),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Checkbox(
@@ -332,7 +343,11 @@ fun TaskListScreen(
                                     onTaskClick = onTaskClick,
                                     onDeleteClick = onDeleteClick,
                                     onLongClick = onToggleSelection,
-                                    modifier = Modifier.animateItem()
+                                    modifier = Modifier.animateItem(
+                                        fadeInSpec = TaskItemFadeSpec,
+                                        fadeOutSpec = TaskItemFadeSpec,
+                                        placementSpec = TaskItemPlacementSpec
+                                    )
                                 )
                             }
                         }
@@ -359,7 +374,11 @@ fun TaskListScreen(
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .animateItem(),
+                                        .animateItem(
+                                            fadeInSpec = TaskItemFadeSpec,
+                                            fadeOutSpec = TaskItemFadeSpec,
+                                            placementSpec = TaskItemPlacementSpec
+                                        ),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     Checkbox(
@@ -381,7 +400,11 @@ fun TaskListScreen(
                                     onTaskClick = onTaskClick,
                                     onDeleteClick = onDeleteClick,
                                     onLongClick = onToggleSelection,
-                                    modifier = Modifier.animateItem()
+                                    modifier = Modifier.animateItem(
+                                        fadeInSpec = TaskItemFadeSpec,
+                                        fadeOutSpec = TaskItemFadeSpec,
+                                        placementSpec = TaskItemPlacementSpec
+                                    )
                                 )
                             }
                         }

@@ -45,6 +45,8 @@ val Difficulty.badgeContainerColor: Color
         Difficulty.SULIT -> BG_SULIT
     }
 
+private val BadgeShape = RoundedCornerShape(4.dp)
+
 @Composable
 fun DifficultyBadge(
     difficulty: Difficulty,
@@ -52,7 +54,7 @@ fun DifficultyBadge(
 ) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(4.dp))
+            .clip(BadgeShape)
             .background(difficulty.badgeContainerColor)
             .padding(horizontal = 6.dp, vertical = 2.dp)
     ) {
