@@ -42,7 +42,7 @@ class DashboardViewModel(
     private val nextClassFlow = timetableRepository?.getUpcomingNextClass() ?: flowOf(null)
 
     val uiState: StateFlow<UiState> = combine(
-        taskRepository.getAllTasks(),
+        taskRepository.getTaskSummaries(),
         nextClassFlow
     ) { tasks, nextClass ->
         val now = System.currentTimeMillis()

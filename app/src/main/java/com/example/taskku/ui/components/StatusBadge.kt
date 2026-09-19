@@ -7,15 +7,15 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import java.util.concurrent.ConcurrentHashMap
 
-private val statusColorCache = java.util.concurrent.ConcurrentHashMap<String, Color>()
+private val statusColorCache = ConcurrentHashMap<String, Color>()
+private val statusContainerColorCache = ConcurrentHashMap<String, Color>()
 
 fun parseStatusColor(colorHex: String): Color {
     return statusColorCache.computeIfAbsent(colorHex) { hex ->
@@ -32,18 +32,25 @@ fun parseStatusColor(colorHex: String): Color {
     }
 }
 
+fun parseStatusContainerColor(colorHex: String): Color {
+    return statusContainerColorCache.computeIfAbsent(colorHex) { hex ->
+        parseStatusColor(hex).copy(alpha = 0.2f)
+    }
+}
+
 @Composable
 fun StatusBadge(
     statusName: String,
     colorHex: String,
     modifier: Modifier = Modifier
 ) {
-    val parsedColor = remember(colorHex) { parseStatusColor(colorHex) }
+    val parsedColor = parseStatusColor(colorHex)
+    val containerColor = parseStatusContainerColor(colorHex)
 
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .background(parsedColor.copy(alpha = 0.2f))
+            .background(containerColor)
             .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Text(
@@ -55,4 +62,3 @@ fun StatusBadge(
         )
     }
 }
-

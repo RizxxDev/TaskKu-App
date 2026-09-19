@@ -55,8 +55,6 @@ fun CalendarScreen(
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val monthFormat = remember { DateTimeFormatter.ofPattern("MMMM yyyy", Locale.forLanguageTag("id-ID")) }
-    val selectedDateFormat = remember { DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale.forLanguageTag("id-ID")) }
 
     val isWide = isWideDisplay()
 
@@ -97,9 +95,9 @@ fun CalendarScreen(
                 ) {
                     MonthCalendarCard(
                         currentYearMonth = uiState.currentYearMonth,
+                        formattedMonth = uiState.formattedMonth,
                         selectedDate = uiState.selectedDate,
                         tasksByDate = uiState.tasksByDate,
-                        monthFormat = monthFormat,
                         onPreviousMonth = viewModel::onPreviousMonth,
                         onNextMonth = viewModel::onNextMonth,
                         onDateSelected = viewModel::onDateSelected
@@ -116,7 +114,7 @@ fun CalendarScreen(
                 ) {
                     item(key = "selected_date_header", contentType = "header") {
                         Text(
-                            text = uiState.selectedDate.format(selectedDateFormat),
+                            text = uiState.formattedSelectedDate,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -152,9 +150,9 @@ fun CalendarScreen(
                 item(key = "month_card", contentType = "header") {
                     MonthCalendarCard(
                         currentYearMonth = uiState.currentYearMonth,
+                        formattedMonth = uiState.formattedMonth,
                         selectedDate = uiState.selectedDate,
                         tasksByDate = uiState.tasksByDate,
-                        monthFormat = monthFormat,
                         onPreviousMonth = viewModel::onPreviousMonth,
                         onNextMonth = viewModel::onNextMonth,
                         onDateSelected = viewModel::onDateSelected
@@ -163,7 +161,7 @@ fun CalendarScreen(
 
                 item(key = "selected_date_header", contentType = "header") {
                     Text(
-                        text = uiState.selectedDate.format(selectedDateFormat),
+                        text = uiState.formattedSelectedDate,
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -193,9 +191,9 @@ fun CalendarScreen(
 @Composable
 private fun MonthCalendarCard(
     currentYearMonth: YearMonth,
+    formattedMonth: String,
     selectedDate: LocalDate,
     tasksByDate: Map<String, List<Task>>,
-    monthFormat: DateTimeFormatter,
     onPreviousMonth: () -> Unit,
     onNextMonth: () -> Unit,
     onDateSelected: (LocalDate) -> Unit,
@@ -242,7 +240,7 @@ private fun MonthCalendarCard(
                     )
                 }
                 Text(
-                    text = currentYearMonth.format(monthFormat),
+                    text = formattedMonth,
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onSurface
                 )

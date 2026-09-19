@@ -16,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,12 +25,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.taskku.domain.model.TaskTag
 
+private val COLOR_TAG_PR = Color(0xFF0984E3)
+private val COLOR_TAG_KUIS = Color(0xFFE17055)
+private val COLOR_TAG_PRAKTIKUM = Color(0xFF6C5CE7)
+private val COLOR_TAG_PROYEK = Color(0xFF00B894)
+
+private val CONTAINER_TAG_PR = COLOR_TAG_PR.copy(alpha = 0.15f)
+private val CONTAINER_TAG_KUIS = COLOR_TAG_KUIS.copy(alpha = 0.15f)
+private val CONTAINER_TAG_PRAKTIKUM = COLOR_TAG_PRAKTIKUM.copy(alpha = 0.15f)
+private val CONTAINER_TAG_PROYEK = COLOR_TAG_PROYEK.copy(alpha = 0.15f)
+
 val TaskTag.themeColor: Color
     get() = when (this) {
-        TaskTag.PR -> Color(0xFF0984E3)
-        TaskTag.KUIS -> Color(0xFFE17055)
-        TaskTag.PRAKTIKUM -> Color(0xFF6C5CE7)
-        TaskTag.PROYEK -> Color(0xFF00B894)
+        TaskTag.PR -> COLOR_TAG_PR
+        TaskTag.KUIS -> COLOR_TAG_KUIS
+        TaskTag.PRAKTIKUM -> COLOR_TAG_PRAKTIKUM
+        TaskTag.PROYEK -> COLOR_TAG_PROYEK
+    }
+
+val TaskTag.containerColor: Color
+    get() = when (this) {
+        TaskTag.PR -> CONTAINER_TAG_PR
+        TaskTag.KUIS -> CONTAINER_TAG_KUIS
+        TaskTag.PRAKTIKUM -> CONTAINER_TAG_PRAKTIKUM
+        TaskTag.PROYEK -> CONTAINER_TAG_PROYEK
     }
 
 fun getTagIcon(tag: TaskTag): ImageVector {
@@ -51,11 +68,10 @@ fun TaskTagBadge(
 ) {
     val parsedColor = tag.themeColor
 
-
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(6.dp))
-            .background(parsedColor.copy(alpha = 0.15f))
+            .background(tag.containerColor)
             .padding(horizontal = 6.dp, vertical = 2.dp)
     ) {
         Row(

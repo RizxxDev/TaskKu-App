@@ -49,7 +49,6 @@ kotlin {
     jvmToolchain(17)
 }
 
-
 dependencies {
   val composeBom = platform(libs.androidx.compose.bom)
   implementation(composeBom)
@@ -59,6 +58,7 @@ dependencies {
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
+  implementation(libs.androidx.profileinstaller)
 
   // Arch Components
   implementation(libs.androidx.lifecycle.runtime.compose)

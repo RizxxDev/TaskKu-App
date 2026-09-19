@@ -1,14 +1,12 @@
 package com.example.taskku.ui.main
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -26,8 +24,6 @@ import androidx.compose.material.icons.outlined.Dashboard
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.graphicsLayer
@@ -131,60 +127,59 @@ fun MainScreen(
     val calendarViewModel: CalendarViewModel = viewModel(factory = calendarViewModelFactory)
     val settingsViewModel: SettingsViewModel = viewModel(factory = settingsViewModelFactory)
 
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
-    val saveableStateHolder = rememberSaveableStateHolder()
     val coroutineScope = rememberCoroutineScope()
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        pageCount = { NavigationTab.entries.size }
+    )
 
     val isWide = isWideDisplay()
 
     @Composable
     fun TabContent() {
-        AnimatedContent(
-            targetState = selectedTabIndex,
-            transitionSpec = {
-                fadeIn(animationSpec = tween(150)) togetherWith fadeOut(animationSpec = tween(150))
-            },
-            label = "TabContentAnimation",
+        HorizontalPager(
+            state = pagerState,
+            beyondViewportPageCount = 4,
+            userScrollEnabled = false,
+            key = { page -> NavigationTab.entries[page].name },
             modifier = Modifier.fillMaxSize()
         ) { tabIndex ->
-            saveableStateHolder.SaveableStateProvider(key = tabIndex) {
-                when (NavigationTab.entries[tabIndex]) {
-                    NavigationTab.DASHBOARD -> {
-                        DashboardScreen(
-                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                            onAddTaskClick = { onNavigate(TaskForm(null)) },
-                            onAddHomeworkForSubject = { subject, deadlineDate ->
-                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                            },
-                            viewModel = dashboardViewModel
-                        )
-                    }
-                    NavigationTab.TASKS -> {
-                        TaskListScreen(
-                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                            onAddTaskClick = { onNavigate(TaskForm(null)) },
-                            viewModel = taskListViewModel
-                        )
-                    }
-                    NavigationTab.TIMETABLE -> {
-                        TimetableScreen(
-                            onNavigateToTaskForm = { subject, deadlineDate ->
-                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                            },
-                            viewModel = timetableViewModel
-                        )
-                    }
-                    NavigationTab.CALENDAR -> {
-                        CalendarScreen(
-                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                            viewModel = calendarViewModel
-                        )
-                    }
-                    NavigationTab.SETTINGS -> {
-                        SettingsScreen(
-                            viewModel = settingsViewModel
-                        )
-                    }
+            when (NavigationTab.entries[tabIndex]) {
+                NavigationTab.DASHBOARD -> {
+                    DashboardScreen(
+                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                        onAddTaskClick = { onNavigate(TaskForm(null)) },
+                        onAddHomeworkForSubject = { subject, deadlineDate ->
+                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                        },
+                        viewModel = dashboardViewModel
+                    )
+                }
+                NavigationTab.TASKS -> {
+                    TaskListScreen(
+                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                        onAddTaskClick = { onNavigate(TaskForm(null)) },
+                        viewModel = taskListViewModel
+                    )
+                }
+                NavigationTab.TIMETABLE -> {
+                    TimetableScreen(
+                        onNavigateToTaskForm = { subject, deadlineDate ->
+                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                        },
+                        viewModel = timetableViewModel
+                    )
+                }
+                NavigationTab.CALENDAR -> {
+                    CalendarScreen(
+                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                        viewModel = calendarViewModel
+                    )
+                }
+                NavigationTab.SETTINGS -> {
+                    SettingsScreen(
+                        viewModel = settingsViewModel
+                    )
                 }
             }
         }
@@ -234,11 +229,17 @@ fun MainScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         NavigationTab.entries.forEachIndexed { index, tab ->
-                            val isSelected = selectedTabIndex == index
+                            val isSelected = pagerState.currentPage == index
 
                             NavigationRailItem(
                                 selected = isSelected,
-                                onClick = { selectedTabIndex = index },
+                                onClick = {
+                                    if (pagerState.currentPage != index) {
+                                        coroutineScope.launch {
+                                            pagerState.scrollToPage(index)
+                                        }
+                                    }
+                                },
                                 icon = {
                                     AnimatedNavIcon(
                                         isSelected = isSelected,
@@ -275,11 +276,17 @@ fun MainScreen(
             bottomBar = {
                 NavigationBar {
                     NavigationTab.entries.forEachIndexed { index, tab ->
-                        val isSelected = selectedTabIndex == index
+                        val isSelected = pagerState.currentPage == index
 
                         NavigationBarItem(
                             selected = isSelected,
-                            onClick = { selectedTabIndex = index },
+                            onClick = {
+                                if (pagerState.currentPage != index) {
+                                    coroutineScope.launch {
+                                        pagerState.scrollToPage(index)
+                                    }
+                                }
+                            },
                             icon = {
                                 AnimatedNavIcon(
                                     isSelected = isSelected,

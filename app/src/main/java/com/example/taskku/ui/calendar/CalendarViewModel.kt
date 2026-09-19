@@ -51,13 +51,18 @@ class CalendarViewModel(
         val selectedDateMillis: Long = 0L,
         val tasksByDate: Map<String, List<Task>> = emptyMap(),
         val selectedDateTasks: List<Task> = emptyList(),
+        val formattedMonth: String = "",
+        val formattedSelectedDate: String = "",
         val isLoading: Boolean = true
     ) {
         val currentMonth: Calendar
             get() = Calendar.getInstance().apply { timeInMillis = currentMonthMillis }
     }
 
-    private val tasksByDateFlow: Flow<Map<String, List<Task>>> = taskRepository.getAllTasks()
+    private val monthFormatter = DateTimeFormatter.ofPattern("MMMM yyyy", java.util.Locale.forLanguageTag("id-ID"))
+    private val selectedDateFormatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", java.util.Locale.forLanguageTag("id-ID"))
+
+    private val tasksByDateFlow: Flow<Map<String, List<Task>>> = taskRepository.getTaskSummaries()
         .map { tasks ->
             tasks.groupBy { task -> formatDateKey(task.deadlineDate) }
         }
@@ -82,6 +87,8 @@ class CalendarViewModel(
             selectedDateMillis = selectedMillis,
             tasksByDate = tasksByDate,
             selectedDateTasks = selectedTasks,
+            formattedMonth = yearMonth.format(monthFormatter),
+            formattedSelectedDate = selectedLocalDate.format(selectedDateFormatter),
             isLoading = false
         )
     }.flowOn(defaultDispatcher).stateIn(
@@ -95,6 +102,8 @@ class CalendarViewModel(
                 selectedDate = ld,
                 currentMonthMillis = ym.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli(),
                 selectedDateMillis = ld.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                formattedMonth = ym.format(monthFormatter),
+                formattedSelectedDate = ld.format(selectedDateFormatter),
                 isLoading = true
             )
         }

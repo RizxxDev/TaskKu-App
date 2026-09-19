@@ -22,6 +22,7 @@ interface TaskRepository {
     suspend fun updateTaskStatus(taskId: Long, statusId: Long)
     suspend fun toggleSubtaskCompletion(subtaskId: Long, isCompleted: Boolean)
     fun getAllTasks(): Flow<List<Task>>
+    fun getTaskSummaries(): Flow<List<Task>> = getAllTasks()
     fun getTaskById(id: Long): Flow<Task?>
     fun getTasksBySubject(subject: String): Flow<List<Task>>
     fun getTasksByStatus(statusId: Long): Flow<List<Task>>
@@ -38,6 +39,29 @@ class TaskRepositoryImpl(
     private val database: AppDatabase? = null,
     private val context: Context? = null
 ) : TaskRepository {
+
+    private fun TaskSummaryEntity.toDomainModel(): Task {
+        return Task(
+            id = id,
+            title = title,
+            description = description,
+            subject = subject,
+            type = TaskType.fromString(type),
+            difficulty = Difficulty.fromString(difficulty),
+            statusId = statusId,
+            statusName = statusName ?: "Belum Dikerjakan",
+            statusColorHex = statusColorHex ?: "#B2BEC3",
+            deadlineDate = deadlineDate,
+            deadlineTime = deadlineTime,
+            groupName = groupName,
+            notificationEnabled = notificationEnabled,
+            reminderOffset = ReminderOffset.fromString(reminderOffset),
+            tag = com.example.taskku.domain.model.TaskTag.fromString(tag),
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+            directMemberCount = memberCount
+        )
+    }
 
     private fun TaskWithDetails.toDomainModel(): Task {
         return Task(
@@ -226,6 +250,12 @@ class TaskRepositoryImpl(
         subtaskDao.toggleCompletion(subtaskId, isCompleted)
         context?.let { TaskKuWidgetHelper.updateWidget(it) }
         Unit
+    }
+
+    override fun getTaskSummaries(): Flow<List<Task>> {
+        return taskDao.getAllTaskSummaries()
+            .map { list -> list.map { it.toDomainModel() } }
+            .flowOn(Dispatchers.IO)
     }
 
     override fun getAllTasks(): Flow<List<Task>> {

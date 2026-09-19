@@ -98,8 +98,8 @@ class TaskListViewModel(
     )
 
     private val filteredDataFlow: Flow<FilteredData> = combine(
-        taskRepository.getAllTasks(),
-        subjectRepository.getVisibleSubjects(),
+        taskRepository.getTaskSummaries(),
+        subjectRepository.getVisibleSubjects().distinctUntilChanged(),
         filterParamsFlow
     ) { rawTasks, visibleSubjects, filters ->
         // Calculate pending task counts per subject

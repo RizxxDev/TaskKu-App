@@ -24,13 +24,14 @@ data class Task(
     val updatedAt: Long = System.currentTimeMillis(),
     val members: List<Member> = emptyList(),
     val subtasks: List<Subtask> = emptyList(),
-    val attachments: List<Attachment> = emptyList()
+    val attachments: List<Attachment> = emptyList(),
+    val directMemberCount: Int = 0
 ) {
     val deadlineMillis: Long
         get() = deadlineDate
 
     val memberCount: Int
-        get() = members.size
+        get() = if (members.isNotEmpty()) members.size else directMemberCount
 
     val isOverdue: Boolean
         get() = deadlineDate < System.currentTimeMillis()

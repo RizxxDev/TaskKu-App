@@ -34,6 +34,27 @@ data class StatusCount(
     val count: Int
 )
 
+data class TaskSummaryEntity(
+    val id: Long,
+    val title: String,
+    val description: String,
+    val subject: String,
+    val type: String,
+    val difficulty: String,
+    val statusId: Long,
+    val deadlineDate: Long,
+    val deadlineTime: String,
+    val groupName: String,
+    val notificationEnabled: Boolean,
+    val reminderOffset: String,
+    val tag: String,
+    val createdAt: Long,
+    val updatedAt: Long,
+    val statusName: String?,
+    val statusColorHex: String?,
+    val memberCount: Int
+)
+
 @Dao
 interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -48,6 +69,19 @@ interface TaskDao {
     @Transaction
     @Query("SELECT * FROM tasks")
     fun getAllTasks(): Flow<List<TaskWithDetails>>
+
+    @Query("""
+        SELECT 
+            t.id, t.title, t.description, t.subject, t.type, t.difficulty, 
+            t.statusId, t.deadlineDate, t.deadlineTime, t.groupName, 
+            t.notificationEnabled, t.reminderOffset, t.tag, t.createdAt, t.updatedAt,
+            s.name AS statusName,
+            s.colorHex AS statusColorHex,
+            (SELECT COUNT(*) FROM members m WHERE m.taskId = t.id) AS memberCount
+        FROM tasks t
+        LEFT JOIN statuses s ON t.statusId = s.id
+    """)
+    fun getAllTaskSummaries(): Flow<List<TaskSummaryEntity>>
 
     @Transaction
     @Query("SELECT * FROM tasks WHERE id = :id")
