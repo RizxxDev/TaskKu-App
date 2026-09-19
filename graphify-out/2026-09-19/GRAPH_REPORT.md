@@ -1,17 +1,17 @@
 # Graph Report - TaskKu  (2026-09-19)
 
 ## Corpus Check
-- 101 files · ~37,132 words
+- 101 files · ~37,180 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 24 file(s) not represented in the graph (top: .xml 15, (none) 3, .properties 2)
 
 ## Summary
-- 793 nodes · 1586 edges · 48 communities (28 shown, 20 thin omitted)
+- 794 nodes · 1587 edges · 49 communities (27 shown, 22 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 56 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9e8cf2f0`
+- Built from commit: `f6ed4318`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -26,20 +26,20 @@
 - TaskTag
 - CalendarScreen.kt
 - NotificationScheduler
-- MainActivity.kt
+- AppContainer
 - TaskDao
 - DataRepository
-- Task
+- FakeTaskRepository
 - TaskDetailViewModel
 - 🌟 Fitur Unggulan
 - Status
 - TimetableItem
 - SubtaskDao
 - TaskRepository
-- TaskRepositoryImpl
+- Task
 - TaskDetailViewModelTest
 - 2. Guardrails & Aturan Kritis Pengembangan
-- TaskListViewModelTest
+- MemberEntity
 - NotificationSchedulerTest
 - TaskListViewModel
 - Difficulty
@@ -60,6 +60,7 @@
 - Composable
 - StatusRepositoryImpl
 - ExportImportTest
+- TaskRepositoryImpl
 
 ## God Nodes (most connected - your core abstractions)
 1. `Task` - 66 edges
@@ -88,7 +89,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (48 total, 20 thin omitted)
+## Communities (49 total, 22 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
 Cohesion: 0.10
@@ -96,19 +97,19 @@ Nodes (10): Error, Idle, InProgress, StateFlow, T, ViewModel, OperationResult, S
 
 ### Community 2 - "MainScreen.kt"
 Cohesion: 0.05
-Nodes (41): Main, TaskDetail, TaskForm, CalendarViewModel, CalendarViewModelFactory, Factory, Flow, StateFlow (+33 more)
+Nodes (42): Main, TaskDetail, TaskForm, CalendarViewModel, CalendarViewModelFactory, Factory, Flow, StateFlow (+34 more)
 
 ### Community 3 - "Subject"
-Cohesion: 0.08
-Nodes (10): Flow, SubjectDao, SubjectEntity, Flow, SubjectRepository, SubjectRepositoryImpl, AppContainer, com (+2 more)
+Cohesion: 0.09
+Nodes (8): Flow, SubjectDao, SubjectEntity, Flow, SubjectRepository, SubjectRepositoryImpl, Subject, FakeSubjectRepository
 
 ### Community 4 - "AppDatabase"
-Cohesion: 0.06
-Nodes (14): AttachmentDao, MemberDao, Flow, StatusDao, AppDatabase, AppDatabaseCallback, Context, AttachmentEntity (+6 more)
+Cohesion: 0.07
+Nodes (12): AttachmentDao, Flow, StatusDao, AppDatabase, AppDatabaseCallback, Context, AttachmentEntity, StatusEntity (+4 more)
 
 ### Community 5 - "TaskKuWidget.kt"
-Cohesion: 0.11
-Nodes (21): ActionCallback, ActionParameters, BootReceiver, BroadcastReceiver, Context, Intent, TaskKuApplication, formatWidgetDeadline() (+13 more)
+Cohesion: 0.13
+Nodes (19): ActionCallback, ActionParameters, BootReceiver, BroadcastReceiver, Context, Intent, formatWidgetDeadline(), Context (+11 more)
 
 ### Community 6 - "TaskFormViewModel"
 Cohesion: 0.07
@@ -126,21 +127,17 @@ Nodes (10): CalendarCellData, CalendarGrid(), CalendarGridInfo, CalendarScreen()
 Cohesion: 0.19
 Nodes (8): AlarmManager, ReminderOffset, ON_DEADLINE, ONE_DAY_19_00, ONE_HOUR_BEFORE, THREE_HOURS_BEFORE, Context, NotificationScheduler
 
-### Community 10 - "MainActivity.kt"
-Cohesion: 0.15
-Nodes (10): MainScreenTest, Intent, MainActivity, BroadcastReceiver, Context, Intent, NotificationReceiver, TaskKuTheme() (+2 more)
+### Community 10 - "AppContainer"
+Cohesion: 0.11
+Nodes (14): MainScreenTest, AppContainer, com, Intent, MainActivity, BroadcastReceiver, Context, Intent (+6 more)
 
 ### Community 11 - "TaskDao"
-Cohesion: 0.17
+Cohesion: 0.18
 Nodes (5): Flow, StatusCount, TaskDao, TaskWithDetails, TaskEntity
 
 ### Community 12 - "DataRepository"
 Cohesion: 0.19
 Nodes (13): DataRepository, DefaultDataRepository, Flow, Error, StateFlow, ViewModel, Loading, MainScreenUiState (+5 more)
-
-### Community 13 - "Task"
-Cohesion: 0.15
-Nodes (4): Task, TaskTest, FakeTaskRepository, Flow
 
 ### Community 14 - "TaskDetailViewModel"
 Cohesion: 0.15
@@ -163,7 +160,7 @@ Cohesion: 0.20
 Nodes (9): 1. Arsitektur & Lingkungan Proyek, 2. Guardrails & Aturan Kritis Pengembangan, A. Preservasi Timestamp Pembuatan (`createdAt`), Aturan Pengembangan TaskKu (TaskKu Development Guidelines), B. Siklus Hidup File Lampiran Fisik (Storage Lifecycle), C. Izin Runtime & Notifikasi (Android 13+ / API 33+), D. Navigasi & BackStack (Jetpack Navigation 3), E. Status Tugas Dinamis (Hindari Hardcoded "Selesai") (+1 more)
 
 ### Community 25 - "TaskListViewModel"
-Cohesion: 0.07
+Cohesion: 0.05
 Nodes (24): AppPreferences, StateFlow, ThemeMode, DARK, LIGHT, SYSTEM, SortDirection, ASC (+16 more)
 
 ### Community 26 - "Difficulty"
@@ -179,12 +176,12 @@ Cohesion: 0.20
 Nodes (3): ExportImportManager, SettingsViewModelTest, Result
 
 ### Community 29 - "TaskDetailScreen.kt"
-Cohesion: 0.29
-Nodes (9): DeadlineText(), Modifier, Color, Modifier, parseStatusColor(), StatusBadge(), Modifier, SubtaskItemRow() (+1 more)
+Cohesion: 0.26
+Nodes (10): DifficultyBadge(), com, Modifier, Color, Modifier, parseStatusColor(), StatusBadge(), Modifier (+2 more)
 
 ### Community 32 - "DashboardScreen.kt"
-Cohesion: 0.35
-Nodes (9): DifficultyBadge(), com, Modifier, DashboardScreen(), Color, ImageVector, Modifier, StatCard() (+1 more)
+Cohesion: 0.40
+Nodes (8): DeadlineText(), Modifier, DashboardScreen(), Color, ImageVector, Modifier, StatCard(), UrgentTaskCard()
 
 ### Community 34 - "gradlew"
 Cohesion: 0.70
@@ -204,17 +201,17 @@ Nodes (6): Modifier, SubjectChip(), Modifier, SubjectFilterBar(), SubjectWithCou
 
 ## Knowledge Gaps
 - **75 isolated node(s):** `SYSTEM`, `LIGHT`, `DARK`, `MUDAH`, `SEDANG` (+70 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 245 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 246 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Task` connect `Task` to `DashboardScreen.kt`, `Subtask`, `MainScreen.kt`, `TaskKuWidget.kt`, `TaskFormViewModel`, `CalendarScreen.kt`, `NotificationScheduler`, `TaskCard`, `TaskDetailViewModel`, `TaskRepository`, `TaskRepositoryImpl`, `TaskListViewModelTest`, `TaskListViewModel`, `Difficulty`, `CalendarViewModelTest`, `DashboardViewModelTest`?**
+- **Why does `Task` connect `Task` to `DashboardScreen.kt`, `Subtask`, `MainScreen.kt`, `TaskKuWidget.kt`, `TaskFormViewModel`, `CalendarScreen.kt`, `NotificationScheduler`, `TaskCard`, `FakeTaskRepository`, `TaskDetailViewModel`, `TaskRepositoryImpl`, `TaskRepository`, `TaskDetailViewModelTest`, `NotificationSchedulerTest`, `TaskListViewModel`, `Difficulty`, `CalendarViewModelTest`, `DashboardViewModelTest`?**
   _High betweenness centrality (0.209) - this node is a cross-community bridge._
-- **Why does `AppDatabase` connect `AppDatabase` to `Status`, `Subject`, `SubtaskDao`, `TaskRepository`?**
+- **Why does `AppDatabase` connect `AppDatabase` to `Status`, `TaskRepositoryImpl`, `SubtaskDao`, `TaskRepository`, `MemberEntity`?**
   _High betweenness centrality (0.072) - this node is a cross-community bridge._
-- **Why does `TaskRepository` connect `TaskRepository` to `Subtask`, `MainScreen.kt`, `Subject`, `TaskFormViewModel`, `NotificationScheduler`, `Task`, `TaskDetailViewModel`, `TaskRepositoryImpl`, `TaskListViewModel`, `SettingsViewModelTest`?**
+- **Why does `TaskRepository` connect `TaskRepository` to `Subtask`, `MainScreen.kt`, `TaskFormViewModel`, `NotificationScheduler`, `AppContainer`, `FakeTaskRepository`, `TaskDetailViewModel`, `TaskRepositoryImpl`, `TaskListViewModel`, `SettingsViewModelTest`?**
   _High betweenness centrality (0.067) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `Task` (e.g. with `.importData()` and `.saveTask()`) actually correct?**
   _`Task` has 6 INFERRED edges - model-reasoned connections that need verification._

@@ -117,14 +117,20 @@ fun TaskDetailScreen(
                     Text("Tugas tidak ditemukan")
                 }
             } else {
-                Column(
+                Box(
                     modifier = Modifier
-                        .padding(innerPadding)
                         .fillMaxSize()
-                        .verticalScroll(scrollState)
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .padding(innerPadding),
+                    contentAlignment = Alignment.TopCenter
                 ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .widthIn(max = 720.dp)
+                            .verticalScroll(scrollState)
+                            .padding(horizontal = 20.dp, vertical = 16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
                     // Title & Badges
                     Card(
                         modifier = Modifier.fillMaxWidth(),
@@ -493,6 +499,7 @@ fun TaskDetailScreen(
             }
         }
     }
+}
 }
 
 @Composable

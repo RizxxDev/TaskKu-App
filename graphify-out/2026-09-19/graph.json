@@ -127,11 +127,24 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "mainscreentest",
       "source_file": "app/src/androidTest/java/com/example/taskku/ui/main/MainScreenTest.kt",
       "source_location": "L11"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_di_appcontainer_appcontainer",
+      "label": "AppContainer",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "AppContainer",
+      "file_type": "code",
+      "norm_label": "appcontainer",
+      "source_file": "app/src/main/java/com/example/taskku/di/AppContainer.kt",
+      "source_location": "L15"
     },
     {
       "id": "app_src_main_java_com_example_taskku_mainactivity_mainactivity",
@@ -140,7 +153,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "mainactivity",
       "source_file": "app/src/main/java/com/example/taskku/MainActivity.kt",
@@ -153,11 +166,24 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "notificationreceiver",
       "source_file": "app/src/main/java/com/example/taskku/notification/NotificationReceiver.kt",
       "source_location": "L23"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_taskkuapplication_taskkuapplication",
+      "label": "TaskKuApplication",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "AppContainer",
+      "file_type": "code",
+      "norm_label": "taskkuapplication",
+      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
+      "source_location": "L9"
     },
     {
       "id": "app_src_main_java_com_example_taskku_data_local_dao_taskdao_statuscount",
@@ -329,39 +355,13 @@
       "source_location": "L11"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_domain_model_task_task",
-      "label": "Task",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": "task",
-      "source_file": "app/src/main/java/com/example/taskku/domain/model/Task.kt",
-      "source_location": "L6"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest",
-      "label": "TaskTest",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": "tasktest",
-      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
-      "source_location": "L7"
-    },
-    {
       "id": "app_src_test_java_com_example_taskku_fakes_fakerepositories_faketaskrepository",
       "label": "FakeTaskRepository",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": "faketaskrepository",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -417,7 +417,7 @@
       "file_type": "code",
       "norm_label": "taskformviewmodelfactory",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L449"
+      "source_location": "L456"
     },
     {
       "id": "app_src_main_java_com_example_taskku_data_repository_statusrepository_statusrepository",
@@ -664,7 +664,7 @@
       "file_type": "code",
       "norm_label": "calendarviewmodelfactory",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L177"
+      "source_location": "L165"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarviewmodel_uistate",
@@ -677,7 +677,7 @@
       "file_type": "code",
       "norm_label": "uistate",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L47"
+      "source_location": "L46"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodel",
@@ -807,20 +807,33 @@
       "file_type": "code",
       "norm_label": "dispatcherprovider",
       "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
-      "source_location": "L6"
+      "source_location": "L7"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl",
-      "label": "TaskRepositoryImpl",
+      "id": "app_src_main_java_com_example_taskku_domain_model_task_task",
+      "label": "Task",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
-      "norm_label": "taskrepositoryimpl",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L33"
+      "norm_label": "task",
+      "source_file": "app/src/main/java/com/example/taskku/domain/model/Task.kt",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest",
+      "label": "TaskTest",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "Task",
+      "file_type": "code",
+      "norm_label": "tasktest",
+      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
+      "source_location": "L7"
     },
     {
       "id": "app_src_test_java_com_example_taskku_ui_taskdetail_taskdetailviewmodeltest_taskdetailviewmodeltest",
@@ -836,17 +849,30 @@
       "source_location": "L20"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest",
-      "label": "TaskListViewModelTest",
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao",
+      "label": "MemberDao",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": "tasklistviewmodeltest",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L24"
+      "norm_label": "memberdao",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_local_entity_memberentity_memberentity",
+      "label": "MemberEntity",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "MemberEntity",
+      "file_type": "code",
+      "norm_label": "memberentity",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/entity/MemberEntity.kt",
+      "source_location": "L8"
     },
     {
       "id": "app_src_test_java_com_example_taskku_notification_notificationschedulertest_notificationschedulertest",
@@ -964,6 +990,19 @@
       "norm_label": "uistate",
       "source_file": "app/src/main/java/com/example/taskku/ui/tasklist/TaskListViewModel.kt",
       "source_location": "L48"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest",
+      "label": "TaskListViewModelTest",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": "tasklistviewmodeltest",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L24"
     },
     {
       "id": "app_src_main_java_com_example_taskku_domain_model_difficulty_difficulty",
@@ -1109,19 +1148,6 @@
       "source_location": "L22"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_di_appcontainer_appcontainer",
-      "label": "AppContainer",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Subject",
-      "file_type": "code",
-      "norm_label": "appcontainer",
-      "source_file": "app/src/main/java/com/example/taskku/di/AppContainer.kt",
-      "source_location": "L15"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_domain_model_subject_subject",
       "label": "Subject",
       "_callable": true,
@@ -1200,19 +1226,6 @@
       "source_location": "L6"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao",
-      "label": "MemberDao",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": "memberdao",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L6"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_data_local_dao_statusdao_statusdao",
       "label": "StatusDao",
       "_callable": true,
@@ -1262,19 +1275,6 @@
       "file_type": "code",
       "norm_label": "attachmententity",
       "source_file": "app/src/main/java/com/example/taskku/data/local/entity/AttachmentEntity.kt",
-      "source_location": "L8"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_entity_memberentity_memberentity",
-      "label": "MemberEntity",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": "memberentity",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/entity/MemberEntity.kt",
       "source_location": "L8"
     },
     {
@@ -1356,6 +1356,19 @@
       "source_location": "L17"
     },
     {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl",
+      "label": "TaskRepositoryImpl",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": "taskrepositoryimpl",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L33"
+    },
+    {
       "id": "app_src_main_java_com_example_taskku_notification_bootreceiver_bootreceiver",
       "label": "BootReceiver",
       "_callable": true,
@@ -1366,19 +1379,6 @@
       "file_type": "code",
       "norm_label": "bootreceiver",
       "source_file": "app/src/main/java/com/example/taskku/notification/BootReceiver.kt",
-      "source_location": "L9"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_taskkuapplication_taskkuapplication",
-      "label": "TaskKuApplication",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "TaskKuWidget.kt",
-      "file_type": "code",
-      "norm_label": "taskkuapplication",
-      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
       "source_location": "L9"
     },
     {
@@ -1719,54 +1719,6 @@
       "source_location": "L18"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_deletetask",
-      "label": ".deleteTask()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Subtask",
-      "file_type": "code",
-      "norm_label": ".deletetask()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L167"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_inserttaskwithdetails",
-      "label": ".insertTaskWithDetails()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Subtask",
-      "file_type": "code",
-      "norm_label": ".inserttaskwithdetails()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L87"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_toentity",
-      "label": ".toEntity()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Subtask",
-      "file_type": "code",
-      "norm_label": ".toentity()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L67"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_updatetaskwithdetails",
-      "label": ".updateTaskWithDetails()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Subtask",
-      "file_type": "code",
-      "norm_label": ".updatetaskwithdetails()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L120"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_export_exportimportmanager_exportimportmanager_importdata",
       "label": ".importData()",
       "_callable": true,
@@ -1788,7 +1740,7 @@
       "file_type": "code",
       "norm_label": ".savetask()",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L332"
+      "source_location": "L339"
     },
     {
       "id": "app_src_test_java_com_example_taskku_export_exportimporttest_exportimporttest_exportandimport_restoresalldataandattachments",
@@ -1827,24 +1779,12 @@
       "source_location": "L64"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_taskdetail_taskdetailviewmodeltest_taskdetailviewmodeltest_setup",
-      "label": ".setup()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Subtask",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/taskdetail/TaskDetailViewModelTest.kt",
-      "source_location": "L28"
-    },
-    {
       "id": "app_src_androidtest_java_com_example_taskku_ui_main_mainscreentest_mainscreentest_firstitem_exists",
       "label": ".firstItem_exists()",
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": ".firstitem_exists()",
       "source_file": "app/src/androidTest/java/com/example/taskku/ui/main/MainScreenTest.kt",
@@ -1856,7 +1796,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": ".setup()",
       "source_file": "app/src/androidTest/java/com/example/taskku/ui/main/MainScreenTest.kt",
@@ -1868,7 +1808,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": ".oncreate()",
       "source_file": "app/src/main/java/com/example/taskku/MainActivity.kt",
@@ -1880,7 +1820,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": ".onnewintent()",
       "source_file": "app/src/main/java/com/example/taskku/MainActivity.kt",
@@ -1892,7 +1832,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": ".handledailybriefing()",
       "source_file": "app/src/main/java/com/example/taskku/notification/NotificationReceiver.kt",
@@ -1904,7 +1844,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": ".handletaskreminder()",
       "source_file": "app/src/main/java/com/example/taskku/notification/NotificationReceiver.kt",
@@ -1916,11 +1856,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": ".onreceive()",
       "source_file": "app/src/main/java/com/example/taskku/notification/NotificationReceiver.kt",
       "source_location": "L25"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_taskkuapplication_taskkuapplication_createnotificationchannel",
+      "label": ".createNotificationChannel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "AppContainer",
+      "file_type": "code",
+      "norm_label": ".createnotificationchannel()",
+      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
+      "source_location": "L20"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_taskkuapplication_taskkuapplication_oncreate",
+      "label": ".onCreate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "AppContainer",
+      "file_type": "code",
+      "norm_label": ".oncreate()",
+      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
+      "source_location": "L13"
     },
     {
       "id": "app_src_main_java_com_example_taskku_theme_theme_taskkutheme",
@@ -1928,7 +1892,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "taskkutheme()",
       "source_file": "app/src/main/java/com/example/taskku/theme/Theme.kt",
@@ -2091,18 +2055,6 @@
       "source_location": "L72"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_gettaskcountbystatus",
-      "label": ".getTaskCountByStatus()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "TaskDao",
-      "file_type": "code",
-      "norm_label": ".gettaskcountbystatus()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L267"
-    },
-    {
       "id": "app_src_test_java_com_example_taskku_ui_main_mainscreenviewmodeltest_mainscreenviewmodeltest_uistate_initiallyloading",
       "label": ".uiState_initiallyLoading()",
       "_callable": true,
@@ -2127,48 +2079,12 @@
       "source_location": "L18"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest_iscompleted_returnsfalsewhenstatusnameisnotselesai",
-      "label": ".isCompleted_returnsFalseWhenStatusNameIsNotSelesai()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": ".iscompleted_returnsfalsewhenstatusnameisnotselesai()",
-      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
-      "source_location": "L42"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest_iscompleted_returnstruewhenstatusnameisselesaiordone",
-      "label": ".isCompleted_returnsTrueWhenStatusNameIsSelesaiOrDone()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": ".iscompleted_returnstruewhenstatusnameisselesaiordone()",
-      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
-      "source_location": "L9"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest_isoverdue_correctlyflagspastdeadlines",
-      "label": ".isOverdue_correctlyFlagsPastDeadlines()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": ".isoverdue_correctlyflagspastdeadlines()",
-      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
-      "source_location": "L65"
-    },
-    {
       "id": "app_src_test_java_com_example_taskku_fakes_fakerepositories_faketaskrepository_deletetask",
       "label": ".deleteTask()",
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".deletetask()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2180,7 +2096,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".deletetaskbyid()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2192,7 +2108,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".deletetasksbyids()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2204,7 +2120,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".getalltasks()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2216,7 +2132,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".getoverduetasks()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2228,7 +2144,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".gettaskbyid()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2240,7 +2156,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".gettaskcountbystatus()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2252,7 +2168,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".gettasksbystatus()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2264,7 +2180,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".gettasksbysubject()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2276,7 +2192,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".getupcomingdeadlines()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2288,7 +2204,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".togglesubtaskcompletion()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -2300,23 +2216,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": ".updatetaskstatus()",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
       "source_location": "L96"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_notification_notificationschedulertest_notificationschedulertest_notificationscheduling_taskpropertieshandled",
-      "label": ".notificationScheduling_taskPropertiesHandled()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": ".notificationscheduling_taskpropertieshandled()",
-      "source_file": "app/src/test/java/com/example/taskku/notification/NotificationSchedulerTest.kt",
-      "source_location": "L101"
     },
     {
       "id": "app_src_main_java_com_example_taskku_navigation_mainnavigation",
@@ -2388,7 +2292,7 @@
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L459"
+      "source_location": "L466"
     },
     {
       "id": "app_src_main_java_com_example_taskku_data_repository_statusrepository_statusrepository_deletestatus",
@@ -3372,7 +3276,7 @@
       "file_type": "code",
       "norm_label": ".formatdatekey()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L105"
+      "source_location": "L104"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarviewmodel_calendarviewmodel_ondateselected",
@@ -3384,7 +3288,7 @@
       "file_type": "code",
       "norm_label": ".ondateselected()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L153"
+      "source_location": "L142"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarviewmodel_calendarviewmodel_onnextmonth",
@@ -3396,7 +3300,7 @@
       "file_type": "code",
       "norm_label": ".onnextmonth()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L125"
+      "source_location": "L124"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarviewmodel_calendarviewmodel_onpreviousmonth",
@@ -3408,7 +3312,7 @@
       "file_type": "code",
       "norm_label": ".onpreviousmonth()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L139"
+      "source_location": "L133"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarviewmodel_calendarviewmodelfactory_create",
@@ -3420,7 +3324,7 @@
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L180"
+      "source_location": "L168"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodelfactory_create",
@@ -3445,6 +3349,18 @@
       "norm_label": "mainscreen()",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
       "source_location": "L73"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_tasklist_tasklistviewmodel_tasklistviewmodelfactory_create",
+      "label": ".create()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": ".create()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/tasklist/TaskListViewModel.kt",
+      "source_location": "L282"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_deletetimetable",
@@ -3495,36 +3411,12 @@
       "source_location": "L135"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_deletetaskbyid",
-      "label": ".deleteTaskById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "TaskRepositoryImpl",
-      "file_type": "code",
-      "norm_label": ".deletetaskbyid()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L181"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_deletetasksbyids",
-      "label": ".deleteTasksByIds()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "TaskRepositoryImpl",
-      "file_type": "code",
-      "norm_label": ".deletetasksbyids()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L196"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_getalltasks",
       "label": ".getAllTasks()",
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
       "norm_label": ".getalltasks()",
       "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
@@ -3536,7 +3428,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
       "norm_label": ".getoverduetasks()",
       "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
@@ -3548,7 +3440,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
       "norm_label": ".gettaskbyid()",
       "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
@@ -3560,7 +3452,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
       "norm_label": ".gettasksbystatus()",
       "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
@@ -3572,7 +3464,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
       "norm_label": ".gettasksbysubject()",
       "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
@@ -3584,7 +3476,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
       "norm_label": ".getupcomingdeadlines()",
       "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
@@ -3596,35 +3488,47 @@
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
       "norm_label": ".todomainmodel()",
       "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
       "source_location": "L42"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_togglesubtaskcompletion",
-      "label": ".toggleSubtaskCompletion()",
+      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest_iscompleted_returnsfalsewhenstatusnameisnotselesai",
+      "label": ".isCompleted_returnsFalseWhenStatusNameIsNotSelesai()",
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
-      "norm_label": ".togglesubtaskcompletion()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L225"
+      "norm_label": ".iscompleted_returnsfalsewhenstatusnameisnotselesai()",
+      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
+      "source_location": "L42"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_updatetaskstatus",
-      "label": ".updateTaskStatus()",
+      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest_iscompleted_returnstruewhenstatusnameisselesaiordone",
+      "label": ".isCompleted_returnsTrueWhenStatusNameIsSelesaiOrDone()",
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "TaskRepositoryImpl",
+      "community_name": "Task",
       "file_type": "code",
-      "norm_label": ".updatetaskstatus()",
-      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
-      "source_location": "L219"
+      "norm_label": ".iscompleted_returnstruewhenstatusnameisselesaiordone()",
+      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
+      "source_location": "L9"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest_tasktest_isoverdue_correctlyflagspastdeadlines",
+      "label": ".isOverdue_correctlyFlagsPastDeadlines()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "Task",
+      "file_type": "code",
+      "norm_label": ".isoverdue_correctlyflagspastdeadlines()",
+      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
+      "source_location": "L65"
     },
     {
       "id": "app_src_test_java_com_example_taskku_ui_taskdetail_taskdetailviewmodeltest_taskdetailviewmodeltest_changestatus_updatestaskstatus",
@@ -3663,6 +3567,18 @@
       "source_location": "L63"
     },
     {
+      "id": "app_src_test_java_com_example_taskku_ui_taskdetail_taskdetailviewmodeltest_taskdetailviewmodeltest_setup",
+      "label": ".setup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "TaskDetailViewModelTest",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/taskdetail/TaskDetailViewModelTest.kt",
+      "source_location": "L28"
+    },
+    {
       "id": "app_src_test_java_com_example_taskku_ui_taskdetail_taskdetailviewmodeltest_taskdetailviewmodeltest_teardown",
       "label": ".tearDown()",
       "_callable": true,
@@ -3687,148 +3603,88 @@
       "source_location": "L75"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_deletetask_removessingletask",
-      "label": ".deleteTask_removesSingleTask()",
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_deletemember",
+      "label": ".deleteMember()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": ".deletetask_removessingletask()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L239"
+      "norm_label": ".deletemember()",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L17"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_filterbysearchquery_filterscorrectly",
-      "label": ".filterBySearchQuery_filtersCorrectly()",
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_deletemembersbytaskid",
+      "label": ".deleteMembersByTaskId()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": ".filterbysearchquery_filterscorrectly()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L104"
+      "norm_label": ".deletemembersbytaskid()",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L20"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_filterbysubject_filterscorrectly",
-      "label": ".filterBySubject_filtersCorrectly()",
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_getmembersbytaskid",
+      "label": ".getMembersByTaskId()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": ".filterbysubject_filterscorrectly()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L129"
+      "norm_label": ".getmembersbytaskid()",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L23"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_filterbytag_filterstaskscorrectly",
-      "label": ".filterByTag_filtersTasksCorrectly()",
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_insertmember",
+      "label": ".insertMember()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": ".filterbytag_filterstaskscorrectly()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L251"
+      "norm_label": ".insertmember()",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L8"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_loadtasks_displaysalltasksinitially",
-      "label": ".loadTasks_displaysAllTasksInitially()",
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_insertmembers",
+      "label": ".insertMembers()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": ".loadtasks_displaysalltasksinitially()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L94"
+      "norm_label": ".insertmembers()",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L11"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_searchquery_matchestasktag",
-      "label": ".searchQuery_matchesTaskTag()",
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_updatemember",
+      "label": ".updateMember()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": ".searchquery_matchestasktag()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L280"
+      "norm_label": ".updatemember()",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L14"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_selectionmode_andbulkdelete_workscorrectly",
-      "label": ".selectionMode_andBulkDelete_worksCorrectly()",
+      "id": "app_src_main_java_com_example_taskku_data_local_database_appdatabase_appdatabase_memberdao",
+      "label": ".memberDao()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "TaskListViewModelTest",
+      "community_name": "MemberEntity",
       "file_type": "code",
-      "norm_label": ".selectionmode_andbulkdelete_workscorrectly()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L214"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_setup",
-      "label": ".setup()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "TaskListViewModelTest",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L33"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_sortoption_sortsbydeadlinecorrectly",
-      "label": ".sortOption_sortsByDeadlineCorrectly()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "TaskListViewModelTest",
-      "file_type": "code",
-      "norm_label": ".sortoption_sortsbydeadlinecorrectly()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L166"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_sortoption_sortsbydifficultycorrectly",
-      "label": ".sortOption_sortsByDifficultyCorrectly()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "TaskListViewModelTest",
-      "file_type": "code",
-      "norm_label": ".sortoption_sortsbydifficultycorrectly()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L190"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_subjectfilterbar_onlyshowssubjectswithactivetasks",
-      "label": ".subjectFilterBar_onlyShowsSubjectsWithActiveTasks()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "TaskListViewModelTest",
-      "file_type": "code",
-      "norm_label": ".subjectfilterbar_onlyshowssubjectswithactivetasks()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L154"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_teardown",
-      "label": ".tearDown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "TaskListViewModelTest",
-      "file_type": "code",
-      "norm_label": ".teardown()",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L89"
+      "norm_label": ".memberdao()",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/database/AppDatabase.kt",
+      "source_location": "L30"
     },
     {
       "id": "app_src_test_java_com_example_taskku_notification_notificationschedulertest_notificationschedulertest_calculateremindertime_ondeadline",
@@ -3901,6 +3757,18 @@
       "norm_label": ".notificationconstants_arecorrect()",
       "source_file": "app/src/test/java/com/example/taskku/notification/NotificationSchedulerTest.kt",
       "source_location": "L16"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_notification_notificationschedulertest_notificationschedulertest_notificationscheduling_taskpropertieshandled",
+      "label": ".notificationScheduling_taskPropertiesHandled()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "NotificationSchedulerTest",
+      "file_type": "code",
+      "norm_label": ".notificationscheduling_taskpropertieshandled()",
+      "source_file": "app/src/test/java/com/example/taskku/notification/NotificationSchedulerTest.kt",
+      "source_location": "L101"
     },
     {
       "id": "app_src_main_java_com_example_taskku_data_preferences_apppreferences_apppreferences_loadsortdirection",
@@ -4083,16 +3951,148 @@
       "source_location": "L234"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_tasklist_tasklistviewmodel_tasklistviewmodelfactory_create",
-      "label": ".create()",
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_deletetask_removessingletask",
+      "label": ".deleteTask_removesSingleTask()",
       "_callable": true,
       "_origin": "ast",
       "community": 25,
       "community_name": "TaskListViewModel",
       "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/tasklist/TaskListViewModel.kt",
-      "source_location": "L282"
+      "norm_label": ".deletetask_removessingletask()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L239"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_filterbysearchquery_filterscorrectly",
+      "label": ".filterBySearchQuery_filtersCorrectly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".filterbysearchquery_filterscorrectly()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L104"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_filterbysubject_filterscorrectly",
+      "label": ".filterBySubject_filtersCorrectly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".filterbysubject_filterscorrectly()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L129"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_filterbytag_filterstaskscorrectly",
+      "label": ".filterByTag_filtersTasksCorrectly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".filterbytag_filterstaskscorrectly()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L251"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_loadtasks_displaysalltasksinitially",
+      "label": ".loadTasks_displaysAllTasksInitially()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".loadtasks_displaysalltasksinitially()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L94"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_searchquery_matchestasktag",
+      "label": ".searchQuery_matchesTaskTag()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".searchquery_matchestasktag()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L280"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_selectionmode_andbulkdelete_workscorrectly",
+      "label": ".selectionMode_andBulkDelete_worksCorrectly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".selectionmode_andbulkdelete_workscorrectly()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L214"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_setup",
+      "label": ".setup()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L33"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_sortoption_sortsbydeadlinecorrectly",
+      "label": ".sortOption_sortsByDeadlineCorrectly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".sortoption_sortsbydeadlinecorrectly()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L166"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_sortoption_sortsbydifficultycorrectly",
+      "label": ".sortOption_sortsByDifficultyCorrectly()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".sortoption_sortsbydifficultycorrectly()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L190"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_subjectfilterbar_onlyshowssubjectswithactivetasks",
+      "label": ".subjectFilterBar_onlyShowsSubjectsWithActiveTasks()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".subjectfilterbar_onlyshowssubjectswithactivetasks()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L154"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest_tasklistviewmodeltest_teardown",
+      "label": ".tearDown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": ".teardown()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L89"
     },
     {
       "id": "app_src_main_java_com_example_taskku_domain_model_difficulty_difficulty_fromstring",
@@ -4335,16 +4335,16 @@
       "source_location": "L58"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_components_deadlinetext_deadlinetext",
-      "label": "DeadlineText()",
+      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge_difficultybadge",
+      "label": "DifficultyBadge()",
       "_callable": true,
       "_origin": "ast",
       "community": 29,
       "community_name": "TaskDetailScreen.kt",
       "file_type": "code",
-      "norm_label": "deadlinetext()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/components/DeadlineText.kt",
-      "source_location": "L22"
+      "norm_label": "difficultybadge()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/components/DifficultyBadge.kt",
+      "source_location": "L15"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_components_statusbadge_parsestatuscolor",
@@ -4779,6 +4779,18 @@
       "source_location": "L99"
     },
     {
+      "id": "app_src_test_java_com_example_taskku_ui_calendar_calendarviewmodeltest_calendarviewmodeltest_calendar_selectsdatedirectlywithlocaldate",
+      "label": ".calendar_selectsDateDirectlyWithLocalDate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 30,
+      "community_name": "CalendarViewModelTest",
+      "file_type": "code",
+      "norm_label": ".calendar_selectsdatedirectlywithlocaldate()",
+      "source_file": "app/src/test/java/com/example/taskku/ui/calendar/CalendarViewModelTest.kt",
+      "source_location": "L115"
+    },
+    {
       "id": "app_src_test_java_com_example_taskku_ui_calendar_calendarviewmodeltest_calendarviewmodeltest_setup",
       "label": ".setup()",
       "_callable": true,
@@ -4851,16 +4863,16 @@
       "source_location": "L30"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge_difficultybadge",
-      "label": "DifficultyBadge()",
+      "id": "app_src_main_java_com_example_taskku_ui_components_deadlinetext_deadlinetext",
+      "label": "DeadlineText()",
       "_callable": true,
       "_origin": "ast",
       "community": 32,
       "community_name": "DashboardScreen.kt",
       "file_type": "code",
-      "norm_label": "difficultybadge()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/components/DifficultyBadge.kt",
-      "source_location": "L15"
+      "norm_label": "deadlinetext()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/components/DeadlineText.kt",
+      "source_location": "L22"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_dashboardscreen",
@@ -5007,78 +5019,6 @@
       "source_location": "L14"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_deletemember",
-      "label": ".deleteMember()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": ".deletemember()",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L17"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_deletemembersbytaskid",
-      "label": ".deleteMembersByTaskId()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": ".deletemembersbytaskid()",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L20"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_getmembersbytaskid",
-      "label": ".getMembersByTaskId()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": ".getmembersbytaskid()",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L23"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_insertmember",
-      "label": ".insertMember()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": ".insertmember()",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L8"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_insertmembers",
-      "label": ".insertMembers()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": ".insertmembers()",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L11"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao_memberdao_updatemember",
-      "label": ".updateMember()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": ".updatemember()",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L14"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_data_local_dao_statusdao_statusdao_deletestatus",
       "label": ".deleteStatus()",
       "_callable": true,
@@ -5209,18 +5149,6 @@
       "norm_label": ".getinstance()",
       "source_file": "app/src/main/java/com/example/taskku/data/local/database/AppDatabase.kt",
       "source_location": "L82"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_database_appdatabase_appdatabase_memberdao",
-      "label": ".memberDao()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": ".memberdao()",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/database/AppDatabase.kt",
-      "source_location": "L30"
     },
     {
       "id": "app_src_main_java_com_example_taskku_data_local_database_appdatabase_appdatabase_statusdao",
@@ -5595,6 +5523,114 @@
       "source_location": "L36"
     },
     {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_deletetask",
+      "label": ".deleteTask()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".deletetask()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L167"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_deletetaskbyid",
+      "label": ".deleteTaskById()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".deletetaskbyid()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L181"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_deletetasksbyids",
+      "label": ".deleteTasksByIds()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".deletetasksbyids()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L196"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_gettaskcountbystatus",
+      "label": ".getTaskCountByStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".gettaskcountbystatus()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L267"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_inserttaskwithdetails",
+      "label": ".insertTaskWithDetails()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".inserttaskwithdetails()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L87"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_toentity",
+      "label": ".toEntity()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".toentity()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L67"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_togglesubtaskcompletion",
+      "label": ".toggleSubtaskCompletion()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".togglesubtaskcompletion()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L225"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_updatetaskstatus",
+      "label": ".updateTaskStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".updatetaskstatus()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L219"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_repository_taskrepository_taskrepositoryimpl_updatetaskwithdetails",
+      "label": ".updateTaskWithDetails()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": ".updatetaskwithdetails()",
+      "source_file": "app/src/main/java/com/example/taskku/data/repository/TaskRepository.kt",
+      "source_location": "L120"
+    },
+    {
       "id": "app_src_main_java_com_example_taskku_notification_bootreceiver_bootreceiver_onreceive",
       "label": ".onReceive()",
       "_callable": true,
@@ -5605,30 +5641,6 @@
       "norm_label": ".onreceive()",
       "source_file": "app/src/main/java/com/example/taskku/notification/BootReceiver.kt",
       "source_location": "L10"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_taskkuapplication_taskkuapplication_createnotificationchannel",
-      "label": ".createNotificationChannel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "TaskKuWidget.kt",
-      "file_type": "code",
-      "norm_label": ".createnotificationchannel()",
-      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
-      "source_location": "L20"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_taskkuapplication_taskkuapplication_oncreate",
-      "label": ".onCreate()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "TaskKuWidget.kt",
-      "file_type": "code",
-      "norm_label": ".oncreate()",
-      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
-      "source_location": "L13"
     },
     {
       "id": "app_src_main_java_com_example_taskku_widget_taskkuwidget_formatwidgetdeadline",
@@ -5772,7 +5784,7 @@
       "file_type": "code",
       "norm_label": ".oncleared()",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L321"
+      "source_location": "L325"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_taskform_taskformviewmodel_taskformviewmodel_processselecteduris",
@@ -6144,7 +6156,7 @@
       "file_type": "code",
       "norm_label": "daycell()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L323"
+      "source_location": "L321"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_legenditem",
@@ -6156,7 +6168,7 @@
       "file_type": "code",
       "norm_label": "legenditem()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L396"
+      "source_location": "L394"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_statuslegend",
@@ -6168,7 +6180,7 @@
       "file_type": "code",
       "norm_label": "statuslegend()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L380"
+      "source_location": "L378"
     },
     {
       "id": "app_src_main_java_com_example_taskku_domain_model_reminderoffset_reminderoffset_fromstring",
@@ -6381,33 +6393,33 @@
       "source_location": "L1"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_taskdetail_taskdetailviewmodeltest",
-      "label": "TaskDetailViewModelTest.kt",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Subtask",
-      "file_type": "code",
-      "norm_label": "taskdetailviewmodeltest.kt",
-      "source_file": "app/src/test/java/com/example/taskku/ui/taskdetail/TaskDetailViewModelTest.kt",
-      "source_location": "L1"
-    },
-    {
       "id": "app_src_androidtest_java_com_example_taskku_ui_main_mainscreentest",
       "label": "MainScreenTest.kt",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "mainscreentest.kt",
       "source_file": "app/src/androidTest/java/com/example/taskku/ui/main/MainScreenTest.kt",
       "source_location": "L1"
     },
     {
+      "id": "app_src_main_java_com_example_taskku_di_appcontainer_kt_com",
+      "label": "com",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "AppContainer",
+      "file_type": "code",
+      "norm_label": "com",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "app_src_main_java_com_example_taskku_mainactivity",
       "label": "MainActivity.kt",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "mainactivity.kt",
       "source_file": "app/src/main/java/com/example/taskku/MainActivity.kt",
@@ -6418,7 +6430,7 @@
       "label": "Intent",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "intent",
       "source_file": "",
@@ -6429,7 +6441,7 @@
       "label": "NotificationReceiver.kt",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "notificationreceiver.kt",
       "source_file": "app/src/main/java/com/example/taskku/notification/NotificationReceiver.kt",
@@ -6440,7 +6452,7 @@
       "label": "BroadcastReceiver",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "broadcastreceiver",
       "source_file": "",
@@ -6451,7 +6463,7 @@
       "label": "Context",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "context",
       "source_file": "",
@@ -6462,29 +6474,51 @@
       "label": "Intent",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "intent",
       "source_file": "",
       "source_location": ""
     },
     {
+      "id": "app_src_main_java_com_example_taskku_taskkuapplication",
+      "label": "TaskKuApplication.kt",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "AppContainer",
+      "file_type": "code",
+      "norm_label": "taskkuapplication.kt",
+      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
+      "source_location": "L1"
+    },
+    {
       "id": "app_src_main_java_com_example_taskku_theme_theme",
       "label": "Theme.kt",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "theme.kt",
       "source_file": "app/src/main/java/com/example/taskku/theme/Theme.kt",
       "source_location": "L1"
     },
     {
+      "id": "application",
+      "label": "Application",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "AppContainer",
+      "file_type": "code",
+      "norm_label": "application",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "bundle",
       "label": "Bundle",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "bundle",
       "source_file": "",
@@ -6495,7 +6529,7 @@
       "label": "ComponentActivity",
       "_origin": "ast",
       "community": 10,
-      "community_name": "MainActivity.kt",
+      "community_name": "AppContainer",
       "file_type": "code",
       "norm_label": "componentactivity",
       "source_file": "",
@@ -6612,33 +6646,11 @@
       "source_location": ""
     },
     {
-      "id": "app_src_main_java_com_example_taskku_domain_model_task",
-      "label": "Task.kt",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": "task.kt",
-      "source_file": "app/src/main/java/com/example/taskku/domain/model/Task.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest",
-      "label": "TaskTest.kt",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": "tasktest.kt",
-      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
-      "source_location": "L1"
-    },
-    {
       "id": "app_src_test_java_com_example_taskku_fakes_fakerepositories",
       "label": "FakeRepositories.kt",
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": "fakerepositories.kt",
       "source_file": "app/src/test/java/com/example/taskku/fakes/FakeRepositories.kt",
@@ -6649,7 +6661,7 @@
       "label": "Flow",
       "_origin": "ast",
       "community": 13,
-      "community_name": "Task",
+      "community_name": "FakeTaskRepository",
       "file_type": "code",
       "norm_label": "flow",
       "source_file": "",
@@ -7491,6 +7503,17 @@
       "source_location": ""
     },
     {
+      "id": "app_src_main_java_com_example_taskku_ui_tasklist_tasklistviewmodel_kt_t",
+      "label": "T",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "t",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel",
       "label": "TimetableViewModel.kt",
       "_origin": "ast",
@@ -7577,6 +7600,39 @@
       "norm_label": "navkey",
       "source_file": "",
       "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_domain_model_task",
+      "label": "Task.kt",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "Task",
+      "file_type": "code",
+      "norm_label": "task.kt",
+      "source_file": "app/src/main/java/com/example/taskku/domain/model/Task.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_domain_model_tasktest",
+      "label": "TaskTest.kt",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "Task",
+      "file_type": "code",
+      "norm_label": "tasktest.kt",
+      "source_file": "app/src/test/java/com/example/taskku/domain/model/TaskTest.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_taskdetail_taskdetailviewmodeltest",
+      "label": "TaskDetailViewModelTest.kt",
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "TaskDetailViewModelTest",
+      "file_type": "code",
+      "norm_label": "taskdetailviewmodeltest.kt",
+      "source_file": "app/src/test/java/com/example/taskku/ui/taskdetail/TaskDetailViewModelTest.kt",
+      "source_location": "L1"
     },
     {
       "id": "agents",
@@ -7697,6 +7753,28 @@
       "norm_label": "f. imutabilitas state jetpack compose",
       "source_file": "AGENTS.md",
       "source_location": "L31"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao",
+      "label": "MemberDao.kt",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "MemberEntity",
+      "file_type": "code",
+      "norm_label": "memberdao.kt",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_data_local_entity_memberentity",
+      "label": "MemberEntity.kt",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "MemberEntity",
+      "file_type": "code",
+      "norm_label": "memberentity.kt",
+      "source_file": "app/src/main/java/com/example/taskku/data/local/entity/MemberEntity.kt",
+      "source_location": "L1"
     },
     {
       "id": "app_src_main_java_com_example_taskku_data_preferences_apppreferences",
@@ -7897,17 +7975,6 @@
       "source_location": ""
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_tasklist_tasklistviewmodel_kt_t",
-      "label": "T",
-      "_origin": "ast",
-      "community": 25,
-      "community_name": "TaskListViewModel",
-      "file_type": "code",
-      "norm_label": "t",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_ui_tasklist_tasklistviewmodel_kt_viewmodel",
       "label": "ViewModel",
       "_origin": "ast",
@@ -7917,6 +7984,17 @@
       "norm_label": "viewmodel",
       "source_file": "",
       "source_location": ""
+    },
+    {
+      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest",
+      "label": "TaskListViewModelTest.kt",
+      "_origin": "ast",
+      "community": 25,
+      "community_name": "TaskListViewModel",
+      "file_type": "code",
+      "norm_label": "tasklistviewmodeltest.kt",
+      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
+      "source_location": "L1"
     },
     {
       "id": "app_src_main_java_com_example_taskku_domain_model_difficulty",
@@ -8018,17 +8096,6 @@
       "source_location": "L1"
     },
     {
-      "id": "app_src_test_java_com_example_taskku_ui_tasklist_tasklistviewmodeltest",
-      "label": "TaskListViewModelTest.kt",
-      "_origin": "ast",
-      "community": 26,
-      "community_name": "Difficulty",
-      "file_type": "code",
-      "norm_label": "tasklistviewmodeltest.kt",
-      "source_file": "app/src/test/java/com/example/taskku/ui/tasklist/TaskListViewModelTest.kt",
-      "source_location": "L1"
-    },
-    {
       "id": "app_src_test_java_com_example_taskku_widget_widgetlogictest",
       "label": "WidgetLogicTest.kt",
       "_origin": "ast",
@@ -8117,18 +8184,29 @@
       "source_location": ""
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_components_deadlinetext",
-      "label": "DeadlineText.kt",
+      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge",
+      "label": "DifficultyBadge.kt",
       "_origin": "ast",
       "community": 29,
       "community_name": "TaskDetailScreen.kt",
       "file_type": "code",
-      "norm_label": "deadlinetext.kt",
-      "source_file": "app/src/main/java/com/example/taskku/ui/components/DeadlineText.kt",
+      "norm_label": "difficultybadge.kt",
+      "source_file": "app/src/main/java/com/example/taskku/ui/components/DifficultyBadge.kt",
       "source_location": "L1"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_components_deadlinetext_kt_modifier",
+      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge_kt_com",
+      "label": "com",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "TaskDetailScreen.kt",
+      "file_type": "code",
+      "norm_label": "com",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge_kt_modifier",
       "label": "Modifier",
       "_origin": "ast",
       "community": 29,
@@ -8249,28 +8327,6 @@
       "source_location": ""
     },
     {
-      "id": "app_src_main_java_com_example_taskku_di_appcontainer",
-      "label": "AppContainer.kt",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Subject",
-      "file_type": "code",
-      "norm_label": "appcontainer.kt",
-      "source_file": "app/src/main/java/com/example/taskku/di/AppContainer.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_di_appcontainer_kt_com",
-      "label": "com",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "Subject",
-      "file_type": "code",
-      "norm_label": "com",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_domain_model_subject",
       "label": "Subject.kt",
       "_origin": "ast",
@@ -8304,29 +8360,18 @@
       "source_location": "L1"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge",
-      "label": "DifficultyBadge.kt",
+      "id": "app_src_main_java_com_example_taskku_ui_components_deadlinetext",
+      "label": "DeadlineText.kt",
       "_origin": "ast",
       "community": 32,
       "community_name": "DashboardScreen.kt",
       "file_type": "code",
-      "norm_label": "difficultybadge.kt",
-      "source_file": "app/src/main/java/com/example/taskku/ui/components/DifficultyBadge.kt",
+      "norm_label": "deadlinetext.kt",
+      "source_file": "app/src/main/java/com/example/taskku/ui/components/DeadlineText.kt",
       "source_location": "L1"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge_kt_com",
-      "label": "com",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "DashboardScreen.kt",
-      "file_type": "code",
-      "norm_label": "com",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_components_difficultybadge_kt_modifier",
+      "id": "app_src_main_java_com_example_taskku_ui_components_deadlinetext_kt_modifier",
       "label": "Modifier",
       "_origin": "ast",
       "community": 32,
@@ -8580,17 +8625,6 @@
       "source_location": "L1"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_data_local_dao_memberdao",
-      "label": "MemberDao.kt",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": "memberdao.kt",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/dao/MemberDao.kt",
-      "source_location": "L1"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_data_local_dao_statusdao",
       "label": "StatusDao.kt",
       "_origin": "ast",
@@ -8643,17 +8677,6 @@
       "file_type": "code",
       "norm_label": "attachmententity.kt",
       "source_file": "app/src/main/java/com/example/taskku/data/local/entity/AttachmentEntity.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_data_local_entity_memberentity",
-      "label": "MemberEntity.kt",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "AppDatabase",
-      "file_type": "code",
-      "norm_label": "memberentity.kt",
-      "source_file": "app/src/main/java/com/example/taskku/data/local/entity/MemberEntity.kt",
       "source_location": "L1"
     },
     {
@@ -8921,6 +8944,17 @@
       "source_location": ""
     },
     {
+      "id": "app_src_main_java_com_example_taskku_di_appcontainer",
+      "label": "AppContainer.kt",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TaskRepositoryImpl",
+      "file_type": "code",
+      "norm_label": "appcontainer.kt",
+      "source_file": "app/src/main/java/com/example/taskku/di/AppContainer.kt",
+      "source_location": "L1"
+    },
+    {
       "id": "actioncallback",
       "label": "ActionCallback",
       "_origin": "ast",
@@ -8985,17 +9019,6 @@
       "norm_label": "intent",
       "source_file": "",
       "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_taskkuapplication",
-      "label": "TaskKuApplication.kt",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "TaskKuWidget.kt",
-      "file_type": "code",
-      "norm_label": "taskkuapplication.kt",
-      "source_file": "app/src/main/java/com/example/taskku/TaskKuApplication.kt",
-      "source_location": "L1"
     },
     {
       "id": "app_src_main_java_com_example_taskku_widget_taskkuwidget",
@@ -9071,17 +9094,6 @@
       "community_name": "TaskKuWidget.kt",
       "file_type": "code",
       "norm_label": "glanceappwidget",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "application",
-      "label": "Application",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "TaskKuWidget.kt",
-      "file_type": "code",
-      "norm_label": "application",
       "source_file": "",
       "source_location": ""
     },
@@ -10605,7 +10617,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L279",
+      "source_location": "L277",
       "weight": 1.0
     },
     {
@@ -10617,7 +10629,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L288",
+      "source_location": "L286",
       "weight": 1.0
     },
     {
@@ -10629,7 +10641,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L306",
+      "source_location": "L304",
       "weight": 1.0
     },
     {
@@ -10689,7 +10701,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L389",
+      "source_location": "L387",
       "weight": 1.0
     },
     {
@@ -10701,7 +10713,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L183",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -10773,7 +10785,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L489",
+      "source_location": "L490",
       "weight": 1.0
     },
     {
@@ -10785,7 +10797,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L502",
+      "source_location": "L503",
       "weight": 1.0
     },
     {
@@ -11193,7 +11205,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L322",
+      "source_location": "L326",
       "weight": 1.0
     },
     {
@@ -11205,7 +11217,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L462",
+      "source_location": "L469",
       "weight": 1.0
     },
     {
@@ -11721,7 +11733,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L47",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -11865,7 +11877,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L114",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -11985,7 +11997,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L61",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -11997,7 +12009,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L68",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -12105,7 +12117,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
-      "source_location": "L11",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -13245,7 +13257,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L323",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -13269,7 +13281,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L61",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -18126,7 +18138,7 @@
         "target_fqn": "kotlinx.coroutines.CoroutineDispatcher"
       },
       "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
-      "source_location": "L3",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -19344,7 +19356,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L323",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -19356,7 +19368,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L396",
+      "source_location": "L394",
       "weight": 1.0
     },
     {
@@ -21156,7 +21168,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L180",
+      "source_location": "L168",
       "weight": 1.0
     },
     {
@@ -21228,7 +21240,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L459",
+      "source_location": "L466",
       "weight": 1.0
     },
     {
@@ -22598,7 +22610,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L323",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -22609,7 +22621,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L380",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -22620,7 +22632,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L396",
+      "source_location": "L394",
       "weight": 1.0
     },
     {
@@ -22642,7 +22654,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L177",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -23126,7 +23138,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L449",
+      "source_location": "L456",
       "weight": 1.0
     },
     {
@@ -23247,7 +23259,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -23918,7 +23930,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L177",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -23984,7 +23996,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L449",
+      "source_location": "L456",
       "weight": 1.0
     },
     {
@@ -26173,7 +26185,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L125",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -26184,7 +26196,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L139",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -26195,7 +26207,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L170",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -26206,7 +26218,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarViewModel.kt",
-      "source_location": "L180",
+      "source_location": "L168",
       "weight": 1.0
     },
     {
@@ -26635,7 +26647,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L321",
+      "source_location": "L325",
       "weight": 1.0
     },
     {
@@ -26646,7 +26658,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L332",
+      "source_location": "L339",
       "weight": 1.0
     },
     {
@@ -26668,7 +26680,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L459",
+      "source_location": "L466",
       "weight": 1.0
     },
     {
@@ -27483,6 +27495,17 @@
       "confidence_score": 1.0,
       "source_file": "app/src/test/java/com/example/taskku/notification/NotificationSchedulerTest.kt",
       "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "app_src_test_java_com_example_taskku_ui_calendar_calendarviewmodeltest_calendarviewmodeltest",
+      "target": "app_src_test_java_com_example_taskku_ui_calendar_calendarviewmodeltest_calendarviewmodeltest_calendar_selectsdatedirectlywithlocaldate",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/src/test/java/com/example/taskku/ui/calendar/CalendarViewModelTest.kt",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -28370,7 +28393,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L311",
+      "source_location": "L309",
       "weight": 1.0
     },
     {
@@ -28430,7 +28453,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L62",
+      "source_location": "L63",
       "weight": 1.0
     },
     {
@@ -28442,7 +28465,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L76",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -28454,7 +28477,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -28466,7 +28489,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L93",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -28490,7 +28513,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L363",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -28502,7 +28525,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L365",
+      "source_location": "L372",
       "weight": 1.0
     },
     {
@@ -28514,7 +28537,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
-      "source_location": "L394",
+      "source_location": "L401",
       "weight": 1.0
     },
     {
@@ -28819,5 +28842,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9e8cf2f09530701f6e12006bbc4ef0b054d2eb7d"
+  "built_at_commit": "f6ed4318c3736b6f1c6c547ea23dd03e9bb36d3d"
 }

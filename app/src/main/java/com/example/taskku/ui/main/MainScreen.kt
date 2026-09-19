@@ -53,10 +53,20 @@ import com.example.taskku.ui.tasklist.TaskListViewModel
 import com.example.taskku.ui.tasklist.TaskListViewModelFactory
 
 import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.filled.TaskAlt
 import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import com.example.taskku.ui.timetable.TimetableScreen
 import com.example.taskku.ui.timetable.TimetableViewModel
 import com.example.taskku.ui.timetable.TimetableViewModelFactory
+import com.example.taskku.ui.util.isWideDisplay
 
 enum class NavigationTab(
     val title: String,
@@ -120,126 +130,250 @@ fun MainScreen(
     val saveableStateHolder = rememberSaveableStateHolder()
     val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(
-        bottomBar = {
-            NavigationBar {
-                NavigationTab.entries.forEachIndexed { index, tab ->
-                    val isSelected = selectedTabIndex == index
-                    val iconScale = remember(tab) { Animatable(1.0f) }
+    val isWide = isWideDisplay()
 
-                    LaunchedEffect(isSelected) {
-                        if (isSelected) {
-                            iconScale.animateTo(
-                                targetValue = 1.12f,
-                                animationSpec = tween(90, easing = FastOutSlowInEasing)
-                            )
-                            iconScale.animateTo(
-                                targetValue = 1.0f,
-                                animationSpec = spring(
-                                    dampingRatio = Spring.DampingRatioLowBouncy,
-                                    stiffness = Spring.StiffnessMedium
-                                )
-                            )
-                        } else {
-                            iconScale.snapTo(1.0f)
-                        }
+    @Composable
+    fun TabContent() {
+        AnimatedContent(
+            targetState = selectedTabIndex,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(150)) togetherWith fadeOut(animationSpec = tween(150))
+            },
+            label = "TabContentAnimation",
+            modifier = Modifier.fillMaxSize()
+        ) { tabIndex ->
+            saveableStateHolder.SaveableStateProvider(key = tabIndex) {
+                when (NavigationTab.entries[tabIndex]) {
+                    NavigationTab.DASHBOARD -> {
+                        DashboardScreen(
+                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                            onAddTaskClick = { onNavigate(TaskForm(null)) },
+                            onAddHomeworkForSubject = { subject, deadlineDate ->
+                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                            },
+                            viewModel = dashboardViewModel
+                        )
                     }
-
-                    NavigationBarItem(
-                        selected = isSelected,
-                        onClick = {
-                            if (selectedTabIndex == index) {
-                                coroutineScope.launch {
-                                    iconScale.snapTo(1.0f)
-                                    iconScale.animateTo(
-                                        targetValue = 1.12f,
-                                        animationSpec = tween(90, easing = FastOutSlowInEasing)
-                                    )
-                                    iconScale.animateTo(
-                                        targetValue = 1.0f,
-                                        animationSpec = spring(
-                                            dampingRatio = Spring.DampingRatioLowBouncy,
-                                            stiffness = Spring.StiffnessMedium
-                                        )
-                                    )
-                                }
-                            } else {
-                                selectedTabIndex = index
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
-                                contentDescription = tab.title,
-                                modifier = Modifier.graphicsLayer {
-                                    scaleX = iconScale.value
-                                    scaleY = iconScale.value
-                                }
-                            )
-                        },
-                        label = { Text(tab.title) }
-                    )
+                    NavigationTab.TASKS -> {
+                        TaskListScreen(
+                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                            onAddTaskClick = { onNavigate(TaskForm(null)) },
+                            viewModel = taskListViewModel
+                        )
+                    }
+                    NavigationTab.TIMETABLE -> {
+                        TimetableScreen(
+                            onNavigateToTaskForm = { subject, deadlineDate ->
+                                onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+                            },
+                            viewModel = timetableViewModel
+                        )
+                    }
+                    NavigationTab.CALENDAR -> {
+                        CalendarScreen(
+                            onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                            viewModel = calendarViewModel
+                        )
+                    }
+                    NavigationTab.SETTINGS -> {
+                        SettingsScreen(
+                            viewModel = settingsViewModel
+                        )
+                    }
                 }
             }
-        },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
-        modifier = modifier
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = innerPadding.calculateBottomPadding())
-                .consumeWindowInsets(PaddingValues(bottom = innerPadding.calculateBottomPadding()))
-                .clipToBounds()
-        ) {
-            AnimatedContent(
-                targetState = selectedTabIndex,
-                transitionSpec = {
-                    fadeIn(animationSpec = tween(150)) togetherWith fadeOut(animationSpec = tween(150))
-                },
-                label = "TabContentAnimation",
-                modifier = Modifier.fillMaxSize()
-            ) { tabIndex ->
-                saveableStateHolder.SaveableStateProvider(key = tabIndex) {
-                    when (NavigationTab.entries[tabIndex]) {
-                        NavigationTab.DASHBOARD -> {
-                            DashboardScreen(
-                                onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                                onAddTaskClick = { onNavigate(TaskForm(null)) },
-                                onAddHomeworkForSubject = { subject, deadlineDate ->
-                                    onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                                },
-                                viewModel = dashboardViewModel
-                            )
-                        }
-                        NavigationTab.TASKS -> {
-                            TaskListScreen(
-                                onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                                onAddTaskClick = { onNavigate(TaskForm(null)) },
-                                viewModel = taskListViewModel
-                            )
-                        }
-                        NavigationTab.TIMETABLE -> {
-                            TimetableScreen(
-                                onNavigateToTaskForm = { subject, deadlineDate ->
-                                    onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                                },
-                                viewModel = timetableViewModel
-                            )
-                        }
-                        NavigationTab.CALENDAR -> {
-                            CalendarScreen(
-                                onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                                viewModel = calendarViewModel
-                            )
-                        }
-                        NavigationTab.SETTINGS -> {
-                            SettingsScreen(
-                                viewModel = settingsViewModel
-                            )
+        }
+    }
+
+    if (isWide) {
+        Scaffold(
+            contentWindowInsets = WindowInsets(0, 0, 0, 0),
+            modifier = modifier
+        ) { innerPadding ->
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) {
+                NavigationRail(
+                    modifier = Modifier.fillMaxHeight(),
+                    header = {
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.primaryContainer,
+                            modifier = Modifier
+                                .padding(top = 12.dp, bottom = 16.dp)
+                                .size(42.dp)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Icon(
+                                    imageVector = Icons.Filled.TaskAlt,
+                                    contentDescription = "Logo TaskKu",
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
                         }
                     }
+                ) {
+                    Spacer(modifier = Modifier.weight(1f, fill = false))
+                    NavigationTab.entries.forEachIndexed { index, tab ->
+                        val isSelected = selectedTabIndex == index
+                        val iconScale = remember(tab) { Animatable(1.0f) }
+
+                        LaunchedEffect(isSelected) {
+                            if (isSelected) {
+                                iconScale.animateTo(
+                                    targetValue = 1.12f,
+                                    animationSpec = tween(90, easing = FastOutSlowInEasing)
+                                )
+                                iconScale.animateTo(
+                                    targetValue = 1.0f,
+                                    animationSpec = spring(
+                                        dampingRatio = Spring.DampingRatioLowBouncy,
+                                        stiffness = Spring.StiffnessMedium
+                                    )
+                                )
+                            } else {
+                                iconScale.snapTo(1.0f)
+                            }
+                        }
+
+                        NavigationRailItem(
+                            selected = isSelected,
+                            onClick = {
+                                if (selectedTabIndex == index) {
+                                    coroutineScope.launch {
+                                        iconScale.snapTo(1.0f)
+                                        iconScale.animateTo(
+                                            targetValue = 1.12f,
+                                            animationSpec = tween(90, easing = FastOutSlowInEasing)
+                                        )
+                                        iconScale.animateTo(
+                                            targetValue = 1.0f,
+                                            animationSpec = spring(
+                                                dampingRatio = Spring.DampingRatioLowBouncy,
+                                                stiffness = Spring.StiffnessMedium
+                                            )
+                                        )
+                                    }
+                                } else {
+                                    selectedTabIndex = index
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
+                                    contentDescription = tab.title,
+                                    modifier = Modifier.graphicsLayer {
+                                        scaleX = iconScale.value
+                                        scaleY = iconScale.value
+                                    }
+                                )
+                            },
+                            label = {
+                                Text(
+                                    text = tab.title,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            },
+                            alwaysShowLabel = false
+                        )
+                    }
+                    Spacer(modifier = Modifier.weight(1f, fill = false))
                 }
+
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .clipToBounds()
+                ) {
+                    TabContent()
+                }
+            }
+        }
+    } else {
+        Scaffold(
+            bottomBar = {
+                NavigationBar {
+                    NavigationTab.entries.forEachIndexed { index, tab ->
+                        val isSelected = selectedTabIndex == index
+                        val iconScale = remember(tab) { Animatable(1.0f) }
+
+                        LaunchedEffect(isSelected) {
+                            if (isSelected) {
+                                iconScale.animateTo(
+                                    targetValue = 1.12f,
+                                    animationSpec = tween(90, easing = FastOutSlowInEasing)
+                                )
+                                iconScale.animateTo(
+                                    targetValue = 1.0f,
+                                    animationSpec = spring(
+                                        dampingRatio = Spring.DampingRatioLowBouncy,
+                                        stiffness = Spring.StiffnessMedium
+                                    )
+                                )
+                            } else {
+                                iconScale.snapTo(1.0f)
+                            }
+                        }
+
+                        NavigationBarItem(
+                            selected = isSelected,
+                            onClick = {
+                                if (selectedTabIndex == index) {
+                                    coroutineScope.launch {
+                                        iconScale.snapTo(1.0f)
+                                        iconScale.animateTo(
+                                            targetValue = 1.12f,
+                                            animationSpec = tween(90, easing = FastOutSlowInEasing)
+                                        )
+                                        iconScale.animateTo(
+                                            targetValue = 1.0f,
+                                            animationSpec = spring(
+                                                dampingRatio = Spring.DampingRatioLowBouncy,
+                                                stiffness = Spring.StiffnessMedium
+                                            )
+                                        )
+                                    }
+                                } else {
+                                    selectedTabIndex = index
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    imageVector = if (isSelected) tab.selectedIcon else tab.unselectedIcon,
+                                    contentDescription = tab.title,
+                                    modifier = Modifier.graphicsLayer {
+                                        scaleX = iconScale.value
+                                        scaleY = iconScale.value
+                                    }
+                                )
+                            },
+                            label = {
+                                Text(
+                                    text = tab.title,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        )
+                    }
+                }
+            },
+            contentWindowInsets = WindowInsets(0, 0, 0, 0),
+            modifier = modifier
+        ) { innerPadding ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = innerPadding.calculateBottomPadding())
+                    .consumeWindowInsets(PaddingValues(bottom = innerPadding.calculateBottomPadding()))
+                    .clipToBounds()
+            ) {
+                TabContent()
             }
         }
     }

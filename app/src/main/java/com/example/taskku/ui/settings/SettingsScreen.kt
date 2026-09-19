@@ -182,13 +182,19 @@ fun SettingsScreen(
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
         modifier = modifier
     ) { innerPadding ->
-        LazyColumn(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+            contentAlignment = Alignment.TopCenter
         ) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .widthIn(max = 720.dp),
+                contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 12.dp, bottom = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(24.dp)
+            ) {
             // 1. Tema Aplikasi
             item(key = "theme_section", contentType = "settings_card") {
                 SectionCard(title = "Tema Tampilan", icon = Icons.Outlined.Palette) {
@@ -529,6 +535,7 @@ fun SettingsScreen(
             }
         }
     }
+}
 }
 
 @Composable

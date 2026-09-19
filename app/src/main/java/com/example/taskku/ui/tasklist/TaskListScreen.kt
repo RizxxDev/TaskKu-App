@@ -5,6 +5,10 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import com.example.taskku.ui.util.isWideDisplay
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Sort
@@ -280,51 +284,106 @@ fun TaskListScreen(
                 val onDeleteClick = remember { { id: Long -> taskToDeleteId = id } }
                 val onToggleSelection = remember(viewModel) { { id: Long -> viewModel.onToggleTaskSelection(id) } }
 
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        top = 4.dp,
-                        bottom = if (uiState.isSelectionMode) 16.dp else 80.dp
-                    ),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    items(
-                        items = uiState.tasks,
-                        key = { it.id },
-                        contentType = { "task" }
-                    ) { task ->
-                        val isSelected = uiState.selectedTaskIds.contains(task.id)
+                val isWide = isWideDisplay()
 
-                        if (uiState.isSelectionMode) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .animateItem(),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Checkbox(
-                                    checked = isSelected,
-                                    onCheckedChange = { onToggleSelection(task.id) }
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Box(modifier = Modifier.weight(1f)) {
-                                    TaskCard(
-                                        task = task,
-                                        onTaskClick = onToggleSelection,
-                                        onDeleteClick = onDeleteClick
+                if (isWide) {
+                    LazyVerticalGrid(
+                        columns = GridCells.Adaptive(minSize = 340.dp),
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 4.dp,
+                            bottom = if (uiState.isSelectionMode) 16.dp else 80.dp
+                        ),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(
+                            items = uiState.tasks,
+                            key = { it.id },
+                            contentType = { "task" }
+                        ) { task ->
+                            val isSelected = uiState.selectedTaskIds.contains(task.id)
+
+                            if (uiState.isSelectionMode) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .animateItem(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Checkbox(
+                                        checked = isSelected,
+                                        onCheckedChange = { onToggleSelection(task.id) }
                                     )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Box(modifier = Modifier.weight(1f)) {
+                                        TaskCard(
+                                            task = task,
+                                            onTaskClick = onToggleSelection,
+                                            onDeleteClick = onDeleteClick
+                                        )
+                                    }
                                 }
+                            } else {
+                                TaskCard(
+                                    task = task,
+                                    onTaskClick = onTaskClick,
+                                    onDeleteClick = onDeleteClick,
+                                    onLongClick = onToggleSelection,
+                                    modifier = Modifier.animateItem()
+                                )
                             }
-                        } else {
-                            TaskCard(
-                                task = task,
-                                onTaskClick = onTaskClick,
-                                onDeleteClick = onDeleteClick,
-                                onLongClick = onToggleSelection,
-                                modifier = Modifier.animateItem()
-                            )
+                        }
+                    }
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 4.dp,
+                            bottom = if (uiState.isSelectionMode) 16.dp else 80.dp
+                        ),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(
+                            items = uiState.tasks,
+                            key = { it.id },
+                            contentType = { "task" }
+                        ) { task ->
+                            val isSelected = uiState.selectedTaskIds.contains(task.id)
+
+                            if (uiState.isSelectionMode) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .animateItem(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Checkbox(
+                                        checked = isSelected,
+                                        onCheckedChange = { onToggleSelection(task.id) }
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Box(modifier = Modifier.weight(1f)) {
+                                        TaskCard(
+                                            task = task,
+                                            onTaskClick = onToggleSelection,
+                                            onDeleteClick = onDeleteClick
+                                        )
+                                    }
+                                }
+                            } else {
+                                TaskCard(
+                                    task = task,
+                                    onTaskClick = onTaskClick,
+                                    onDeleteClick = onDeleteClick,
+                                    onLongClick = onToggleSelection,
+                                    modifier = Modifier.animateItem()
+                                )
+                            }
                         }
                     }
                 }

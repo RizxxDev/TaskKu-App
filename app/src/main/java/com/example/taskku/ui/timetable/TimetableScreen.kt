@@ -6,8 +6,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.text.style.TextOverflow
+import com.example.taskku.ui.util.isWideDisplay
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Assignment
 import androidx.compose.material.icons.filled.Add
@@ -155,12 +160,10 @@ fun TimetableScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            // Day selection tab row (Senin to Sabtu)
-            ScrollableTabRow(
-                selectedTabIndex = SCHOOL_DAYS.indexOfFirst { it.dayOfWeek == uiState.selectedDay }.coerceAtLeast(0),
-                edgePadding = 16.dp,
-                divider = { HorizontalDivider() }
-            ) {
+            val isWide = isWideDisplay()
+
+            @Composable
+            fun DayTabs() {
                 SCHOOL_DAYS.forEach { schoolDay ->
                     val isSelected = uiState.selectedDay == schoolDay.dayOfWeek
                     val count = uiState.timetablesByDay[schoolDay.dayOfWeek]?.size ?: 0
@@ -172,7 +175,7 @@ fun TimetableScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
-                                Text(schoolDay.displayName)
+                                Text(schoolDay.displayName, maxLines = 1, overflow = TextOverflow.Ellipsis)
                                 if (count > 0) {
                                     Surface(
                                         shape = CircleShape,
@@ -191,6 +194,28 @@ fun TimetableScreen(
                             }
                         }
                     )
+                }
+            }
+
+            val selectedDayIndex = remember(uiState.selectedDay) {
+                SCHOOL_DAYS.indexOfFirst { it.dayOfWeek == uiState.selectedDay }.coerceAtLeast(0)
+            }
+
+            // Day selection tab row: TabRow on wide displays, ScrollableTabRow on compact displays
+            if (isWide) {
+                TabRow(
+                    selectedTabIndex = selectedDayIndex,
+                    divider = { HorizontalDivider() }
+                ) {
+                    DayTabs()
+                }
+            } else {
+                ScrollableTabRow(
+                    selectedTabIndex = selectedDayIndex,
+                    edgePadding = 16.dp,
+                    divider = { HorizontalDivider() }
+                ) {
+                    DayTabs()
                 }
             }
 
@@ -247,6 +272,35 @@ fun TimetableScreen(
                             Spacer(modifier = Modifier.width(6.dp))
                             Text("Tambah Jadwal $dayName")
                         }
+                    }
+                }
+            } else if (isWide) {
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(minSize = 340.dp),
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 80.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(
+                        items = uiState.currentDayTimetables,
+                        key = { it.id },
+                        contentType = { "timetable_slot" }
+                    ) { item ->
+                        TimetableSlotCard(
+                            item = item,
+                            onEdit = {
+                                editingItem = item
+                                showAddEditDialog = true
+                            },
+                            onDelete = {
+                                itemToDelete = item
+                            },
+                            onAddHomework = {
+                                val nextMeeting = calculateNextMeetingDate(item)
+                                onNavigateToTaskForm(item.subject, nextMeeting)
+                            }
+                        )
                     }
                 }
             } else {
@@ -321,7 +375,9 @@ fun TimetableSlotCard(
                         Text(
                             text = item.subject,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = MaterialTheme.colorScheme.onSurface,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                         if (isActive) {
                             Surface(
@@ -354,7 +410,9 @@ fun TimetableSlotCard(
                         Text(
                             text = item.timeRange,
                             style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium),
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.primary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }
@@ -451,7 +509,9 @@ fun TimetableSlotCard(
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Ada PR untuk mapel ini?",
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }

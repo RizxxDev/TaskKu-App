@@ -16,6 +16,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.taskku.domain.model.Task
 import com.example.taskku.domain.model.TaskType
@@ -57,9 +58,13 @@ fun TaskCard(
                 ) {
                     Text(
                         text = task.title,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onSurface
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
                     )
+                    Spacer(modifier = Modifier.width(8.dp))
                     DifficultyBadge(difficulty = task.difficulty)
                 }
 
@@ -72,15 +77,19 @@ fun TaskCard(
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        modifier = Modifier.weight(1f, fill = false)
                     ) {
                         TaskTagBadge(tag = task.tag)
                         Text(
                             text = task.subject,
                             style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.primary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
+                    Spacer(modifier = Modifier.width(8.dp))
                     StatusBadge(statusName = task.statusName, colorHex = task.statusColorHex)
                 }
 
@@ -91,9 +100,15 @@ fun TaskCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    DeadlineText(deadlineMillis = task.deadlineMillis)
-                    
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(modifier = Modifier.weight(1f, fill = false)) {
+                        DeadlineText(deadlineMillis = task.deadlineMillis)
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.weight(1f, fill = false),
+                        horizontalArrangement = Arrangement.End
+                    ) {
                         Icon(
                             imageVector = if (task.type == TaskType.KELOMPOK) Icons.Outlined.Group else Icons.Outlined.Person,
                             contentDescription = "Tipe Tugas",
@@ -104,7 +119,9 @@ fun TaskCard(
                         Text(
                             text = if (task.type == TaskType.KELOMPOK) "Kelompok (${task.memberCount})" else "Pribadi",
                             style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 }

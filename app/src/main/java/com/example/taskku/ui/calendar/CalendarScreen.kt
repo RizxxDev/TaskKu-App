@@ -7,14 +7,17 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.EventBusy
 import androidx.compose.material3.*
+import com.example.taskku.ui.util.isWideDisplay
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -64,6 +67,8 @@ fun CalendarScreen(
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal),
         modifier = modifier
     ) { innerPadding ->
+        val isWide = isWideDisplay()
+
         if (uiState.isLoading) {
             Box(
                 modifier = Modifier
@@ -73,7 +78,70 @@ fun CalendarScreen(
             ) {
                 CircularProgressIndicator()
             }
+        } else if (isWide) {
+            // Side-by-side two-pane layout for wide displays (tablets/foldables/landscape)
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                // Left pane: Monthly calendar grid & status legend
+                Column(
+                    modifier = Modifier
+                        .weight(1.1f)
+                        .fillMaxHeight()
+                        .verticalScroll(rememberScrollState())
+                        .padding(start = 24.dp, end = 4.dp, top = 8.dp, bottom = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    MonthCalendarCard(
+                        currentYearMonth = uiState.currentYearMonth,
+                        selectedDate = uiState.selectedDate,
+                        tasksByDate = uiState.tasksByDate,
+                        monthFormat = monthFormat,
+                        onPreviousMonth = viewModel::onPreviousMonth,
+                        onNextMonth = viewModel::onNextMonth,
+                        onDateSelected = viewModel::onDateSelected
+                    )
+                }
+
+                // Right pane: Selected date tasks list
+                LazyColumn(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    contentPadding = PaddingValues(start = 4.dp, end = 24.dp, top = 8.dp, bottom = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    item(key = "selected_date_header", contentType = "header") {
+                        Text(
+                            text = uiState.selectedDate.format(selectedDateFormat),
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
+                    if (uiState.selectedDateTasks.isEmpty()) {
+                        item(key = "empty_state", contentType = "empty") {
+                            CalendarEmptyCard()
+                        }
+                    } else {
+                        items(
+                            items = uiState.selectedDateTasks,
+                            key = { it.id },
+                            contentType = { "task" }
+                        ) { task ->
+                            TaskCard(
+                                task = task,
+                                onTaskClick = onTaskClick
+                            )
+                        }
+                    }
+                }
+            }
         } else {
+            // Single-column layout for compact portrait screens
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -81,92 +149,18 @@ fun CalendarScreen(
                 contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 20.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // 1. Month Navigation Header
                 item(key = "month_card", contentType = "header") {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .pointerInput(Unit) {
-                                var totalDrag = 0f
-                                detectHorizontalDragGestures(
-                                    onDragStart = { totalDrag = 0f },
-                                    onHorizontalDrag = { change, dragAmount ->
-                                        change.consume()
-                                        totalDrag += dragAmount
-                                    },
-                                    onDragEnd = {
-                                        if (totalDrag > 60f) {
-                                            viewModel.onPreviousMonth()
-                                        } else if (totalDrag < -60f) {
-                                            viewModel.onNextMonth()
-                                        }
-                                    }
-                                )
-                            },
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                IconButton(onClick = viewModel::onPreviousMonth) {
-                                    Icon(
-                                        Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                                        contentDescription = "Bulan Sebelumnya"
-                                    )
-                                }
-                                Text(
-                                    text = uiState.currentYearMonth.format(monthFormat),
-                                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                                IconButton(onClick = viewModel::onNextMonth) {
-                                    Icon(
-                                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                                        contentDescription = "Bulan Berikutnya"
-                                    )
-                                }
-                            }
-
-                            // Day of Week Row
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceAround
-                            ) {
-                                DAYS_OF_WEEK.forEach { dayName ->
-                                    Text(
-                                        text = dayName,
-                                        modifier = Modifier.weight(1f),
-                                        textAlign = TextAlign.Center,
-                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
-                                        color = MaterialTheme.colorScheme.primary
-                                    )
-                                }
-                            }
-
-                            // Calendar Days Grid
-                            CalendarGrid(
-                                currentYearMonth = uiState.currentYearMonth,
-                                selectedDate = uiState.selectedDate,
-                                tasksByDate = uiState.tasksByDate,
-                                onDateSelected = viewModel::onDateSelected
-                            )
-
-                            // Status legend
-                            StatusLegend()
-                        }
-                    }
+                    MonthCalendarCard(
+                        currentYearMonth = uiState.currentYearMonth,
+                        selectedDate = uiState.selectedDate,
+                        tasksByDate = uiState.tasksByDate,
+                        monthFormat = monthFormat,
+                        onPreviousMonth = viewModel::onPreviousMonth,
+                        onNextMonth = viewModel::onNextMonth,
+                        onDateSelected = viewModel::onDateSelected
+                    )
                 }
 
-                // 2. Selected Date Header
                 item(key = "selected_date_header", contentType = "header") {
                     Text(
                         text = uiState.selectedDate.format(selectedDateFormat),
@@ -175,27 +169,9 @@ fun CalendarScreen(
                     )
                 }
 
-                // 3. Task list for selected date
                 if (uiState.selectedDateTasks.isEmpty()) {
                     item(key = "empty_state", contentType = "empty") {
-                        Card(
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(32.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                EmptyState(
-                                    icon = Icons.Outlined.EventBusy,
-                                    title = "Tidak Ada Tugas",
-                                    subtitle = "Tidak ada batas waktu tugas pada tanggal ini."
-                                )
-                            }
-                        }
+                        CalendarEmptyCard()
                     }
                 } else {
                     items(
@@ -210,6 +186,122 @@ fun CalendarScreen(
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun MonthCalendarCard(
+    currentYearMonth: YearMonth,
+    selectedDate: LocalDate,
+    tasksByDate: Map<String, List<Task>>,
+    monthFormat: DateTimeFormatter,
+    onPreviousMonth: () -> Unit,
+    onNextMonth: () -> Unit,
+    onDateSelected: (LocalDate) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .pointerInput(Unit) {
+                var totalDrag = 0f
+                detectHorizontalDragGestures(
+                    onDragStart = { totalDrag = 0f },
+                    onHorizontalDrag = { change, dragAmount ->
+                        change.consume()
+                        totalDrag += dragAmount
+                    },
+                    onDragEnd = {
+                        if (totalDrag > 60f) {
+                            onPreviousMonth()
+                        } else if (totalDrag < -60f) {
+                            onNextMonth()
+                        }
+                    }
+                )
+            },
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = onPreviousMonth) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                        contentDescription = "Bulan Sebelumnya"
+                    )
+                }
+                Text(
+                    text = currentYearMonth.format(monthFormat),
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                IconButton(onClick = onNextMonth) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                        contentDescription = "Bulan Berikutnya"
+                    )
+                }
+            }
+
+            // Day of Week Row
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                DAYS_OF_WEEK.forEach { dayName ->
+                    Text(
+                        text = dayName,
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            // Calendar Days Grid
+            CalendarGrid(
+                currentYearMonth = currentYearMonth,
+                selectedDate = selectedDate,
+                tasksByDate = tasksByDate,
+                onDateSelected = onDateSelected
+            )
+
+            // Status legend
+            StatusLegend()
+        }
+    }
+}
+
+@Composable
+private fun CalendarEmptyCard() {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(32.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            EmptyState(
+                icon = Icons.Outlined.EventBusy,
+                title = "Tidak Ada Tugas",
+                subtitle = "Tidak ada batas waktu tugas pada tanggal ini."
+            )
         }
     }
 }
@@ -375,14 +467,15 @@ private fun DayCell(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun StatusLegend() {
-    Row(
+    FlowRow(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
+        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
+        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         LegendItem(color = CalendarOverdue, label = "Terlambat")
         LegendItem(color = CalendarUrgent, label = "Mendesak")

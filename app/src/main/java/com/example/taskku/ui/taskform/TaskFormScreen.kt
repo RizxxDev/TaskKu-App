@@ -182,14 +182,20 @@ fun TaskFormScreen(
                 CircularProgressIndicator()
             }
         } else {
-            Column(
+            Box(
                 modifier = Modifier
-                    .padding(innerPadding)
                     .fillMaxSize()
-                    .verticalScroll(scrollState)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                    .padding(innerPadding),
+                contentAlignment = Alignment.TopCenter
             ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .widthIn(max = 720.dp)
+                        .verticalScroll(scrollState)
+                        .padding(horizontal = 20.dp, vertical = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
                 // Error banner if any
                 formState.errors["general"]?.let { errorMsg ->
                     Card(
@@ -858,4 +864,5 @@ fun TaskFormScreen(
             }
         }
     }
+}
 }
