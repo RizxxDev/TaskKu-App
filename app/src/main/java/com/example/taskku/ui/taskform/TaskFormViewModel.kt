@@ -288,7 +288,7 @@ class TaskFormViewModel(
         context: Context? = null,
         onErrorMessage: ((String) -> Unit)? = null
     ) {
-        val targetContext = context ?: appContext ?: return
+        val targetContext = context?.applicationContext ?: appContext?.applicationContext ?: context ?: appContext ?: return
         viewModelScope.launch(Dispatchers.IO) {
             val newAttachments = mutableListOf<Attachment>()
             for (uri in uris) {
@@ -312,18 +312,25 @@ class TaskFormViewModel(
     fun removeAttachment(index: Int) {
         if (index in _formState.value.attachments.indices) {
             val removed = _formState.value.attachments[index]
-            appContext?.let { FileStorageHelper.deleteTempFile(it, removed) }
             val updated = _formState.value.attachments.toMutableList().apply { removeAt(index) }
             _formState.value = _formState.value.copy(attachments = updated)
+            appContext?.let { ctx ->
+                viewModelScope.launch(Dispatchers.IO) {
+                    FileStorageHelper.deleteTempFile(ctx, removed)
+                }
+            }
         }
     }
 
     override fun onCleared() {
         super.onCleared()
         if (!_formState.value.isSaving) {
+            val attachmentsToDelete = _formState.value.attachments
             appContext?.let { ctx ->
-                _formState.value.attachments.forEach { att ->
-                    FileStorageHelper.deleteTempFile(ctx, att)
+                kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + Dispatchers.IO).launch {
+                    attachmentsToDelete.forEach { att ->
+                        FileStorageHelper.deleteTempFile(ctx, att)
+                    }
                 }
             }
         }

@@ -31,17 +31,16 @@ class CalendarViewModel(
     // Backward-compatible synchronous Calendar StateFlow bridges for tests/consumers
     private val _currentMonth = MutableStateFlow(Calendar.getInstance().apply {
         val ym = YearMonth.now()
-        set(Calendar.YEAR, ym.year)
-        set(Calendar.MONTH, ym.monthValue - 1)
-        set(Calendar.DAY_OF_MONTH, 1)
-        set(Calendar.HOUR_OF_DAY, 0)
-        set(Calendar.MINUTE, 0)
-        set(Calendar.SECOND, 0)
-        set(Calendar.MILLISECOND, 0)
+        val startOfMonthMillis = ym.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        timeInMillis = startOfMonthMillis
     })
     val currentMonth: StateFlow<Calendar> = _currentMonth.asStateFlow()
 
-    private val _selectedDate = MutableStateFlow(Calendar.getInstance())
+    private val _selectedDate = MutableStateFlow(Calendar.getInstance().apply {
+        val today = LocalDate.now()
+        val todayMillis = today.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        timeInMillis = todayMillis
+    })
     val selectedDate: StateFlow<Calendar> = _selectedDate.asStateFlow()
 
     @Immutable
@@ -125,37 +124,26 @@ class CalendarViewModel(
     fun onNextMonth() {
         val next = _currentYearMonth.value.plusMonths(1)
         _currentYearMonth.value = next
+        val startOfMonthMillis = next.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
         _currentMonth.value = Calendar.getInstance().apply {
-            set(Calendar.YEAR, next.year)
-            set(Calendar.MONTH, next.monthValue - 1)
-            set(Calendar.DAY_OF_MONTH, 1)
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
+            timeInMillis = startOfMonthMillis
         }
     }
 
     fun onPreviousMonth() {
         val prev = _currentYearMonth.value.minusMonths(1)
         _currentYearMonth.value = prev
+        val startOfMonthMillis = prev.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
         _currentMonth.value = Calendar.getInstance().apply {
-            set(Calendar.YEAR, prev.year)
-            set(Calendar.MONTH, prev.monthValue - 1)
-            set(Calendar.DAY_OF_MONTH, 1)
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
+            timeInMillis = startOfMonthMillis
         }
     }
 
     fun onDateSelected(date: LocalDate) {
         _selectedLocalDate.value = date
+        val selectedMillis = date.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
         _selectedDate.value = Calendar.getInstance().apply {
-            set(Calendar.YEAR, date.year)
-            set(Calendar.MONTH, date.monthValue - 1)
-            set(Calendar.DAY_OF_MONTH, date.dayOfMonth)
+            timeInMillis = selectedMillis
         }
     }
 

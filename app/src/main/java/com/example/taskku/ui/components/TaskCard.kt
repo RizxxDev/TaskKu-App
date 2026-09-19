@@ -34,6 +34,7 @@ fun TaskCard(
             modifier = cardModifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
+                .clip(RoundedCornerShape(16.dp))
                 .combinedClickable(
                     onClick = { onTaskClick(task.id) },
                     onLongClick = onLongClick?.let { { it(task.id) } }

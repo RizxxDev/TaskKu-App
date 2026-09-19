@@ -43,7 +43,7 @@ fun DashboardScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val greeting = remember {
-        val hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
+        val hour = java.time.LocalTime.now().hour
         when (hour) {
             in 4..10 -> "Selamat Pagi! 🌅"
             in 11..14 -> "Selamat Siang! ☀️"
@@ -463,6 +463,7 @@ private fun UrgentTaskCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
             .clickable { onTaskClick(task.id) },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(

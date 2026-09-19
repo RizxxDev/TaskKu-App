@@ -52,8 +52,8 @@ fun CalendarScreen(
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val monthFormat = remember { DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id", "ID")) }
-    val selectedDateFormat = remember { DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale("id", "ID")) }
+    val monthFormat = remember { DateTimeFormatter.ofPattern("MMMM yyyy", Locale.forLanguageTag("id-ID")) }
+    val selectedDateFormat = remember { DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy", Locale.forLanguageTag("id-ID")) }
 
     Scaffold(
         topBar = {
@@ -220,7 +220,7 @@ private data class CalendarCellData(
     val isToday: Boolean,
     val isSelected: Boolean,
     val dotColors: List<Color>,
-    val dateMillis: Long
+    val date: LocalDate
 )
 
 @Immutable
@@ -236,7 +236,7 @@ private fun CalendarGrid(
     currentYearMonth: YearMonth,
     selectedDate: LocalDate,
     tasksByDate: Map<String, List<Task>>,
-    onDateSelected: (Long) -> Unit
+    onDateSelected: (LocalDate) -> Unit
 ) {
     val gridInfo = remember(currentYearMonth, selectedDate, tasksByDate) {
         val firstDayOfMonth = currentYearMonth.atDay(1)
@@ -274,14 +274,12 @@ private fun CalendarGrid(
                 }
             }
 
-            val dayMillis = dayDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
-
             cellMap[day] = CalendarCellData(
                 dayNumber = day,
                 isToday = day == todayDay,
                 isSelected = day == selectedDay,
                 dotColors = dotColors,
-                dateMillis = dayMillis
+                date = dayDate
             )
         }
 
@@ -308,7 +306,7 @@ private fun CalendarGrid(
                             isToday = cellData.isToday,
                             isSelected = cellData.isSelected,
                             dotColors = cellData.dotColors,
-                            onClick = { onDateSelected(cellData.dateMillis) },
+                            onClick = { onDateSelected(cellData.date) },
                             modifier = Modifier.weight(1f)
                         )
                     } else {

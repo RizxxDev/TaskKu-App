@@ -111,4 +111,22 @@ class CalendarViewModelTest {
         val revertedMonth = viewModel.currentMonth.value.get(Calendar.MONTH)
         assertEquals(initialMonth, revertedMonth)
     }
+
+    @Test
+    fun calendar_selectsDateDirectlyWithLocalDate() = runTest(testDispatcher) {
+        viewModel = CalendarViewModel(taskRepository)
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) { viewModel.uiState.collect() }
+        testScheduler.advanceUntilIdle()
+
+        val targetDate = java.time.LocalDate.of(2026, 5, 20)
+        viewModel.onDateSelected(targetDate)
+        testScheduler.advanceUntilIdle()
+
+        val updatedState = viewModel.uiState.value
+        assertEquals(targetDate, updatedState.selectedDate)
+        assertEquals(targetDate, viewModel.selectedLocalDate.value)
+        assertEquals(targetDate.dayOfMonth, viewModel.selectedDate.value.get(Calendar.DAY_OF_MONTH))
+        assertEquals(targetDate.monthValue - 1, viewModel.selectedDate.value.get(Calendar.MONTH))
+        assertEquals(targetDate.year, viewModel.selectedDate.value.get(Calendar.YEAR))
+    }
 }
