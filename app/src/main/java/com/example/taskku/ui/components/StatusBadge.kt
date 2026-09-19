@@ -49,8 +49,7 @@ fun StatusBadge(
 
     Box(
         modifier = modifier
-            .clip(CircleShape)
-            .background(containerColor)
+            .background(containerColor, CircleShape)
             .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Text(

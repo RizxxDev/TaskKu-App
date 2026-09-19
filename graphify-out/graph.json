@@ -1213,104 +1213,13 @@
       "source_location": "L23"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_navigationkeys_main",
-      "label": "Main",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "main",
-      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
-      "source_location": "L7"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_navigationkeys_taskdetail",
-      "label": "TaskDetail",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "taskdetail",
-      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
-      "source_location": "L11"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_navigationkeys_taskform",
-      "label": "TaskForm",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "taskform",
-      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
-      "source_location": "L15"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodel",
-      "label": "DashboardViewModel",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "dashboardviewmodel",
-      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
-      "source_location": "L22"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodelfactory",
-      "label": "DashboardViewModelFactory",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "dashboardviewmodelfactory",
-      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
-      "source_location": "L121"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_uistate",
-      "label": "UiState",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "uistate",
-      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
-      "source_location": "L28"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab",
-      "label": "NavigationTab",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "navigationtab",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L72"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_ui_taskdetail_taskdetailviewmodel_taskdetailviewmodel",
       "label": "TaskDetailViewModel",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "taskdetailviewmodel",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
@@ -1323,7 +1232,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "taskdetailviewmodelfactory",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
@@ -1336,7 +1245,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "uistate",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
@@ -1349,63 +1258,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "taskformviewmodelfactory",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskform/TaskFormViewModel.kt",
       "source_location": "L456"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel",
-      "label": "TimetableViewModel",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "timetableviewmodel",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L48"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodelfactory",
-      "label": "TimetableViewModelFactory",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "timetableviewmodelfactory",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L131"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_uistate",
-      "label": "UiState",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "uistate",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L54"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_util_dispatcherprovider_dispatcherprovider",
-      "label": "DispatcherProvider",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "dispatcherprovider",
-      "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
-      "source_location": "L7"
     },
     {
       "id": "app_src_main_java_com_example_taskku_export_exportimportmanager_exportimportmanager",
@@ -1445,6 +1302,136 @@
       "norm_label": "taskkuwidgethelper",
       "source_file": "app/src/main/java/com/example/taskku/widget/TaskKuWidgetHelper.kt",
       "source_location": "L9"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_navigationkeys_main",
+      "label": "Main",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "main",
+      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
+      "source_location": "L7"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_navigationkeys_taskdetail",
+      "label": "TaskDetail",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "taskdetail",
+      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
+      "source_location": "L11"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_navigationkeys_taskform",
+      "label": "TaskForm",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "taskform",
+      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
+      "source_location": "L15"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodelfactory",
+      "label": "DashboardViewModelFactory",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "dashboardviewmodelfactory",
+      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
+      "source_location": "L121"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodelfactory",
+      "label": "TimetableViewModelFactory",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "timetableviewmodelfactory",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L131"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel",
+      "label": "TimetableViewModel",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "timetableviewmodel",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L48"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_uistate",
+      "label": "UiState",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "uistate",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L54"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_util_dispatcherprovider_dispatcherprovider",
+      "label": "DispatcherProvider",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "dispatcherprovider",
+      "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
+      "source_location": "L7"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodel",
+      "label": "DashboardViewModel",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "DashboardViewModel.kt",
+      "file_type": "code",
+      "norm_label": "dashboardviewmodel",
+      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
+      "source_location": "L22"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_uistate",
+      "label": "UiState",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "DashboardViewModel.kt",
+      "file_type": "code",
+      "norm_label": "uistate",
+      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
+      "source_location": "L28"
     },
     {
       "id": "app_src_main_java_com_example_taskku_notification_bootreceiver_bootreceiver",
@@ -1510,6 +1497,19 @@
       "norm_label": "taskkuwidgetreceiver",
       "source_file": "app/src/main/java/com/example/taskku/widget/TaskKuWidgetReceiver.kt",
       "source_location": "L6"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab",
+      "label": "NavigationTab",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "NavigationTab",
+      "file_type": "code",
+      "norm_label": "navigationtab",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L72"
     },
     {
       "id": "app_src_test_java_com_example_taskku_ui_util_adaptivelayouttest_adaptivelayouttest",
@@ -3728,7 +3728,7 @@
       "file_type": "code",
       "norm_label": "legenditem()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L488"
+      "source_location": "L487"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_monthcalendarcard",
@@ -5572,47 +5572,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "mainnavigation()",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
       "source_location": "L19"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodelfactory_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
-      "source_location": "L125"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_animatednavicon",
-      "label": "AnimatedNavIcon()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "animatednavicon()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L325"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
-      "label": "MainScreen()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "mainscreen()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L84"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_taskdetail_taskdetailviewmodel_taskdetailviewmodel_onchangestatus",
@@ -5620,7 +5584,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": ".onchangestatus()",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
@@ -5632,7 +5596,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": ".ondeletetask()",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
@@ -5644,7 +5608,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": ".ontogglesubtask()",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
@@ -5656,59 +5620,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
       "source_location": "L97"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_deletetimetable",
-      "label": ".deleteTimetable()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": ".deletetimetable()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L124"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_onselectday",
-      "label": ".onSelectDay()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": ".onselectday()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L93"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_savetimetable",
-      "label": ".saveTimetable()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": ".savetimetable()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L97"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodelfactory_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L135"
     },
     {
       "id": "app_src_main_java_com_example_taskku_export_exportimportmanager_exportimportmanager_exportdata",
@@ -5793,6 +5709,90 @@
       "norm_label": ".updatewidget()",
       "source_file": "app/src/main/java/com/example/taskku/widget/TaskKuWidgetHelper.kt",
       "source_location": "L10"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_animatednavicon",
+      "label": "AnimatedNavIcon()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "animatednavicon()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L329"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
+      "label": "MainScreen()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "mainscreen()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L84"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_deletetimetable",
+      "label": ".deleteTimetable()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": ".deletetimetable()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L124"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_onselectday",
+      "label": ".onSelectDay()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": ".onselectday()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L93"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodel_savetimetable",
+      "label": ".saveTimetable()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": ".savetimetable()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L97"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_timetableviewmodelfactory_create",
+      "label": ".create()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": ".create()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L135"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_dashboardviewmodelfactory_create",
+      "label": ".create()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "DashboardViewModel.kt",
+      "file_type": "code",
+      "norm_label": ".create()",
+      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
+      "source_location": "L125"
     },
     {
       "id": "app_src_main_java_com_example_taskku_notification_bootreceiver_bootreceiver_onreceive",
@@ -6404,7 +6404,7 @@
       "file_type": "code",
       "norm_label": "taskcardcontent()",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L87"
+      "source_location": "L85"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_components_tasktagbadge_gettagicon",
@@ -6452,7 +6452,7 @@
       "file_type": "code",
       "norm_label": "nextclasscard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L252"
+      "source_location": "L256"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_quickstatssection",
@@ -6464,7 +6464,7 @@
       "file_type": "code",
       "norm_label": "quickstatssection()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L433"
+      "source_location": "L437"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_statcard",
@@ -6476,7 +6476,7 @@
       "file_type": "code",
       "norm_label": "statcard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L538"
+      "source_location": "L542"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_urgentemptycard",
@@ -6488,7 +6488,7 @@
       "file_type": "code",
       "norm_label": "urgentemptycard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L510"
+      "source_location": "L514"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_urgenttaskcard",
@@ -6500,7 +6500,7 @@
       "file_type": "code",
       "norm_label": "urgenttaskcard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L589"
+      "source_location": "L593"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_urgenttasksheader",
@@ -6512,7 +6512,7 @@
       "file_type": "code",
       "norm_label": "urgenttasksheader()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L488"
+      "source_location": "L492"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_weeklyprogresscard",
@@ -6524,7 +6524,7 @@
       "file_type": "code",
       "norm_label": "weeklyprogresscard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L377"
+      "source_location": "L381"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_settings_settingsscreen_addstatusdialog",
@@ -9012,172 +9012,18 @@
       "label": "Navigation.kt",
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "navigation.kt",
       "source_file": "app/src/main/java/com/example/taskku/Navigation.kt",
       "source_location": "L1"
     },
     {
-      "id": "app_src_main_java_com_example_taskku_navigationkeys",
-      "label": "NavigationKeys.kt",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "navigationkeys.kt",
-      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel",
-      "label": "DashboardViewModel.kt",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "dashboardviewmodel.kt",
-      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_factory",
-      "label": "Factory",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "factory",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_stateflow",
-      "label": "StateFlow",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "stateflow",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_t",
-      "label": "T",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "t",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_viewmodel",
-      "label": "ViewModel",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "viewmodel",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen",
-      "label": "MainScreen.kt",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "mainscreen.kt",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_kt_imagevector",
-      "label": "ImageVector",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "imagevector",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_kt_modifier",
-      "label": "Modifier",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "modifier",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_calendar",
-      "label": "CALENDAR",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "calendar",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L80"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_dashboard",
-      "label": "DASHBOARD",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "dashboard",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L77"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_settings",
-      "label": "SETTINGS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "settings",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L81"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_tasks",
-      "label": "TASKS",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "tasks",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L78"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_timetable",
-      "label": "TIMETABLE",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "timetable",
-      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L79"
-    },
-    {
       "id": "app_src_main_java_com_example_taskku_ui_taskdetail_taskdetailviewmodel",
       "label": "TaskDetailViewModel.kt",
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "taskdetailviewmodel.kt",
       "source_file": "app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailViewModel.kt",
@@ -9188,7 +9034,7 @@
       "label": "Factory",
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "factory",
       "source_file": "",
@@ -9199,7 +9045,7 @@
       "label": "StateFlow",
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "stateflow",
       "source_file": "",
@@ -9210,7 +9056,7 @@
       "label": "T",
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "t",
       "source_file": "",
@@ -9221,7 +9067,7 @@
       "label": "ViewModel",
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "viewmodel",
       "source_file": "",
@@ -9232,97 +9078,9 @@
       "label": "Factory",
       "_origin": "ast",
       "community": 44,
-      "community_name": "MainScreen.kt",
+      "community_name": "TaskDetailViewModel",
       "file_type": "code",
       "norm_label": "factory",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel",
-      "label": "TimetableViewModel.kt",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "timetableviewmodel.kt",
-      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_factory",
-      "label": "Factory",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "factory",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_stateflow",
-      "label": "StateFlow",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "stateflow",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_t",
-      "label": "T",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "t",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_viewmodel",
-      "label": "ViewModel",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "viewmodel",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "app_src_main_java_com_example_taskku_util_dispatcherprovider",
-      "label": "DispatcherProvider.kt",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "dispatcherprovider.kt",
-      "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
-      "source_location": "L1"
-    },
-    {
-      "id": "coroutinedispatcher",
-      "label": "CoroutineDispatcher",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "coroutinedispatcher",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "navkey",
-      "label": "NavKey",
-      "_origin": "ast",
-      "community": 44,
-      "community_name": "MainScreen.kt",
-      "file_type": "code",
-      "norm_label": "navkey",
       "source_file": "",
       "source_location": ""
     },
@@ -9389,6 +9147,193 @@
       "community_name": "TaskKuWidgetHelper",
       "file_type": "code",
       "norm_label": "context",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_navigationkeys",
+      "label": "NavigationKeys.kt",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "navigationkeys.kt",
+      "source_file": "app/src/main/java/com/example/taskku/NavigationKeys.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_factory",
+      "label": "Factory",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "factory",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen",
+      "label": "MainScreen.kt",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "mainscreen.kt",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_kt_imagevector",
+      "label": "ImageVector",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "imagevector",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_kt_modifier",
+      "label": "Modifier",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "modifier",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_factory",
+      "label": "Factory",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "factory",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "navkey",
+      "label": "NavKey",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "MainScreen.kt",
+      "file_type": "code",
+      "norm_label": "navkey",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel",
+      "label": "TimetableViewModel.kt",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "timetableviewmodel.kt",
+      "source_file": "app/src/main/java/com/example/taskku/ui/timetable/TimetableViewModel.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_stateflow",
+      "label": "StateFlow",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "stateflow",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_t",
+      "label": "T",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "t",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_timetable_timetableviewmodel_kt_viewmodel",
+      "label": "ViewModel",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "viewmodel",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_util_dispatcherprovider",
+      "label": "DispatcherProvider.kt",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "dispatcherprovider.kt",
+      "source_file": "app/src/main/java/com/example/taskku/util/DispatcherProvider.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "coroutinedispatcher",
+      "label": "CoroutineDispatcher",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "TimetableViewModel.kt",
+      "file_type": "code",
+      "norm_label": "coroutinedispatcher",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel",
+      "label": "DashboardViewModel.kt",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "DashboardViewModel.kt",
+      "file_type": "code",
+      "norm_label": "dashboardviewmodel.kt",
+      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardViewModel.kt",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_stateflow",
+      "label": "StateFlow",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "DashboardViewModel.kt",
+      "file_type": "code",
+      "norm_label": "stateflow",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_t",
+      "label": "T",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "DashboardViewModel.kt",
+      "file_type": "code",
+      "norm_label": "t",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardviewmodel_kt_viewmodel",
+      "label": "ViewModel",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "DashboardViewModel.kt",
+      "file_type": "code",
+      "norm_label": "viewmodel",
       "source_file": "",
       "source_location": ""
     },
@@ -9556,6 +9501,61 @@
       "norm_label": "glanceid",
       "source_file": "",
       "source_location": ""
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_calendar",
+      "label": "CALENDAR",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "NavigationTab",
+      "file_type": "code",
+      "norm_label": "calendar",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L80"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_dashboard",
+      "label": "DASHBOARD",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "NavigationTab",
+      "file_type": "code",
+      "norm_label": "dashboard",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L77"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_settings",
+      "label": "SETTINGS",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "NavigationTab",
+      "file_type": "code",
+      "norm_label": "settings",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L81"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_tasks",
+      "label": "TASKS",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "NavigationTab",
+      "file_type": "code",
+      "norm_label": "tasks",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L78"
+    },
+    {
+      "id": "app_src_main_java_com_example_taskku_ui_main_mainscreen_navigationtab_timetable",
+      "label": "TIMETABLE",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "NavigationTab",
+      "file_type": "code",
+      "norm_label": "timetable",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L79"
     },
     {
       "id": "app_src_test_java_com_example_taskku_ui_util_adaptivelayouttest",
@@ -11556,7 +11556,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L70",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -11568,7 +11568,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskTagBadge.kt",
-      "source_location": "L85",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -11664,7 +11664,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L346",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -11676,7 +11676,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L450",
+      "source_location": "L454",
       "weight": 1.0
     },
     {
@@ -11688,7 +11688,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L623",
+      "source_location": "L627",
       "weight": 1.0
     },
     {
@@ -11700,7 +11700,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L640",
+      "source_location": "L644",
       "weight": 1.0
     },
     {
@@ -11765,6 +11765,30 @@
     },
     {
       "source": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
+      "target": "app_src_main_java_com_example_taskku_navigationkeys_taskdetail",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L138",
+      "weight": 1.0
+    },
+    {
+      "source": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
+      "target": "app_src_main_java_com_example_taskku_navigationkeys_taskform",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "app_src_main_java_com_example_taskku_ui_main_mainscreen_mainscreen",
       "target": "app_src_main_java_com_example_taskku_ui_util_adaptivelayout_iscompactheight",
       "relation": "calls",
       "_origin": "ast",
@@ -11772,7 +11796,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L188",
+      "source_location": "L192",
       "weight": 1.0
     },
     {
@@ -11784,7 +11808,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L244",
+      "source_location": "L248",
       "weight": 1.0
     },
     {
@@ -12156,7 +12180,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/tasklist/TaskListScreen.kt",
-      "source_location": "L333",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -20616,7 +20640,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L488",
+      "source_location": "L487",
       "weight": 1.0
     },
     {
@@ -20820,7 +20844,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L87",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -20832,7 +20856,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L87",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -20904,7 +20928,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L252",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -20916,7 +20940,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L538",
+      "source_location": "L542",
       "weight": 1.0
     },
     {
@@ -20928,7 +20952,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L538",
+      "source_location": "L542",
       "weight": 1.0
     },
     {
@@ -20940,7 +20964,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L538",
+      "source_location": "L542",
       "weight": 1.0
     },
     {
@@ -20952,7 +20976,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L589",
+      "source_location": "L593",
       "weight": 1.0
     },
     {
@@ -20964,7 +20988,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L589",
+      "source_location": "L593",
       "weight": 1.0
     },
     {
@@ -20976,7 +21000,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L325",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -20988,7 +21012,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L362",
+      "source_location": "L366",
       "weight": 1.0
     },
     {
@@ -24214,7 +24238,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L488",
+      "source_location": "L487",
       "weight": 1.0
     },
     {
@@ -24379,7 +24403,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L87",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -24412,7 +24436,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L252",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -24423,7 +24447,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L377",
+      "source_location": "L381",
       "weight": 1.0
     },
     {
@@ -24434,7 +24458,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L433",
+      "source_location": "L437",
       "weight": 1.0
     },
     {
@@ -24456,7 +24480,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L488",
+      "source_location": "L492",
       "weight": 1.0
     },
     {
@@ -24467,7 +24491,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L510",
+      "source_location": "L514",
       "weight": 1.0
     },
     {
@@ -24478,7 +24502,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L538",
+      "source_location": "L542",
       "weight": 1.0
     },
     {
@@ -24489,7 +24513,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L589",
+      "source_location": "L593",
       "weight": 1.0
     },
     {
@@ -24522,7 +24546,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L325",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -24533,7 +24557,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/main/MainScreen.kt",
-      "source_location": "L362",
+      "source_location": "L366",
       "weight": 1.0
     },
     {
@@ -30521,7 +30545,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L134",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -30533,7 +30557,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L149",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -30545,7 +30569,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L159",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -30557,7 +30581,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/components/TaskCard.kt",
-      "source_location": "L170",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -30910,5 +30934,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b2b996ce3f78e77bc9181a17c582ff2ba220f086"
+  "built_at_commit": "05c161b8f7d10f23de0af3da1b1815fd80a99344"
 }

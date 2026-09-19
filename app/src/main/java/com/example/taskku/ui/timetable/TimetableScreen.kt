@@ -399,16 +399,16 @@ fun TimetableSlotCard(
                             overflow = TextOverflow.Ellipsis
                         )
                         if (isActive) {
-                            Surface(
-                                shape = OngoingBadgeShape,
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.padding(start = 4.dp)
+                            Box(
+                                modifier = Modifier
+                                    .padding(start = 4.dp)
+                                    .background(MaterialTheme.colorScheme.primary, OngoingBadgeShape)
+                                    .padding(horizontal = 6.dp, vertical = 2.dp)
                             ) {
                                 Text(
                                     text = "Sedang Berlangsung",
                                     color = MaterialTheme.colorScheme.onPrimary,
-                                    style = MaterialTheme.typography.labelSmall,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                    style = MaterialTheme.typography.labelSmall
                                 )
                             }
                         }

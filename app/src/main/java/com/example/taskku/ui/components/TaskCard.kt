@@ -51,9 +51,7 @@ fun TaskCard(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(vertical = 8.dp)
-                        .clip(TaskCardShape)
-                        .background(MaterialTheme.colorScheme.error)
+                        .background(MaterialTheme.colorScheme.error, TaskCardShape)
                         .padding(horizontal = 20.dp),
                     contentAlignment = Alignment.CenterEnd
                 ) {
@@ -100,8 +98,6 @@ private fun TaskCardContent(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .clip(TaskCardShape)
             .combinedClickable(
                 onClick = clickAction,
                 onLongClick = longClickAction

@@ -135,6 +135,14 @@ fun MainScreen(
 
     val isWide = isWideDisplay()
 
+    val onTaskDetailClick = remember(onNavigate) { { taskId: Long -> onNavigate(TaskDetail(taskId)) } }
+    val onAddTaskClick = remember(onNavigate) { { onNavigate(TaskForm(null)) } }
+    val onAddHomeworkForSubject = remember(onNavigate) {
+        { subject: String, deadlineDate: Long ->
+            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
+        }
+    }
+
     @Composable
     fun TabContent() {
         HorizontalPager(
@@ -147,32 +155,28 @@ fun MainScreen(
             when (NavigationTab.entries[tabIndex]) {
                 NavigationTab.DASHBOARD -> {
                     DashboardScreen(
-                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                        onAddTaskClick = { onNavigate(TaskForm(null)) },
-                        onAddHomeworkForSubject = { subject, deadlineDate ->
-                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                        },
+                        onTaskClick = onTaskDetailClick,
+                        onAddTaskClick = onAddTaskClick,
+                        onAddHomeworkForSubject = onAddHomeworkForSubject,
                         viewModel = dashboardViewModel
                     )
                 }
                 NavigationTab.TASKS -> {
                     TaskListScreen(
-                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
-                        onAddTaskClick = { onNavigate(TaskForm(null)) },
+                        onTaskClick = onTaskDetailClick,
+                        onAddTaskClick = onAddTaskClick,
                         viewModel = taskListViewModel
                     )
                 }
                 NavigationTab.TIMETABLE -> {
                     TimetableScreen(
-                        onNavigateToTaskForm = { subject, deadlineDate ->
-                            onNavigate(TaskForm(taskId = null, initialSubject = subject, initialDeadlineDate = deadlineDate, initialTag = "PR"))
-                        },
+                        onNavigateToTaskForm = onAddHomeworkForSubject,
                         viewModel = timetableViewModel
                     )
                 }
                 NavigationTab.CALENDAR -> {
                     CalendarScreen(
-                        onTaskClick = { taskId -> onNavigate(TaskDetail(taskId)) },
+                        onTaskClick = onTaskDetailClick,
                         viewModel = calendarViewModel
                     )
                 }

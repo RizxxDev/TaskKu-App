@@ -1,7 +1,7 @@
 # Graph Report - TaskKu  (2026-09-19)
 
 ## Corpus Check
-- 105 files · ~40,246 words
+- 105 files · ~40,196 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 24 file(s) not represented in the graph (top: .xml 15, (none) 3, .properties 2)
 

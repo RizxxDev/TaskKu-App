@@ -179,7 +179,11 @@ fun DashboardScreen(
                             UrgentTaskCard(
                                 task = task,
                                 onTaskClick = onTaskClick,
-                                modifier = Modifier.animateItem()
+                                modifier = Modifier.animateItem(
+                                    fadeInSpec = UrgentTaskFadeSpec,
+                                    fadeOutSpec = UrgentTaskFadeSpec,
+                                    placementSpec = UrgentTaskPlacementSpec
+                                )
                             )
                         }
                     }

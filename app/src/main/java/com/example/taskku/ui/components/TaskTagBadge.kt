@@ -72,8 +72,7 @@ fun TaskTagBadge(
 
     Box(
         modifier = modifier
-            .clip(TagBadgeShape)
-            .background(tag.containerColor)
+            .background(tag.containerColor, TagBadgeShape)
             .padding(horizontal = 6.dp, vertical = 2.dp)
     ) {
         Row(

@@ -37,8 +37,7 @@ fun SubjectChip(
                         text = count.toString(),
                         style = MaterialTheme.typography.labelSmall,
                         modifier = Modifier
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primaryContainer)
+                            .background(MaterialTheme.colorScheme.primaryContainer, CircleShape)
                             .padding(horizontal = 4.dp, vertical = 2.dp)
                     )
                 }

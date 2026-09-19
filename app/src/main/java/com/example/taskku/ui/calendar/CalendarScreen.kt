@@ -460,8 +460,7 @@ private fun DayCell(
                 Box(
                     modifier = Modifier
                         .size(5.dp)
-                        .clip(CircleShape)
-                        .background(color)
+                        .background(color, CircleShape)
                 )
             }
         }

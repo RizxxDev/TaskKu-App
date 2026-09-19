@@ -36,7 +36,7 @@ class DashboardViewModel(
         val thisWeekDoneCount: Int = 0,
         val thisWeekProgress: Float = 0f,
         val nextClassToday: TimetableItem? = null,
-        val isLoading: Boolean = true
+        val isLoading: Boolean = false
     )
 
     private val nextClassFlow = timetableRepository?.getUpcomingNextClass() ?: flowOf(null)
@@ -114,7 +114,7 @@ class DashboardViewModel(
     }.flowOn(defaultDispatcher).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = UiState(isLoading = true)
+        initialValue = UiState(isLoading = false)
     )
 }
 

@@ -1,17 +1,17 @@
 # Graph Report - TaskKu  (2026-09-19)
 
 ## Corpus Check
-- 105 files · ~40,196 words
+- 105 files · ~40,278 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 24 file(s) not represented in the graph (top: .xml 15, (none) 3, .properties 2)
 
 ## Summary
-- 856 nodes · 1699 edges · 48 communities (30 shown, 18 thin omitted)
+- 856 nodes · 1701 edges · 52 communities (34 shown, 18 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 58 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b2b996ce`
+- Built from commit: `05c161b8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -56,9 +56,13 @@
 - CLAUDE.md
 - ic_launcher.webp (Launcher Icon)
 - OperationResult
-- MainScreen.kt
+- TaskDetailViewModel
 - ExportImportTest
 - TaskKuWidgetHelper
+- MainScreen.kt
+- TimetableViewModel.kt
+- DashboardViewModel.kt
+- NavigationTab
 - AdaptiveLayoutTest
 
 ## God Nodes (most connected - your core abstractions)
@@ -78,17 +82,17 @@
   app/src/main/java/com/example/taskku/Navigation.kt → app/src/main/java/com/example/taskku/NavigationKeys.kt
 - `MainNavigation()` --calls--> `TaskForm`  [INFERRED]
   app/src/main/java/com/example/taskku/Navigation.kt → app/src/main/java/com/example/taskku/NavigationKeys.kt
+- `MainNavigation()` --calls--> `MainScreen()`  [EXTRACTED]
+  app/src/main/java/com/example/taskku/Navigation.kt → app/src/main/java/com/example/taskku/ui/main/MainScreen.kt
 - `MainNavigation()` --calls--> `TaskDetailScreen()`  [EXTRACTED]
   app/src/main/java/com/example/taskku/Navigation.kt → app/src/main/java/com/example/taskku/ui/taskdetail/TaskDetailScreen.kt
 - `MainNavigation()` --calls--> `TaskFormScreen()`  [EXTRACTED]
   app/src/main/java/com/example/taskku/Navigation.kt → app/src/main/java/com/example/taskku/ui/taskform/TaskFormScreen.kt
-- `TaskKuApplication` --references--> `AppContainer`  [EXTRACTED]
-  app/src/main/java/com/example/taskku/TaskKuApplication.kt → app/src/main/java/com/example/taskku/di/AppContainer.kt
 
 ## Import Cycles
 - None detected.
 
-## Communities (48 total, 18 thin omitted)
+## Communities (52 total, 18 thin omitted)
 
 ### Community 0 - "SettingsViewModel"
 Cohesion: 0.13
@@ -202,13 +206,29 @@ Nodes (4): gradlew script, die(), save(), warn()
 Cohesion: 0.29
 Nodes (5): Error, Idle, InProgress, OperationResult, Success
 
-### Community 44 - "MainScreen.kt"
-Cohesion: 0.06
-Nodes (40): MainNavigation(), Main, TaskDetail, TaskForm, DashboardViewModel, DashboardViewModelFactory, Factory, StateFlow (+32 more)
+### Community 44 - "TaskDetailViewModel"
+Cohesion: 0.17
+Nodes (10): MainNavigation(), Factory, StateFlow, T, ViewModel, TaskDetailViewModel, TaskDetailViewModelFactory, UiState (+2 more)
 
 ### Community 45 - "ExportImportTest"
 Cohesion: 0.18
 Nodes (4): ExportImportManager, ExportImportTest, com, Result
+
+### Community 47 - "MainScreen.kt"
+Cohesion: 0.27
+Nodes (12): Main, TaskDetail, TaskForm, DashboardViewModelFactory, Factory, AnimatedNavIcon(), ImageVector, Modifier (+4 more)
+
+### Community 48 - "TimetableViewModel.kt"
+Cohesion: 0.19
+Nodes (7): StateFlow, T, ViewModel, TimetableViewModel, UiState, DispatcherProvider, CoroutineDispatcher
+
+### Community 49 - "DashboardViewModel.kt"
+Cohesion: 0.38
+Nodes (5): DashboardViewModel, StateFlow, T, ViewModel, UiState
+
+### Community 50 - "NavigationTab"
+Cohesion: 0.33
+Nodes (6): NavigationTab, CALENDAR, DASHBOARD, SETTINGS, TASKS, TIMETABLE
 
 ## Knowledge Gaps
 - **86 isolated node(s):** `SYSTEM`, `LIGHT`, `DARK`, `MUDAH`, `SEDANG` (+81 more)
@@ -218,9 +238,9 @@ Nodes (4): ExportImportManager, ExportImportTest, com, Result
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Task` connect `Task` to `CalendarScreen.kt`, `TaskKuWidget.kt`, `TaskFormViewModel`, `DashboardScreen.kt`, `NotificationScheduler`, `MainScreen.kt`, `ExportImportTest`, `FakeTaskRepository`, `TaskRepositoryImpl`, `Subtask`, `NotificationSchedulerTest`, `TaskListViewModel`, `Difficulty`, `CalendarViewModelTest`?**
+- **Why does `Task` connect `Task` to `CalendarScreen.kt`, `TaskKuWidget.kt`, `TaskFormViewModel`, `DashboardScreen.kt`, `NotificationScheduler`, `TaskDetailViewModel`, `ExportImportTest`, `FakeTaskRepository`, `DashboardViewModel.kt`, `TaskRepositoryImpl`, `Subtask`, `NotificationSchedulerTest`, `TaskListViewModel`, `Difficulty`, `CalendarViewModelTest`?**
   _High betweenness centrality (0.206) - this node is a cross-community bridge._
-- **Why does `TimetableItem` connect `TimetableItem` to `MainScreen.kt`, `TaskKuWidget.kt`, `DashboardScreen.kt`?**
+- **Why does `TimetableItem` connect `TimetableItem` to `TimetableViewModel.kt`, `DashboardViewModel.kt`, `TaskKuWidget.kt`, `DashboardScreen.kt`?**
   _High betweenness centrality (0.070) - this node is a cross-community bridge._
 - **Why does `AppDatabase` connect `AppDatabase` to `TaskDao`, `AttachmentEntity`, `Status`, `TaskRepositoryImpl`, `MemberEntity`?**
   _High betweenness centrality (0.065) - this node is a cross-community bridge._

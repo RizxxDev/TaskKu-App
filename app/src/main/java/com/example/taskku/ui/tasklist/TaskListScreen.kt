@@ -329,13 +329,12 @@ fun TaskListScreen(
                                         onCheckedChange = { onToggleSelection(task.id) }
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Box(modifier = Modifier.weight(1f)) {
-                                        TaskCard(
-                                            task = task,
-                                            onTaskClick = onToggleSelection,
-                                            onDeleteClick = onDeleteClick
-                                        )
-                                    }
+                                    TaskCard(
+                                        task = task,
+                                        onTaskClick = onToggleSelection,
+                                        onDeleteClick = onDeleteClick,
+                                        modifier = Modifier.weight(1f)
+                                    )
                                 }
                             } else {
                                 TaskCard(
@@ -386,13 +385,12 @@ fun TaskListScreen(
                                         onCheckedChange = { onToggleSelection(task.id) }
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Box(modifier = Modifier.weight(1f)) {
-                                        TaskCard(
-                                            task = task,
-                                            onTaskClick = onToggleSelection,
-                                            onDeleteClick = onDeleteClick
-                                        )
-                                    }
+                                    TaskCard(
+                                        task = task,
+                                        onTaskClick = onToggleSelection,
+                                        onDeleteClick = onDeleteClick,
+                                        modifier = Modifier.weight(1f)
+                                    )
                                 }
                             } else {
                                 TaskCard(

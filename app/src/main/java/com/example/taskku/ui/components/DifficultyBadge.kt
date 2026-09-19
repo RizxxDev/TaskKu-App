@@ -54,8 +54,7 @@ fun DifficultyBadge(
 ) {
     Box(
         modifier = modifier
-            .clip(BadgeShape)
-            .background(difficulty.badgeContainerColor)
+            .background(difficulty.badgeContainerColor, BadgeShape)
             .padding(horizontal = 6.dp, vertical = 2.dp)
     ) {
         Text(
