@@ -5,8 +5,6 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -24,6 +22,8 @@ import androidx.compose.material.icons.outlined.Dashboard
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.graphicsLayer
@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavKey
-import kotlinx.coroutines.launch
 import com.example.taskku.TaskDetail
 import com.example.taskku.TaskForm
 import com.example.taskku.TaskKuApplication
@@ -127,11 +126,8 @@ fun MainScreen(
     val calendarViewModel: CalendarViewModel = viewModel(factory = calendarViewModelFactory)
     val settingsViewModel: SettingsViewModel = viewModel(factory = settingsViewModelFactory)
 
-    val coroutineScope = rememberCoroutineScope()
-    val pagerState = rememberPagerState(
-        initialPage = 0,
-        pageCount = { NavigationTab.entries.size }
-    )
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+    val saveableStateHolder = rememberSaveableStateHolder()
 
     val isWide = isWideDisplay()
 
@@ -145,14 +141,8 @@ fun MainScreen(
 
     @Composable
     fun TabContent() {
-        HorizontalPager(
-            state = pagerState,
-            beyondViewportPageCount = 0,
-            userScrollEnabled = false,
-            key = { page -> NavigationTab.entries[page].name },
-            modifier = Modifier.fillMaxSize()
-        ) { tabIndex ->
-            when (NavigationTab.entries[tabIndex]) {
+        saveableStateHolder.SaveableStateProvider(key = selectedTabIndex) {
+            when (NavigationTab.entries[selectedTabIndex]) {
                 NavigationTab.DASHBOARD -> {
                     DashboardScreen(
                         onTaskClick = onTaskDetailClick,
@@ -233,15 +223,13 @@ fun MainScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         NavigationTab.entries.forEachIndexed { index, tab ->
-                            val isSelected = pagerState.currentPage == index
+                            val isSelected = selectedTabIndex == index
 
                             NavigationRailItem(
                                 selected = isSelected,
                                 onClick = {
-                                    if (pagerState.currentPage != index) {
-                                        coroutineScope.launch {
-                                            pagerState.scrollToPage(index)
-                                        }
+                                    if (selectedTabIndex != index) {
+                                        selectedTabIndex = index
                                     }
                                 },
                                 icon = {
@@ -280,15 +268,13 @@ fun MainScreen(
             bottomBar = {
                 NavigationBar {
                     NavigationTab.entries.forEachIndexed { index, tab ->
-                        val isSelected = pagerState.currentPage == index
+                        val isSelected = selectedTabIndex == index
 
                         NavigationBarItem(
                             selected = isSelected,
                             onClick = {
-                                if (pagerState.currentPage != index) {
-                                    coroutineScope.launch {
-                                        pagerState.scrollToPage(index)
-                                    }
+                                if (selectedTabIndex != index) {
+                                    selectedTabIndex = index
                                 }
                             },
                             icon = {
