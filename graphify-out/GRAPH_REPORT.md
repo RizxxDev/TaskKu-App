@@ -1,17 +1,17 @@
 # Graph Report - TaskKu  (2026-09-19)
 
 ## Corpus Check
-- 105 files · ~40,158 words
+- 105 files · ~40,196 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 24 file(s) not represented in the graph (top: .xml 15, (none) 3, .properties 2)
 
 ## Summary
-- 856 nodes · 1698 edges · 48 communities (30 shown, 18 thin omitted)
+- 856 nodes · 1699 edges · 48 communities (30 shown, 18 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 58 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9168139b`
+- Built from commit: `b2b996ce`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -63,7 +63,7 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `Task` - 70 edges
-2. `TimetableItem` - 43 edges
+2. `TimetableItem` - 44 edges
 3. `TaskFormViewModel` - 39 edges
 4. `FakeTaskRepository` - 32 edges
 5. `TaskRepository` - 29 edges
@@ -212,16 +212,16 @@ Nodes (4): ExportImportManager, ExportImportTest, com, Result
 
 ## Knowledge Gaps
 - **86 isolated node(s):** `SYSTEM`, `LIGHT`, `DARK`, `MUDAH`, `SEDANG` (+81 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 271 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 270 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Task` connect `Task` to `CalendarScreen.kt`, `TaskKuWidget.kt`, `TaskFormViewModel`, `DashboardScreen.kt`, `NotificationScheduler`, `MainScreen.kt`, `ExportImportTest`, `FakeTaskRepository`, `TaskRepositoryImpl`, `Subtask`, `NotificationSchedulerTest`, `TaskListViewModel`, `Difficulty`, `CalendarViewModelTest`?**
-  _High betweenness centrality (0.205) - this node is a cross-community bridge._
+  _High betweenness centrality (0.206) - this node is a cross-community bridge._
 - **Why does `TimetableItem` connect `TimetableItem` to `MainScreen.kt`, `TaskKuWidget.kt`, `DashboardScreen.kt`?**
-  _High betweenness centrality (0.068) - this node is a cross-community bridge._
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
 - **Why does `AppDatabase` connect `AppDatabase` to `TaskDao`, `AttachmentEntity`, `Status`, `TaskRepositoryImpl`, `MemberEntity`?**
   _High betweenness centrality (0.065) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `Task` (e.g. with `.importData()` and `.saveTask()`) actually correct?**

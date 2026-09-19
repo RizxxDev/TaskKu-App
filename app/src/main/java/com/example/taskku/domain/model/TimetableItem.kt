@@ -15,8 +15,10 @@ enum class SchoolDay(val dayOfWeek: Int, val displayName: String, val shortName:
     MINGGU(7, "Minggu", "Min");
 
     companion object {
+        private val byDayOfWeek = entries.associateBy { it.dayOfWeek }
+
         fun fromDayOfWeek(day: Int): SchoolDay =
-            entries.find { it.dayOfWeek == day } ?: SENIN
+            byDayOfWeek[day] ?: SENIN
 
         fun currentDayOfWeek(): Int =
             LocalDate.now().dayOfWeek.value
@@ -33,8 +35,7 @@ data class TimetableItem(
     val room: String = "",
     val teacher: String = ""
 ) {
-    val dayName: String
-        get() = SchoolDay.fromDayOfWeek(dayOfWeek).displayName
+    val dayName: String = SchoolDay.fromDayOfWeek(dayOfWeek).displayName
 
     val timeRange: String = "$startTime - $endTime"
 

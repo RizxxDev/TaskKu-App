@@ -282,11 +282,14 @@ private fun MonthCalendarCard(
     }
 }
 
+private val DayCellShape = RoundedCornerShape(10.dp)
+private val CalendarEmptyCardShape = RoundedCornerShape(16.dp)
+
 @Composable
 private fun CalendarEmptyCard() {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = CalendarEmptyCardShape,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Box(
@@ -421,11 +424,11 @@ private fun DayCell(
         modifier = modifier
             .defaultMinSize(minWidth = 32.dp, minHeight = 36.dp)
             .padding(2.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .clip(DayCellShape)
             .then(
                 when {
                     isSelected -> Modifier.background(MaterialTheme.colorScheme.primaryContainer)
-                    isToday -> Modifier.border(1.5.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(10.dp))
+                    isToday -> Modifier.border(1.5.dp, MaterialTheme.colorScheme.primary, DayCellShape)
                     else -> Modifier
                 }
             )

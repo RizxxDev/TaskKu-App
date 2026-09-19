@@ -35,6 +35,11 @@ import com.example.taskku.ui.util.isWideDisplay
 import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.automirrored.outlined.Assignment
 import com.example.taskku.ui.timetable.calculateNextMeetingDate
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.unit.IntOffset
+
+private val UrgentTaskFadeSpec = tween<Float>(durationMillis = 150)
+private val UrgentTaskPlacementSpec = tween<IntOffset>(durationMillis = 150)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -231,7 +236,11 @@ fun DashboardScreen(
                         UrgentTaskCard(
                             task = task,
                             onTaskClick = onTaskClick,
-                            modifier = Modifier.animateItem()
+                            modifier = Modifier.animateItem(
+                                fadeInSpec = UrgentTaskFadeSpec,
+                                fadeOutSpec = UrgentTaskFadeSpec,
+                                placementSpec = UrgentTaskPlacementSpec
+                            )
                         )
                     }
                 }
@@ -585,10 +594,8 @@ private fun UrgentTaskCard(
 ) {
     val clickAction = remember(task.id, onTaskClick) { { onTaskClick(task.id) } }
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(UrgentCardShape)
-            .clickable(onClick = clickAction),
+        onClick = clickAction,
+        modifier = modifier.fillMaxWidth(),
         shape = UrgentCardShape,
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface

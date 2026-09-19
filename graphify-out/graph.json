@@ -508,7 +508,7 @@
       "file_type": "code",
       "norm_label": "timetableitem",
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L26"
+      "source_location": "L28"
     },
     {
       "id": "app_src_test_java_com_example_taskku_fakes_fakerepositories_faketimetablerepository",
@@ -573,7 +573,7 @@
       "file_type": "code",
       "norm_label": "calendarcelldata",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L307"
+      "source_location": "L310"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_calendargridinfo",
@@ -586,7 +586,7 @@
       "file_type": "code",
       "norm_label": "calendargridinfo",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L316"
+      "source_location": "L319"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarviewmodel_calendarviewmodel",
@@ -3140,7 +3140,7 @@
       "file_type": "code",
       "norm_label": "parseminutes()",
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L54"
+      "source_location": "L55"
     },
     {
       "id": "app_src_main_java_com_example_taskku_domain_model_timetableitem_schoolday_currentdayofweek",
@@ -3152,7 +3152,7 @@
       "file_type": "code",
       "norm_label": ".currentdayofweek()",
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L21"
+      "source_location": "L23"
     },
     {
       "id": "app_src_main_java_com_example_taskku_domain_model_timetableitem_schoolday_fromdayofweek",
@@ -3164,7 +3164,7 @@
       "file_type": "code",
       "norm_label": ".fromdayofweek()",
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L18"
+      "source_location": "L20"
     },
     {
       "id": "app_src_main_java_com_example_taskku_domain_model_timetableitem_timetableitem_iscurrentlyactive",
@@ -3176,7 +3176,7 @@
       "file_type": "code",
       "norm_label": ".iscurrentlyactive()",
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L41"
+      "source_location": "L42"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_timetable_timetablescreen_timetableaddeditdialog",
@@ -3680,7 +3680,7 @@
       "file_type": "code",
       "norm_label": "calendaremptycard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L285"
+      "source_location": "L288"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_calendargrid",
@@ -3692,7 +3692,7 @@
       "file_type": "code",
       "norm_label": "calendargrid()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L324"
+      "source_location": "L327"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_calendarscreen",
@@ -3716,7 +3716,7 @@
       "file_type": "code",
       "norm_label": "daycell()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L411"
+      "source_location": "L414"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_legenditem",
@@ -3728,7 +3728,7 @@
       "file_type": "code",
       "norm_label": "legenditem()",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L485"
+      "source_location": "L488"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_calendar_calendarscreen_monthcalendarcard",
@@ -6440,7 +6440,7 @@
       "file_type": "code",
       "norm_label": "dashboardscreen()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L39"
+      "source_location": "L44"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_nextclasscard",
@@ -6452,7 +6452,7 @@
       "file_type": "code",
       "norm_label": "nextclasscard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L243"
+      "source_location": "L252"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_quickstatssection",
@@ -6464,7 +6464,7 @@
       "file_type": "code",
       "norm_label": "quickstatssection()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L424"
+      "source_location": "L433"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_statcard",
@@ -6476,7 +6476,7 @@
       "file_type": "code",
       "norm_label": "statcard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L529"
+      "source_location": "L538"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_urgentemptycard",
@@ -6488,7 +6488,7 @@
       "file_type": "code",
       "norm_label": "urgentemptycard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L501"
+      "source_location": "L510"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_urgenttaskcard",
@@ -6500,7 +6500,7 @@
       "file_type": "code",
       "norm_label": "urgenttaskcard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L580"
+      "source_location": "L589"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_urgenttasksheader",
@@ -6512,7 +6512,7 @@
       "file_type": "code",
       "norm_label": "urgenttasksheader()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L479"
+      "source_location": "L488"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_weeklyprogresscard",
@@ -6524,7 +6524,7 @@
       "file_type": "code",
       "norm_label": "weeklyprogresscard()",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L368"
+      "source_location": "L377"
     },
     {
       "id": "app_src_main_java_com_example_taskku_ui_settings_settingsscreen_addstatusdialog",
@@ -11020,6 +11020,18 @@
       "weight": 1.0
     },
     {
+      "source": "app_src_main_java_com_example_taskku_domain_model_timetableitem_timetableitem",
+      "target": "app_src_main_java_com_example_taskku_domain_model_timetableitem_schoolday_fromdayofweek",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
       "source": "app_src_main_java_com_example_taskku_domain_model_timetableitem_timetableitem_iscurrentlyactive",
       "target": "app_src_main_java_com_example_taskku_domain_model_timetableitem_schoolday_currentdayofweek",
       "relation": "calls",
@@ -11028,7 +11040,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L42",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -11040,7 +11052,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L47",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -11388,7 +11400,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L298",
+      "source_location": "L301",
       "weight": 1.0
     },
     {
@@ -11400,7 +11412,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L367",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -11412,7 +11424,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L376",
+      "source_location": "L379",
       "weight": 1.0
     },
     {
@@ -11424,7 +11436,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L394",
+      "source_location": "L397",
       "weight": 1.0
     },
     {
@@ -11568,7 +11580,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L134",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -11580,7 +11592,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L139",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -11592,7 +11604,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L144",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -11604,7 +11616,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L161",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -11616,7 +11628,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L166",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -11628,7 +11640,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L174",
+      "source_location": "L179",
       "weight": 1.0
     },
     {
@@ -11640,7 +11652,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L60",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -11652,7 +11664,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L337",
+      "source_location": "L346",
       "weight": 1.0
     },
     {
@@ -11664,7 +11676,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L441",
+      "source_location": "L450",
       "weight": 1.0
     },
     {
@@ -11676,7 +11688,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L616",
+      "source_location": "L623",
       "weight": 1.0
     },
     {
@@ -11688,7 +11700,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L633",
+      "source_location": "L640",
       "weight": 1.0
     },
     {
@@ -14244,7 +14256,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L324",
+      "source_location": "L327",
       "weight": 1.0
     },
     {
@@ -14256,7 +14268,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L411",
+      "source_location": "L414",
       "weight": 1.0
     },
     {
@@ -20556,7 +20568,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L324",
+      "source_location": "L327",
       "weight": 1.0
     },
     {
@@ -20592,7 +20604,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L411",
+      "source_location": "L414",
       "weight": 1.0
     },
     {
@@ -20604,7 +20616,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L485",
+      "source_location": "L488",
       "weight": 1.0
     },
     {
@@ -20868,7 +20880,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L39",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -20880,7 +20892,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L39",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -20892,7 +20904,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L243",
+      "source_location": "L252",
       "weight": 1.0
     },
     {
@@ -20904,7 +20916,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L529",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
@@ -20916,7 +20928,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L529",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
@@ -20928,7 +20940,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L529",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
@@ -20940,7 +20952,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L580",
+      "source_location": "L589",
       "weight": 1.0
     },
     {
@@ -20952,7 +20964,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L580",
+      "source_location": "L589",
       "weight": 1.0
     },
     {
@@ -23982,7 +23994,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L26",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -23993,7 +24005,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L54",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
@@ -24147,7 +24159,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L285",
+      "source_location": "L288",
       "weight": 1.0
     },
     {
@@ -24158,7 +24170,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L307",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -24169,7 +24181,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L316",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -24180,7 +24192,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L324",
+      "source_location": "L327",
       "weight": 1.0
     },
     {
@@ -24191,7 +24203,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L411",
+      "source_location": "L414",
       "weight": 1.0
     },
     {
@@ -24202,7 +24214,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L485",
+      "source_location": "L488",
       "weight": 1.0
     },
     {
@@ -24400,7 +24412,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L243",
+      "source_location": "L252",
       "weight": 1.0
     },
     {
@@ -24411,18 +24423,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L368",
-      "weight": 1.0
-    },
-    {
-      "source": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen",
-      "target": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_dashboardscreen",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L39",
+      "source_location": "L377",
       "weight": 1.0
     },
     {
@@ -24433,7 +24434,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L424",
+      "source_location": "L433",
+      "weight": 1.0
+    },
+    {
+      "source": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen",
+      "target": "app_src_main_java_com_example_taskku_ui_dashboard_dashboardscreen_dashboardscreen",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -24444,7 +24456,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L479",
+      "source_location": "L488",
       "weight": 1.0
     },
     {
@@ -24455,7 +24467,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L501",
+      "source_location": "L510",
       "weight": 1.0
     },
     {
@@ -24466,7 +24478,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L529",
+      "source_location": "L538",
       "weight": 1.0
     },
     {
@@ -24477,7 +24489,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/ui/dashboard/DashboardScreen.kt",
-      "source_location": "L580",
+      "source_location": "L589",
       "weight": 1.0
     },
     {
@@ -27744,7 +27756,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L18",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -27755,7 +27767,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L21",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -27766,7 +27778,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/src/main/java/com/example/taskku/domain/model/TimetableItem.kt",
-      "source_location": "L41",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -30425,7 +30437,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/src/main/java/com/example/taskku/ui/calendar/CalendarScreen.kt",
-      "source_location": "L399",
+      "source_location": "L402",
       "weight": 1.0
     },
     {
@@ -30898,5 +30910,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9168139b24c9867bb8c0df8260483aeb94806486"
+  "built_at_commit": "b2b996ce3f78e77bc9181a17c582ff2ba220f086"
 }
